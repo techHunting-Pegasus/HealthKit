@@ -12,6 +12,10 @@
 		94D563781F85B99A00C2C72D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94D563761F85B99A00C2C72D /* Main.storyboard */; };
 		94D5637A1F85B99A00C2C72D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94D563791F85B99A00C2C72D /* Assets.xcassets */; };
 		94D5637D1F85B99A00C2C72D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94D5637B1F85B99A00C2C72D /* LaunchScreen.storyboard */; };
+		94DCE1401F942B27007B76CD /* HockeySDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 94DCE13E1F942B26007B76CD /* HockeySDKResources.bundle */; };
+		94DCE1411F942B27007B76CD /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94DCE13F1F942B27007B76CD /* HockeySDK.framework */; };
+		94DCE1441F942C23007B76CD /* ApplicationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DCE1431F942C23007B76CD /* ApplicationService.swift */; };
+		94DCE1461F942C5F007B76CD /* HockeyAppService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DCE1451F942C5F007B76CD /* HockeyAppService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +26,10 @@
 		94D563791F85B99A00C2C72D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		94D5637C1F85B99A00C2C72D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		94D5637E1F85B99A00C2C72D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		94DCE13E1F942B26007B76CD /* HockeySDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = HockeySDKResources.bundle; sourceTree = "<group>"; };
+		94DCE13F1F942B27007B76CD /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HockeySDK.framework; sourceTree = "<group>"; };
+		94DCE1431F942C23007B76CD /* ApplicationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationService.swift; sourceTree = "<group>"; };
+		94DCE1451F942C5F007B76CD /* HockeyAppService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HockeyAppService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94DCE1411F942B27007B76CD /* HockeySDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -38,6 +47,7 @@
 		94D563661F85B99900C2C72D = {
 			isa = PBXGroup;
 			children = (
+				94DCE13D1F942B10007B76CD /* lib */,
 				94D563711F85B99900C2C72D /* Piviot App */,
 				94D563701F85B99900C2C72D /* Products */,
 			);
@@ -54,7 +64,7 @@
 		94D563711F85B99900C2C72D /* Piviot App */ = {
 			isa = PBXGroup;
 			children = (
-				94D563721F85B99900C2C72D /* AppDelegate.swift */,
+				94DCE1421F942BF1007B76CD /* AppDelegate */,
 				94D563741F85B99A00C2C72D /* ViewController.swift */,
 				94D563761F85B99A00C2C72D /* Main.storyboard */,
 				94D563791F85B99A00C2C72D /* Assets.xcassets */,
@@ -62,6 +72,25 @@
 				94D5637E1F85B99A00C2C72D /* Info.plist */,
 			);
 			path = "Piviot App";
+			sourceTree = "<group>";
+		};
+		94DCE13D1F942B10007B76CD /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				94DCE13F1F942B27007B76CD /* HockeySDK.framework */,
+				94DCE13E1F942B26007B76CD /* HockeySDKResources.bundle */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		94DCE1421F942BF1007B76CD /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				94D563721F85B99900C2C72D /* AppDelegate.swift */,
+				94DCE1431F942C23007B76CD /* ApplicationService.swift */,
+				94DCE1451F942C5F007B76CD /* HockeyAppService.swift */,
+			);
+			path = AppDelegate;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -124,6 +153,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				94D5637D1F85B99A00C2C72D /* LaunchScreen.storyboard in Resources */,
+				94DCE1401F942B27007B76CD /* HockeySDKResources.bundle in Resources */,
 				94D5637A1F85B99A00C2C72D /* Assets.xcassets in Resources */,
 				94D563781F85B99A00C2C72D /* Main.storyboard in Resources */,
 			);
@@ -137,6 +167,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				94D563751F85B99A00C2C72D /* ViewController.swift in Sources */,
+				94DCE1441F942C23007B76CD /* ApplicationService.swift in Sources */,
+				94DCE1461F942C5F007B76CD /* HockeyAppService.swift in Sources */,
 				94D563731F85B99900C2C72D /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -276,6 +308,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T85Z44958S;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lib",
+				);
 				INFOPLIST_FILE = "Piviot App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -292,6 +328,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T85Z44958S;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lib",
+				);
 				INFOPLIST_FILE = "Piviot App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -302,6 +342,76 @@
 			};
 			name = Release;
 		};
+		94DCE1471F943438007B76CD /* Ad Hoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Ad Hoc";
+		};
+		94DCE1481F943438007B76CD /* Ad Hoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = T85Z44958S;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lib",
+				);
+				INFOPLIST_FILE = "Piviot App/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.gbehavior.Piviot-App";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = "Ad Hoc";
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -310,6 +420,7 @@
 			buildConfigurations = (
 				94D5637F1F85B99A00C2C72D /* Debug */,
 				94D563801F85B99A00C2C72D /* Release */,
+				94DCE1471F943438007B76CD /* Ad Hoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -319,6 +430,7 @@
 			buildConfigurations = (
 				94D563821F85B99A00C2C72D /* Debug */,
 				94D563831F85B99A00C2C72D /* Release */,
+				94DCE1481F943438007B76CD /* Ad Hoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
