@@ -12,6 +12,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     lazy var services: [ApplicationService] = [
+        SettingsService(),
         HockeyAppService()
     ]
     var window: UIWindow?

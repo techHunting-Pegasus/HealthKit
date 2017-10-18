@@ -18,8 +18,6 @@
 	<string>0.0.2</string>
 	<key>CFBundleVersion</key>
 	<string>2</string>
-	<key>HockeyAppKey</key>
-	<string>4ac49226d6ab41b597e21898a69dc837</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -48,5 +46,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>PivotLoginURL</key>
+	<string>http://pivotdev.gbehavior.com</string>
 </dict>
 </plist>

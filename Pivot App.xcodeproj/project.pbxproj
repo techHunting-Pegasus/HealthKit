@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		9436773B1F96CE3300840058 /* Info.qa.plist in Resources */ = {isa = PBXBuildFile; fileRef = 943677391F96CE3300840058 /* Info.qa.plist */; };
 		9436773C1F96CE3300840058 /* Info.dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9436773A1F96CE3300840058 /* Info.dev.plist */; };
+		943677531F96D37000840058 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 943677521F96D37000840058 /* Settings.bundle */; };
+		943677551F96D58F00840058 /* SettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943677541F96D58F00840058 /* SettingsService.swift */; };
 		94D563731F85B99900C2C72D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D563721F85B99900C2C72D /* AppDelegate.swift */; };
 		94D563751F85B99A00C2C72D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D563741F85B99A00C2C72D /* ViewController.swift */; };
 		94D563781F85B99A00C2C72D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94D563761F85B99A00C2C72D /* Main.storyboard */; };
@@ -23,7 +25,10 @@
 /* Begin PBXFileReference section */
 		943677391F96CE3300840058 /* Info.qa.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.qa.plist; sourceTree = "<group>"; };
 		9436773A1F96CE3300840058 /* Info.dev.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.dev.plist; sourceTree = "<group>"; };
-		94D5636F1F85B99900C2C72D /* Pivot Dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pivot Dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		943677511F96CF2600840058 /* Pivot App copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Pivot App copy-Info.plist"; path = "/Users/ryan/Projects/pivotapp-ios/Pivot App copy-Info.plist"; sourceTree = "<absolute>"; };
+		943677521F96D37000840058 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		943677541F96D58F00840058 /* SettingsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsService.swift; sourceTree = "<group>"; };
+		94D5636F1F85B99900C2C72D /* Pivot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pivot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		94D563721F85B99900C2C72D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		94D563741F85B99A00C2C72D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		94D563771F85B99A00C2C72D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -54,6 +59,7 @@
 				9436773A1F96CE3300840058 /* Info.dev.plist */,
 				943677391F96CE3300840058 /* Info.qa.plist */,
 				94D5637E1F85B99A00C2C72D /* Info.plist */,
+				943677521F96D37000840058 /* Settings.bundle */,
 			);
 			path = res;
 			sourceTree = "<group>";
@@ -64,13 +70,14 @@
 				94DCE13D1F942B10007B76CD /* lib */,
 				94D563711F85B99900C2C72D /* Pivot App */,
 				94D563701F85B99900C2C72D /* Products */,
+				943677511F96CF2600840058 /* Pivot App copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
 		94D563701F85B99900C2C72D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				94D5636F1F85B99900C2C72D /* Pivot Dev.app */,
+				94D5636F1F85B99900C2C72D /* Pivot.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -103,6 +110,7 @@
 				94D563721F85B99900C2C72D /* AppDelegate.swift */,
 				94DCE1431F942C23007B76CD /* ApplicationService.swift */,
 				94DCE1451F942C5F007B76CD /* HockeyAppService.swift */,
+				943677541F96D58F00840058 /* SettingsService.swift */,
 			);
 			path = AppDelegate;
 			sourceTree = "<group>";
@@ -110,9 +118,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		94D5636E1F85B99900C2C72D /* Pivot App */ = {
+		94D5636E1F85B99900C2C72D /* Pivot */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 94D563811F85B99A00C2C72D /* Build configuration list for PBXNativeTarget "Pivot App" */;
+			buildConfigurationList = 94D563811F85B99A00C2C72D /* Build configuration list for PBXNativeTarget "Pivot" */;
 			buildPhases = (
 				94D5636B1F85B99900C2C72D /* Sources */,
 				94D5636C1F85B99900C2C72D /* Frameworks */,
@@ -122,9 +130,9 @@
 			);
 			dependencies = (
 			);
-			name = "Pivot App";
+			name = Pivot;
 			productName = "Piviot App";
-			productReference = 94D5636F1F85B99900C2C72D /* Pivot Dev.app */;
+			productReference = 94D5636F1F85B99900C2C72D /* Pivot.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -156,7 +164,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				94D5636E1F85B99900C2C72D /* Pivot App */,
+				94D5636E1F85B99900C2C72D /* Pivot */,
 			);
 		};
 /* End PBXProject section */
@@ -172,6 +180,7 @@
 				94D5637A1F85B99A00C2C72D /* Assets.xcassets in Resources */,
 				94D563781F85B99A00C2C72D /* Main.storyboard in Resources */,
 				9436773C1F96CE3300840058 /* Info.dev.plist in Resources */,
+				943677531F96D37000840058 /* Settings.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -182,6 +191,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				943677551F96D58F00840058 /* SettingsService.swift in Sources */,
 				94D563751F85B99A00C2C72D /* ViewController.swift in Sources */,
 				94DCE1441F942C23007B76CD /* ApplicationService.swift in Sources */,
 				94DCE1461F942C5F007B76CD /* HockeyAppService.swift in Sources */,
@@ -215,6 +225,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon${BUNDLE_ID_SUFFIX}";
+				BUNDLE_ID_BASE = "com.gbehavior.pivot-app";
+				BUNDLE_ID_SUFFIX = .qa;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -253,8 +266,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "Pivot App/res/Info${BUNDLE_ID_SUFFIX}.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "${BUNDLE_ID_BASE}${BUNDLE_ID_SUFFIX}";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
@@ -264,19 +279,14 @@
 		943677371F96CA8400840058 /* QA */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				BUNDLE_ID_BASE = "com.gbehavior.pivot-app";
-				BUNDLE_ID_SUFFIX = .qa;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T85Z44958S;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib",
 				);
-				INFOPLIST_FILE = "Pivot App/res/Info${BUNDLE_ID_SUFFIX}.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "${BUNDLE_ID_BASE}${BUNDLE_ID_SUFFIX}";
-				PRODUCT_NAME = "Pivot QA";
+				PRODUCT_NAME = "${TARGET_NAME}";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -286,6 +296,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon${BUNDLE_ID_SUFFIX}";
+				BUNDLE_ID_BASE = "com.gbehavior.pivot-app";
+				BUNDLE_ID_SUFFIX = .dev;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -330,9 +343,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "Pivot App/res/Info${BUNDLE_ID_SUFFIX}.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "${BUNDLE_ID_BASE}${BUNDLE_ID_SUFFIX}";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -343,6 +358,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon${BUNDLE_ID_SUFFIX}";
+				BUNDLE_ID_BASE = "com.gbehavior.pivot-app";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -381,8 +398,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "Pivot App/res/Info${BUNDLE_ID_SUFFIX}.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "${BUNDLE_ID_BASE}${BUNDLE_ID_SUFFIX}";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
@@ -392,19 +411,14 @@
 		94D563821F85B99A00C2C72D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				BUNDLE_ID_BASE = "com.gbehavior.pivot-app";
-				BUNDLE_ID_SUFFIX = .dev;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T85Z44958S;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib",
 				);
-				INFOPLIST_FILE = "Pivot App/res/Info${BUNDLE_ID_SUFFIX}.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "${BUNDLE_ID_BASE}${BUNDLE_ID_SUFFIX}";
-				PRODUCT_NAME = "Pivot Dev";
+				PRODUCT_NAME = "${TARGET_NAME}";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -413,19 +427,14 @@
 		94D563831F85B99A00C2C72D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				BUNDLE_ID_BASE = "com.gbehavior.pivot-app";
-				BUNDLE_ID_SUFFIX = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T85Z44958S;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib",
 				);
-				INFOPLIST_FILE = "Pivot App/res/Info${BUNDLE_ID_SUFFIX}.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "${BUNDLE_ID_BASE}${BUNDLE_ID_SUFFIX}";
-				PRODUCT_NAME = Pivot;
+				PRODUCT_NAME = "${TARGET_NAME}";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -444,7 +453,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		94D563811F85B99A00C2C72D /* Build configuration list for PBXNativeTarget "Pivot App" */ = {
+		94D563811F85B99A00C2C72D /* Build configuration list for PBXNativeTarget "Pivot" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				94D563821F85B99A00C2C72D /* Debug */,

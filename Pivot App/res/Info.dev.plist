@@ -48,5 +48,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>PivotLoginURL</key>
+	<string>http://pivotdev.gbehavior.com</string>
 </dict>
 </plist>

@@ -18,7 +18,7 @@ class HockeyAppService: NSObject, ApplicationService {
             BITHockeyManager.shared().start()
             BITHockeyManager.shared().authenticator.authenticateInstallation()
         } else {
-            print("Failed to find 'HockeyAppKey' in Info.plist.\nSkipping Hockeyapp Initialization.")
+            print("'HockeyAppKey' not found in Info.plist.\nSkipping Hockeyapp Initialization.")
         }
         return true
     }
