@@ -48,5 +48,7 @@
 	</array>
 	<key>PivotLoginURL</key>
 	<string>http://pivotdev.gbehavior.com</string>
+	<key>HockeyAppKey</key>
+	<string>4ac49226d6ab41b597e21898a69dc837</string>
 </dict>
 </plist>
