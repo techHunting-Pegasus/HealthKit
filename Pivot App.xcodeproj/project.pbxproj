@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9432D14E1FD1E3FE00A2B98A /* ScriptMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9432D14D1FD1E3FE00A2B98A /* ScriptMessage.swift */; };
 		9436773B1F96CE3300840058 /* Info.qa.plist in Resources */ = {isa = PBXBuildFile; fileRef = 943677391F96CE3300840058 /* Info.qa.plist */; };
 		9436773C1F96CE3300840058 /* Info.dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9436773A1F96CE3300840058 /* Info.dev.plist */; };
 		943677531F96D37000840058 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 943677521F96D37000840058 /* Settings.bundle */; };
@@ -20,9 +21,11 @@
 		94DCE1411F942B27007B76CD /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94DCE13F1F942B27007B76CD /* HockeySDK.framework */; };
 		94DCE1441F942C23007B76CD /* ApplicationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DCE1431F942C23007B76CD /* ApplicationService.swift */; };
 		94DCE1461F942C5F007B76CD /* HockeyAppService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DCE1451F942C5F007B76CD /* HockeyAppService.swift */; };
+		94F9FF721FD8B2B10032B193 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94F9FF711FD8B2B10032B193 /* HealthKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9432D14D1FD1E3FE00A2B98A /* ScriptMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptMessage.swift; sourceTree = "<group>"; };
 		943677391F96CE3300840058 /* Info.qa.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.qa.plist; sourceTree = "<group>"; };
 		9436773A1F96CE3300840058 /* Info.dev.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.dev.plist; sourceTree = "<group>"; };
 		943677511F96CF2600840058 /* Pivot App copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Pivot App copy-Info.plist"; path = "/Users/ryan/Projects/pivotapp-ios/Pivot App copy-Info.plist"; sourceTree = "<absolute>"; };
@@ -39,6 +42,8 @@
 		94DCE13F1F942B27007B76CD /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HockeySDK.framework; sourceTree = "<group>"; };
 		94DCE1431F942C23007B76CD /* ApplicationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationService.swift; sourceTree = "<group>"; };
 		94DCE1451F942C5F007B76CD /* HockeyAppService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HockeyAppService.swift; sourceTree = "<group>"; };
+		94F9FF6F1FD8B29A0032B193 /* Pivot.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Pivot.entitlements; sourceTree = "<group>"; };
+		94F9FF711FD8B2B10032B193 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +52,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				94DCE1411F942B27007B76CD /* HockeySDK.framework in Frameworks */,
+				94F9FF721FD8B2B10032B193 /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -67,10 +73,12 @@
 		94D563661F85B99900C2C72D = {
 			isa = PBXGroup;
 			children = (
+				94F9FF6F1FD8B29A0032B193 /* Pivot.entitlements */,
 				94DCE13D1F942B10007B76CD /* lib */,
 				94D563711F85B99900C2C72D /* Pivot App */,
 				94D563701F85B99900C2C72D /* Products */,
 				943677511F96CF2600840058 /* Pivot App copy-Info.plist */,
+				94F9FF701FD8B2B10032B193 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -91,6 +99,7 @@
 				94D563761F85B99A00C2C72D /* Main.storyboard */,
 				94D563791F85B99A00C2C72D /* Assets.xcassets */,
 				94D5637B1F85B99A00C2C72D /* LaunchScreen.storyboard */,
+				9432D14D1FD1E3FE00A2B98A /* ScriptMessage.swift */,
 			);
 			path = "Pivot App";
 			sourceTree = "<group>";
@@ -113,6 +122,14 @@
 				943677541F96D58F00840058 /* SettingsService.swift */,
 			);
 			path = AppDelegate;
+			sourceTree = "<group>";
+		};
+		94F9FF701FD8B2B10032B193 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				94F9FF711FD8B2B10032B193 /* HealthKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -148,6 +165,14 @@
 					94D5636E1F85B99900C2C72D = {
 						CreatedOnToolsVersion = 9.0;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.HealthKit = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -191,6 +216,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9432D14E1FD1E3FE00A2B98A /* ScriptMessage.swift in Sources */,
 				943677551F96D58F00840058 /* SettingsService.swift in Sources */,
 				94D563751F85B99A00C2C72D /* ViewController.swift in Sources */,
 				94DCE1441F942C23007B76CD /* ApplicationService.swift in Sources */,
@@ -279,6 +305,7 @@
 		943677371F96CA8400840058 /* QA */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Pivot.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T85Z44958S;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -411,6 +438,7 @@
 		94D563821F85B99A00C2C72D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Pivot.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T85Z44958S;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -427,6 +455,7 @@
 		94D563831F85B99A00C2C72D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Pivot.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T85Z44958S;
 				FRAMEWORK_SEARCH_PATHS = (

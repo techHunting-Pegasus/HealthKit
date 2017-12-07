@@ -11,13 +11,28 @@ import WebKit
 
 class ViewController: UIViewController {
     
-    @IBOutlet weak var webView: UIWebView!
+    @IBOutlet weak var webView: WKWebView!
     
     let decoder = JSONDecoder()
     
+    override func loadView() {
+        let webConfiguration = WKWebViewConfiguration()
+        let userContentController = WKUserContentController()
+        let messageHandler = NotificationScriptMessageHandler()
+        messageHandler.delegate = self
+        
+        userContentController.add(messageHandler, name: "observer")
+        webConfiguration.userContentController = userContentController
+
+        let webView = WKWebView(frame: .zero, configuration: webConfiguration)
+        webView.uiDelegate = self
+        view = webView
+        self.webView = webView
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         if let websiteUrl = UserDefaults.standard.string(forKey: "login_url") {
             guard let requestUrl = URL(string: websiteUrl) else { return }
             loadURL(url: requestUrl)
@@ -28,7 +43,7 @@ class ViewController: UIViewController {
     
     func loadURL(url: URL) {
         let request = URLRequest(url: url)
-        self.webView.loadRequest(request)
+        self.webView.load(request)
     }
 
     override func observeValue(forKeyPath _keyPath: String?, of object: Any?,
@@ -46,6 +61,19 @@ class ViewController: UIViewController {
             }
         default: break
         }
+    }
+}
+
+extension ViewController: WKUIDelegate {
+    func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
+        print(message)
+        completionHandler()
+    }
+}
+
+extension ViewController: NotificationScriptMessageDelegate {
+    func onMessage() {
+        webView.evaluateJavaScript("alertPage(\"ThisIsAToken\");", completionHandler: nil)
     }
 }
 
