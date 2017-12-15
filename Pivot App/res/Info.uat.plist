@@ -19,7 +19,7 @@
 	<key>CFBundleVersion</key>
 	<string>4</string>
 	<key>HockeyAppKey</key>
-	<string>4ac49226d6ab41b597e21898a69dc837</string>
+	<string>9a073a03312b4569a86402d15b1c0d27</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -29,10 +29,8 @@
 	</dict>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Please allow Pivot App access to photos for crash reporting.</string>
-	<key>PivotAPIURL</key>
-	<string>http://pivotdev.gbehavior.com</string>
 	<key>PivotLoginURL</key>
-	<string>http://pivotdev.gbehavior.com</string>
+	<string>http://pivotqa.gbehavior.com:80</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -52,5 +50,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>PivotAPIURL</key>
+	<string>http://pivotdev.gbehavior.com</string>
 </dict>
 </plist>

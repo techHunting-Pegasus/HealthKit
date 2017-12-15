@@ -13,7 +13,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     lazy var services: [ApplicationService] = [
         SettingsService(),
-        HockeyAppService()
+        HockeyAppService(),
+        NotificationService()
     ]
     var window: UIWindow?
 
@@ -53,7 +54,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         services.forEach { $0.applicationWillTerminate?(application) }
     }
-
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        services.forEach { $0.application?(application, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken) }
+    }
+    
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        services.forEach { $0.application?(application, didFailToRegisterForRemoteNotificationsWithError: error) }
+    }
 
 }
-

@@ -8,6 +8,7 @@
 
 import UIKit
 import WebKit
+import UserNotifications
 
 class ViewController: UIViewController {
     
@@ -65,15 +66,30 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: WKUIDelegate {
-    func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
-        print(message)
-        completionHandler()
-    }
 }
 
 extension ViewController: NotificationScriptMessageDelegate {
-    func onMessage() {
-        webView.evaluateJavaScript("alertPage(\"ThisIsAToken\");", completionHandler: nil)
+    func onUserGUIDRecieved(value guid: String) {
+        UserDefaults.standard.set(guid, forKey: "userGUID")
+    }
+    
+    func onNotificationRegistration(value: Bool) {
+        if #available(iOS 10, *) {
+            let center = UNUserNotificationCenter.current()
+            center.requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
+                // Enable or disable features based on authorization.
+                guard granted == true else { return }
+                DispatchQueue.main.async {
+                    UIApplication.shared.registerForRemoteNotifications()
+                }
+
+            }
+        } else {
+            let settings = UIUserNotificationSettings(types: [.alert, .sound, .badge], categories: nil)
+            UIApplication.shared.registerUserNotificationSettings(settings)
+            UIApplication.shared.registerForRemoteNotifications()
+
+        }
     }
 }
 
