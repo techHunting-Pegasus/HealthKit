@@ -74,6 +74,7 @@ extension ViewController: NotificationScriptMessageDelegate {
     }
     
     func onNotificationRegistration(value: Bool) {
+        guard value == true else { return }
         if #available(iOS 10, *) {
             let center = UNUserNotificationCenter.current()
             center.requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
@@ -88,7 +89,6 @@ extension ViewController: NotificationScriptMessageDelegate {
             let settings = UIUserNotificationSettings(types: [.alert, .sound, .badge], categories: nil)
             UIApplication.shared.registerUserNotificationSettings(settings)
             UIApplication.shared.registerForRemoteNotifications()
-
         }
     }
 }
