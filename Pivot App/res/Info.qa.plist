@@ -32,7 +32,7 @@
 	<key>PivotAPIURL</key>
 	<string>http://pivotqa.gbehavior.com</string>
 	<key>PivotLoginURL</key>
-	<string>http://pivotqa.gbehavior.com:80</string>
+	<string>http://pivotqa.gbehavior.com</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
