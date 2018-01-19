@@ -17,6 +17,10 @@ class ViewController: UIViewController {
     private var currentPromiseId: Int? = nil
     
     override func loadView() {
+        self.view = UIView()
+        self.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        view.backgroundColor = UIColor.white
+
         let webConfiguration = WKWebViewConfiguration()
         let userContentController = WKUserContentController()
         let messageHandler = NotificationScriptMessageHandler()
@@ -25,10 +29,19 @@ class ViewController: UIViewController {
         userContentController.add(messageHandler, name: "observer")
         webConfiguration.userContentController = userContentController
 
-        let webView = WKWebView(frame: .zero, configuration: webConfiguration)
+        let webView = WKWebView(frame: CGRect(origin:CGPoint(x:0,y:20), size: .zero), configuration: webConfiguration)
+        webView.translatesAutoresizingMaskIntoConstraints = false
         webView.uiDelegate = self
-        view = webView
+        
         self.webView = webView
+        self.view.addSubview(webView)
+
+        // Update constraints
+        webView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        webView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        webView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        webView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20.0).isActive = true
+
     }
 
     override func viewDidLoad() {
