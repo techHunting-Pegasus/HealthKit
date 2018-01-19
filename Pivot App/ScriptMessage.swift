@@ -10,8 +10,7 @@ import UIKit
 import WebKit
 
 protocol NotificationScriptMessageDelegate: class {
-    func onNotificationRegistration(value: Bool)
-    func onUserGUIDRecieved(value: String)
+    func onNotificationRegistration(promiseId: Int, value: Bool)
 }
 
 class NotificationScriptMessageHandler: NSObject, WKScriptMessageHandler {
@@ -21,17 +20,13 @@ class NotificationScriptMessageHandler: NSObject, WKScriptMessageHandler {
             print("Recieved invalid json from javascript")
             return
         }
-        // check for guid first
-        if let guid = body["userGUID"] as? String {
-            delegate?.onUserGUIDRecieved(value: guid)
-        }
         
-        if let bodyValue = body["body"] as? String {
+        if let bodyValue = body["body"] as? String, let promiseId = body["promiseId"] as? Int {
             switch bodyValue {
             case "enablePush":
-                delegate?.onNotificationRegistration(value: true)
+                delegate?.onNotificationRegistration(promiseId: promiseId, value: true)
             case "disablePush":
-                delegate?.onNotificationRegistration(value: false)
+                delegate?.onNotificationRegistration(promiseId: promiseId, value: false)
             default: break
             }
         }

@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var webView: WKWebView!
     
-    let decoder = JSONDecoder()
+    private var currentPromiseId: Int? = nil
     
     override func loadView() {
         let webConfiguration = WKWebViewConfiguration()
@@ -39,7 +39,8 @@ class ViewController: UIViewController {
             loadURL(url: requestUrl)
         }
         
-        UserDefaults.standard.addObserver(self, forKeyPath: "login_url", options: .new, context: nil)
+        UserDefaults.standard.addObserver(self, forKeyPath: Constants.login_url, options: .new, context: nil)
+        UserDefaults.standard.addObserver(self, forKeyPath: Constants.token_key, options: .new, context: nil)
     }
     
     func loadURL(url: URL) {
@@ -52,7 +53,7 @@ class ViewController: UIViewController {
                                context: UnsafeMutableRawPointer?) {
         guard let keyPath = _keyPath else { return }
         switch keyPath {
-        case "login_url":
+        case Constants.login_url:
             // Load the URL on the main thread 
             DispatchQueue.main.async { [weak self] in
                 if let szUrl = change?[.newKey] as? String,
@@ -60,8 +61,20 @@ class ViewController: UIViewController {
                     self?.loadURL(url: url)
                 }
             }
+        case Constants.token_key:
+            DispatchQueue.main.async { [weak self] in
+                if let token = change?[.newKey] as? String,
+                    let promiseId = self?.currentPromiseId {
+                    self?.fulfillTokenPromise(promiseId: promiseId, token: token)
+                }
+            }
         default: break
         }
+    }
+    
+    private func fulfillTokenPromise(promiseId: Int, token: String) {
+        let javaScript = "window.resolvePromise(" + String(promiseId) + ", \"\(token)\")"
+        webView?.evaluateJavaScript(javaScript, completionHandler: nil)
     }
 }
 
@@ -69,12 +82,14 @@ extension ViewController: WKUIDelegate {
 }
 
 extension ViewController: NotificationScriptMessageDelegate {
-    func onUserGUIDRecieved(value guid: String) {
-        UserDefaults.standard.set(guid, forKey: "userGUID")
-    }
     
-    func onNotificationRegistration(value: Bool) {
+    func onNotificationRegistration(promiseId: Int, value: Bool) {
+        if let deviceToken = UserDefaults.standard.string(forKey: Constants.token_key) {
+            // we are registered for notifications.
+            fulfillTokenPromise(promiseId: promiseId, token: deviceToken)
+        }
         guard value == true else { return }
+        currentPromiseId = promiseId
         if #available(iOS 10, *) {
             let center = UNUserNotificationCenter.current()
             center.requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
@@ -83,7 +98,6 @@ extension ViewController: NotificationScriptMessageDelegate {
                 DispatchQueue.main.async {
                     UIApplication.shared.registerForRemoteNotifications()
                 }
-
             }
         } else {
             let settings = UIUserNotificationSettings(types: [.alert, .sound, .badge], categories: nil)
