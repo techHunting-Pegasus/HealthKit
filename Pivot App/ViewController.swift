@@ -96,6 +96,10 @@ extension ViewController: WKUIDelegate {
 
 extension ViewController: NotificationScriptMessageDelegate {
     
+    func onUserAuthenticationReceived(value: String) {
+        
+    }
+    
     func onNotificationRegistration(promiseId: Int, value: Bool) {
         if let deviceToken = UserDefaults.standard.string(forKey: Constants.token_key) {
             // we are registered for notifications.

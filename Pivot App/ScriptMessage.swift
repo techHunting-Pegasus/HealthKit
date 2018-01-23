@@ -11,6 +11,7 @@ import WebKit
 
 protocol NotificationScriptMessageDelegate: class {
     func onNotificationRegistration(promiseId: Int, value: Bool)
+    func onUserAuthenticationReceived(value: String)
 }
 
 class NotificationScriptMessageHandler: NSObject, WKScriptMessageHandler {
@@ -19,6 +20,9 @@ class NotificationScriptMessageHandler: NSObject, WKScriptMessageHandler {
         guard let body = message.body as? [String: Any] else {
             print("Recieved invalid json from javascript")
             return
+        }
+        if let userAuth = body["userGUID"] as? String {
+            delegate?.onUserAuthenticationReceived(value: userAuth)
         }
         
         if let bodyValue = body["body"] as? String, let promiseId = body["promiseId"] as? Int {

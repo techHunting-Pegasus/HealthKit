@@ -11,4 +11,5 @@ import Foundation
 final class Constants {
     static let token_key = "token_key"
     static let login_url = "login_url"
+    static let user_authorization = "user_authorization"
 }

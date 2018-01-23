@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		9432D14E1FD1E3FE00A2B98A /* ScriptMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9432D14D1FD1E3FE00A2B98A /* ScriptMessage.swift */; };
 		943677551F96D58F00840058 /* SettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943677541F96D58F00840058 /* SettingsService.swift */; };
+		943B94FC201785EC00C3722A /* DeepLinkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943B94FB201785EC00C3722A /* DeepLinkService.swift */; };
 		946B9B8A1FE2408000296DC7 /* PivotAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946B9B891FE2408000296DC7 /* PivotAPI.swift */; };
 		946B9B8C1FE2424800296DC7 /* PivotAPIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946B9B8B1FE2424800296DC7 /* PivotAPIError.swift */; };
 		946B9B8E1FE245CF00296DC7 /* PivotAPI+RequestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946B9B8D1FE245CF00296DC7 /* PivotAPI+RequestData.swift */; };
@@ -33,6 +34,7 @@
 		9436773A1F96CE3300840058 /* Info.dev.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.dev.plist; sourceTree = "<group>"; };
 		943677511F96CF2600840058 /* Pivot App copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Pivot App copy-Info.plist"; path = "/Users/ryan/Projects/pivotapp-ios/Pivot App copy-Info.plist"; sourceTree = "<absolute>"; };
 		943677541F96D58F00840058 /* SettingsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsService.swift; sourceTree = "<group>"; };
+		943B94FB201785EC00C3722A /* DeepLinkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkService.swift; sourceTree = "<group>"; };
 		9469035C200D3F7F00F4015B /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		946B9B891FE2408000296DC7 /* PivotAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PivotAPI.swift; sourceTree = "<group>"; };
 		946B9B8B1FE2424800296DC7 /* PivotAPIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PivotAPIError.swift; sourceTree = "<group>"; };
@@ -129,9 +131,9 @@
 				946B9B871FE23FD000296DC7 /* Storyboards */,
 				94D563741F85B99A00C2C72D /* ViewController.swift */,
 				9432D14D1FD1E3FE00A2B98A /* ScriptMessage.swift */,
-				94D563791F85B99A00C2C72D /* Assets.xcassets */,
 				946B9B8F1FE247FC00296DC7 /* Util.swift */,
 				94FDC6982011AA460050CA6B /* Constants.swift */,
+				94D563791F85B99A00C2C72D /* Assets.xcassets */,
 			);
 			path = "Pivot App";
 			sourceTree = "<group>";
@@ -153,6 +155,7 @@
 				94DCE1451F942C5F007B76CD /* HockeyAppService.swift */,
 				943677541F96D58F00840058 /* SettingsService.swift */,
 				94F9FF791FD8D3820032B193 /* NotificationService.swift */,
+				943B94FB201785EC00C3722A /* DeepLinkService.swift */,
 			);
 			path = AppDelegate;
 			sourceTree = "<group>";
@@ -204,6 +207,9 @@
 								enabled = 1;
 							};
 							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.SafariKeychain = {
 								enabled = 1;
 							};
 						};
@@ -263,6 +269,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				943B94FC201785EC00C3722A /* DeepLinkService.swift in Sources */,
 				946B9B901FE247FC00296DC7 /* Util.swift in Sources */,
 				9432D14E1FD1E3FE00A2B98A /* ScriptMessage.swift in Sources */,
 				943677551F96D58F00840058 /* SettingsService.swift in Sources */,

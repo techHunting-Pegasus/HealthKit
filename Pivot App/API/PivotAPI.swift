@@ -8,7 +8,7 @@
 import Foundation
 
 enum PivotAPI {
-    case registerDevice(token: String, guid: String)
+    case refreshDevice(oldToken: String, newToken: String, userAuth: String)
     
     static let apiVersion = "v1"
     
@@ -21,8 +21,8 @@ enum PivotAPI {
         }
         
         switch self {
-        case .registerDevice:
-            result = URL(string: "/\(PivotAPI.apiVersion)/registerDevice", relativeTo: apiUrl)
+        case .refreshDevice:
+            result = URL(string: "/\(PivotAPI.apiVersion)/users/refreshToken", relativeTo: apiUrl)
         }
         
         guard let finalResult = result else {
@@ -33,7 +33,7 @@ enum PivotAPI {
     
     func httpMethod() -> String {
         switch self {
-        case .registerDevice:
+        case .refreshDevice:
             return "POST"
         }
     }
@@ -41,12 +41,18 @@ enum PivotAPI {
     func httpBody() throws -> Data? {
         do {
             switch self {
-            case .registerDevice(let token, let guid):
-                return try JSONEncoder().encode(RegisterDeviceRequest(token: token, uniqueIdentifier: guid))
+            case .refreshDevice(let oldToken, let newToken, _):
+                return try JSONEncoder().encode(RefreshDeviceRequest(oldToken: oldToken, newToken: newToken))
             }
         }
         catch {
             throw APIError.badRequestBody(error: error)
+        }
+    }
+    func addHeaders(request: inout URLRequest) {
+        switch self {
+        case .refreshDevice(_, _, let userAuth):
+            request.addValue("Bearer \(userAuth)", forHTTPHeaderField: "Authorization")
         }
     }
     
@@ -54,6 +60,7 @@ enum PivotAPI {
         var urlRequest = URLRequest(url: try url())
         urlRequest.httpMethod = httpMethod()
         urlRequest.httpBody = try httpBody()
+        addHeaders(request: &urlRequest)
         
         return urlRequest
     }

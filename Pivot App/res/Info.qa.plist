@@ -15,9 +15,9 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.0.4</string>
+	<string>0.0.5</string>
 	<key>CFBundleVersion</key>
-	<string>4</string>
+	<string>5</string>
 	<key>HockeyAppKey</key>
 	<string>9a073a03312b4569a86402d15b1c0d27</string>
 	<key>LSRequiresIPhoneOS</key>

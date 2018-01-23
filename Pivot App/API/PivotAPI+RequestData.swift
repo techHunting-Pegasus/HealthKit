@@ -13,10 +13,9 @@ extension PivotAPI {
         return "iOS Version \(Util.appVersion())"
     }
 
-    struct RegisterDeviceRequest: Encodable {
-        var type: String { return PivotAPI.formattedVersion() }
-        let token: String
-        let uniqueIdentifier: String
+    struct RefreshDeviceRequest: Encodable {
+        let oldToken: String
+        let newToken: String
     }
 
 }

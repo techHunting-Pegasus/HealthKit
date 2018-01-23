@@ -62,5 +62,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         services.forEach { $0.application?(application, didFailToRegisterForRemoteNotificationsWithError: error) }
     }
+    
+    func application(_ application: UIApplication, willContinueUserActivityWithType userActivityType: String) -> Bool {
+        var result = false
+        services.forEach {
+            if $0.application?(application, willContinueUserActivityWithType: userActivityType) == true{
+                result = true
+            }
+        }
+        return result
+    }
+
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
+        var result = false
+        services.forEach {
+            if $0.application?(application, continue: userActivity, restorationHandler: restorationHandler) == true {
+                result = true
+            }
+        }
+        return result
+    }
 
 }
