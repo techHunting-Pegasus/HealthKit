@@ -54,7 +54,7 @@ class ViewController: UIViewController {
         
         UserDefaults.standard.addObserver(self, forKeyPath: Constants.login_url, options: .new, context: nil)
         UserDefaults.standard.addObserver(self, forKeyPath: Constants.token_key, options: .new, context: nil)
-    }
+            }
     
     func loadURL(url: URL) {
         let request = URLRequest(url: url)

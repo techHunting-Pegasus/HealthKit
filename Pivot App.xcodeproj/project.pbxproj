@@ -14,6 +14,7 @@
 		946B9B8C1FE2424800296DC7 /* PivotAPIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946B9B8B1FE2424800296DC7 /* PivotAPIError.swift */; };
 		946B9B8E1FE245CF00296DC7 /* PivotAPI+RequestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946B9B8D1FE245CF00296DC7 /* PivotAPI+RequestData.swift */; };
 		946B9B901FE247FC00296DC7 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946B9B8F1FE247FC00296DC7 /* Util.swift */; };
+		9495DBB620260EFD00951BF9 /* HealthStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9495DBB520260EFD00951BF9 /* HealthStore.swift */; };
 		94D563731F85B99900C2C72D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D563721F85B99900C2C72D /* AppDelegate.swift */; };
 		94D563751F85B99A00C2C72D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D563741F85B99A00C2C72D /* ViewController.swift */; };
 		94D563781F85B99A00C2C72D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94D563761F85B99A00C2C72D /* Main.storyboard */; };
@@ -40,6 +41,7 @@
 		946B9B8B1FE2424800296DC7 /* PivotAPIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PivotAPIError.swift; sourceTree = "<group>"; };
 		946B9B8D1FE245CF00296DC7 /* PivotAPI+RequestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PivotAPI+RequestData.swift"; sourceTree = "<group>"; };
 		946B9B8F1FE247FC00296DC7 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		9495DBB520260EFD00951BF9 /* HealthStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthStore.swift; sourceTree = "<group>"; };
 		94D5636F1F85B99900C2C72D /* Pivot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pivot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		94D563721F85B99900C2C72D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		94D563741F85B99A00C2C72D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 				943677541F96D58F00840058 /* SettingsService.swift */,
 				94F9FF791FD8D3820032B193 /* NotificationService.swift */,
 				943B94FB201785EC00C3722A /* DeepLinkService.swift */,
+				9495DBB520260EFD00951BF9 /* HealthStore.swift */,
 			);
 			path = AppDelegate;
 			sourceTree = "<group>";
@@ -203,6 +206,9 @@
 						CreatedOnToolsVersion = 9.0;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
 							com.apple.HealthKit = {
 								enabled = 1;
 							};
@@ -282,6 +288,7 @@
 				94D563731F85B99900C2C72D /* AppDelegate.swift in Sources */,
 				946B9B8C1FE2424800296DC7 /* PivotAPIError.swift in Sources */,
 				94FDC6992011AA460050CA6B /* Constants.swift in Sources */,
+				9495DBB620260EFD00951BF9 /* HealthStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

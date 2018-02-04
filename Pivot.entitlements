@@ -9,6 +9,7 @@
 		<string>applinks:pivotdev.gbehavior.com</string>
 		<string>applinks:pivotqa.gbehavior.com</string>
 		<string>applinks:pivotuat.gbehavior.com</string>
+		<string>applinks:pivot.gbehavior.com</string>
 	</array>
 	<key>com.apple.developer.healthkit</key>
 	<true/>

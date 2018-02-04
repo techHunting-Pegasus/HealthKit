@@ -14,7 +14,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     lazy var services: [ApplicationService] = [
         SettingsService(),
         HockeyAppService(),
-        NotificationService()
+        NotificationService(),
+        HealthStoreService()
     ]
     var window: UIWindow?
 

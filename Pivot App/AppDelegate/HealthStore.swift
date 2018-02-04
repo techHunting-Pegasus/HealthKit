@@ -6,43 +6,96 @@
 //  Copyright © 2018 Schu Studios, LLC. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import HealthKit
 
-class HealthStore {
-    enum HealthStoreError: Error {
-        case healthKitUnavailable
-        case healtKitError(Error)
-    }
+class HealthStoreService: NSObject, ApplicationService {
     
-    static let shared = HealthStore()
-
-    let store = HKHealthStore()
-    
-    private init() { }
-    
-    func requestAuthorization(completion: @escaping (Bool, Error?)->()) {
-        guard HKHealthStore.isHealthDataAvailable() else {
-            return completion(false, HealthStoreError.healthKitUnavailable)
+    // MARK: - ApplicationService Methods
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
+        if HKHealthStore.isHealthDataAvailable() {
+            requestAuthorization()
+            enableBackgroundDeliveries()
+            beginObservations()
         }
-        store.requestAuthorization(toShare: shareSet, read: readSet, completion: completion)
+        return true
     }
     
-    let shareSet: Set<HKSampleType>? = nil
     
-    let readSet: Set<HKObjectType>? = {
+    // MARK: - Helper Methods
+    private func requestAuthorization() {
+        
+        store.requestAuthorization(toShare: shareSet, read: readSet) { (success, error) in
+            if let error = error {
+                print("HealthStoreService RequestAuthorization Error: \(error)")
+                return
+            }
+            print("HealthStoreService Successfully Requested Authorization.")
+        }
+    }
+    
+    private func enableBackgroundDeliveries() {
+
+        let stepCount = HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.stepCount)!
+        store.enableBackgroundDelivery(for:stepCount, frequency: .hourly) { (success, error) in
+            guard error == nil else {
+                print("HealthStoreService enableBackgroundDeliveries Error: \(error!)")
+                return
+            }
+            print("HealthStoreService Successfully Enabled Background Delivereies.")
+        }
+    }
+    
+    private func beginObservations() {
+
+        for id in typeIdentifiers {
+            guard let type = HKObjectType.quantityType(forIdentifier: id) else { continue }
+            let query = HKObserverQuery(sampleType: type, predicate: nil) {
+                (query, completionHandler, error) in
+                guard error == nil else {
+                    print("HealthStoreService Error Creating Observer Query for SampleType: \(type)\nError: \(error!)")
+                    completionHandler()
+                    return
+                }
+                print("HealthStoreService Received Observation for SampleType\(type)")
+
+                completionHandler()
+            }
+            
+            store.execute(query)
+        }
+    }
+    
+    // MARK: - Properties
+    private let store = HKHealthStore()
+
+    private let shareSet: Set<HKSampleType>? = nil
+    
+    private var readSet: Set<HKObjectType>? {
         guard HKHealthStore.isHealthDataAvailable() else { return nil }
 
-        var result: Set<HKObjectType> = [
-            HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.stepCount)!,
-            HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.distanceWalkingRunning)!,
-            HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.distanceCycling)!
-        ]
+        var result: Set<HKObjectType> = []
         
-        if #available(iOS 10, *)  {
-            result.insert(HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.distanceSwimming)!)
+        for id in typeIdentifiers {
+            if let type = HKQuantityType.quantityType(forIdentifier: id) {
+                result.insert(type)
+            }
         }
         
         return result
+    }
+    
+    private let typeIdentifiers: [HKQuantityTypeIdentifier] = {
+        guard HKHealthStore.isHealthDataAvailable() else { return [] }
+        var types = [
+            HKQuantityTypeIdentifier.stepCount,
+            HKQuantityTypeIdentifier.distanceWalkingRunning,
+            HKQuantityTypeIdentifier.distanceCycling]
+        if #available(iOS 10, *)  {
+            types.append(HKQuantityTypeIdentifier.distanceSwimming)
+        }
+        return types
     }()
+    
+    
 }
