@@ -28,11 +28,11 @@
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Please allow Pivot App access to photos for crash reporting.</string>
 	<key>PivotLoginURL</key>
-	<string>https://pivotdev.gbehavior.com</string>
+	<string>https://pivotuat.gbehavior.com</string>
 	<key>PivotAPIURL</key>
-	<string>https://pivotdev.gbehavior.com</string>
+	<string>https://pivotuat.gbehavior.com</string>
 	<key>HockeyAppKey</key>
-	<string>9a073a03312b4569a86402d15b1c0d27</string>
+	<string>11ff3ce390884ed7bfc46d9d46034136</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
