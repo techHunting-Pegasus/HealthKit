@@ -171,9 +171,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		94D5636E1F85B99900C2C72D /* Pivot */ = {
+		94D5636E1F85B99900C2C72D /* GoPivot */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 94D563811F85B99A00C2C72D /* Build configuration list for PBXNativeTarget "Pivot" */;
+			buildConfigurationList = 94D563811F85B99A00C2C72D /* Build configuration list for PBXNativeTarget "GoPivot" */;
 			buildPhases = (
 				94D5636B1F85B99900C2C72D /* Sources */,
 				94D5636C1F85B99900C2C72D /* Frameworks */,
@@ -184,7 +184,7 @@
 			);
 			dependencies = (
 			);
-			name = Pivot;
+			name = GoPivot;
 			productName = "Piviot App";
 			productReference = 94D5636F1F85B99900C2C72D /* Pivot.app */;
 			productType = "com.apple.product-type.application";
@@ -229,7 +229,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				94D5636E1F85B99900C2C72D /* Pivot */,
+				94D5636E1F85B99900C2C72D /* GoPivot */,
 			);
 		};
 /* End PBXProject section */
@@ -623,7 +623,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		94D563811F85B99A00C2C72D /* Build configuration list for PBXNativeTarget "Pivot" */ = {
+		94D563811F85B99A00C2C72D /* Build configuration list for PBXNativeTarget "GoPivot" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				94D563821F85B99A00C2C72D /* Debug */,
