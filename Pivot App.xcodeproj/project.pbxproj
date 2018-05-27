@@ -32,7 +32,6 @@
 		9432D14D1FD1E3FE00A2B98A /* ScriptMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptMessage.swift; sourceTree = "<group>"; };
 		943677391F96CE3300840058 /* Info.qa.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.qa.plist; sourceTree = "<group>"; };
 		9436773A1F96CE3300840058 /* Info.dev.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.dev.plist; sourceTree = "<group>"; };
-		943677511F96CF2600840058 /* Pivot App copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Pivot App copy-Info.plist"; path = "/Users/ryan/Projects/pivotapp-ios/Pivot App copy-Info.plist"; sourceTree = "<absolute>"; };
 		943677541F96D58F00840058 /* SettingsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsService.swift; sourceTree = "<group>"; };
 		943B94FB201785EC00C3722A /* DeepLinkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkService.swift; sourceTree = "<group>"; };
 		9469035C200D3F7F00F4015B /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
@@ -109,7 +108,6 @@
 				94DCE13D1F942B10007B76CD /* lib */,
 				94D563711F85B99900C2C72D /* Pivot App */,
 				94D563701F85B99900C2C72D /* Products */,
-				943677511F96CF2600840058 /* Pivot App copy-Info.plist */,
 				94F9FF701FD8B2B10032B193 /* Frameworks */,
 			);
 			sourceTree = "<group>";
