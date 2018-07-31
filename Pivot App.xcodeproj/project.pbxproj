@@ -39,7 +39,7 @@
 		946B9B8B1FE2424800296DC7 /* PivotAPIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PivotAPIError.swift; sourceTree = "<group>"; };
 		946B9B8D1FE245CF00296DC7 /* PivotAPI+RequestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PivotAPI+RequestData.swift"; sourceTree = "<group>"; };
 		946B9B8F1FE247FC00296DC7 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
-		94D5636F1F85B99900C2C72D /* Pivot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pivot.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		94D5636F1F85B99900C2C72D /* Pivot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = Pivot.app; path = GoPivot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		94D563721F85B99900C2C72D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		94D563741F85B99A00C2C72D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		94D563771F85B99A00C2C72D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
