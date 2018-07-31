@@ -9,6 +9,7 @@
 import UIKit
 import WebKit
 import UserNotifications
+import SafariServices
 
 class ViewController: UIViewController {
     
@@ -59,6 +60,10 @@ class ViewController: UIViewController {
     func loadURL(url: URL) {
         let request = URLRequest(url: url)
         self.webView.load(request)
+    }
+    
+    func dismissSafariVC() {
+        self.dismiss(animated: true)
     }
 
     override func observeValue(forKeyPath _keyPath: String?, of object: Any?,
@@ -122,5 +127,21 @@ extension ViewController: NotificationScriptMessageDelegate {
             UIApplication.shared.registerForRemoteNotifications()
         }
     }
+    
+    func onLoadSecureUrl(url: URL) {
+        DispatchQueue.main.async {
+            let viewController = SFSafariViewController(url: url)
+            self.present(viewController, animated: true)
+        }
+    }
+}
+
+extension ViewController: SFSafariViewControllerDelegate {
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+        DispatchQueue.main.async {
+            self.dismissSafariVC()
+        }
+    }
+
 }
 

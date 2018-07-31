@@ -12,6 +12,8 @@ import WebKit
 protocol NotificationScriptMessageDelegate: class {
     func onNotificationRegistration(promiseId: Int, value: Bool)
     func onUserAuthenticationReceived(value: String)
+    
+    func onLoadSecureUrl(url: URL)
 }
 
 class NotificationScriptMessageHandler: NSObject, WKScriptMessageHandler {
@@ -34,6 +36,9 @@ class NotificationScriptMessageHandler: NSObject, WKScriptMessageHandler {
             default: break
             }
         }
-
+        
+        if let secureString = body["secureUrl"] as? String, let secureUrl = URL(string: secureString){
+            delegate?.onLoadSecureUrl(url: secureUrl)
+        }
     }
 }
