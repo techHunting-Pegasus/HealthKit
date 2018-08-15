@@ -129,14 +129,22 @@ extension ViewController: NotificationScriptMessageDelegate {
     }
     
     func onLoadSecureUrl(url: URL) {
+        print("Loading Secure URL:\(String(describing:url))")
         DispatchQueue.main.async {
             let viewController = SFSafariViewController(url: url)
+            viewController.delegate = self
             self.present(viewController, animated: true)
         }
     }
 }
 
 extension ViewController: SFSafariViewControllerDelegate {
+    
+    func safariViewController(_ controller: SFSafariViewController, initialLoadDidRedirectTo URL: URL) {
+        DispatchQueue.main.async {
+            self.dismissSafariVC()
+        }
+    }
     func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
         DispatchQueue.main.async {
             self.dismissSafariVC()
