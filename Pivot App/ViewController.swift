@@ -168,6 +168,7 @@ extension ViewController: NotificationScriptMessageDelegate {
         
         
         webComponents.query = callbackComponents.query
+        webComponents.fragment = nil
         
         guard let url = webComponents.url else {
             print("Failed to construct new URL for webview.")
