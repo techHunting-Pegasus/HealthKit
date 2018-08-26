@@ -14,7 +14,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     lazy var services: [ApplicationService] = [
         SettingsService(),
         HockeyAppService(),
-        NotificationService()
+        NotificationService(),
+        DeepLinkService()
     ]
     var window: UIWindow?
 
@@ -77,6 +78,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var result = false
         services.forEach {
             if $0.application?(application, continue: userActivity, restorationHandler: restorationHandler) == true {
+                result = true
+            }
+        }
+        return result
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        var result = false
+        services.forEach {
+            if $0.application?(app, open: url, options: options) == true {
                 result = true
             }
         }

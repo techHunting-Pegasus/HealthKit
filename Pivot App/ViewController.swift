@@ -11,6 +11,9 @@ import WebKit
 import UserNotifications
 import SafariServices
 
+let CallbackNotification = Notification.Name(rawValue: "CallbackNotification")
+let CallbackNotificationURLKey = "URL"
+
 class ViewController: UIViewController {
     
     @IBOutlet weak var webView: WKWebView!
@@ -53,8 +56,18 @@ class ViewController: UIViewController {
             loadURL(url: requestUrl)
         }
         
-        UserDefaults.standard.addObserver(self, forKeyPath: Constants.login_url, options: .new, context: nil)
-        UserDefaults.standard.addObserver(self, forKeyPath: Constants.token_key, options: .new, context: nil)
+        UserDefaults.standard.addObserver(self, forKeyPath: Constants.login_url,
+                                          options: .new,
+                                          context: nil)
+        
+        UserDefaults.standard.addObserver(self, forKeyPath: Constants.token_key,
+                                          options: .new,
+                                          context: nil)
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(onCallbackNotification),
+                                               name: CallbackNotification,
+                                               object: nil)
     }
     
     func loadURL(url: URL) {
@@ -136,13 +149,41 @@ extension ViewController: NotificationScriptMessageDelegate {
             self.present(viewController, animated: true)
         }
     }
+    
+    @objc func onCallbackNotification(notification: Notification) {
+        defer { self.dismissSafariVC() }
+        
+        guard
+            let callbackURL = notification.userInfo?[CallbackNotificationURLKey] as? URL,
+            let webURL = webView.url,
+            let callbackComponents = URLComponents(url: callbackURL,
+                                                   resolvingAgainstBaseURL: true),
+            var webComponents = URLComponents(url: webURL, resolvingAgainstBaseURL: true)
+        else {
+            print("Failed to build Callback URL")
+            return
+        }
+        
+        print("Callback Notification with URL:\(callbackURL)")
+        
+        
+        webComponents.query = callbackComponents.query
+        
+        guard let url = webComponents.url else {
+            print("Failed to construct new URL for webview.")
+            return
+        }
+        print("Loading New URL for page: \(url)")
+        let request = URLRequest(url: url)
+
+        self.webView.load(request)
+    }
 }
 
 extension ViewController: SFSafariViewControllerDelegate {
     
     func safariViewController(_ controller: SFSafariViewController, initialLoadDidRedirectTo URL: URL) {
         DispatchQueue.main.async {
-            self.dismissSafariVC()
         }
     }
     func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
