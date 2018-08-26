@@ -9,6 +9,9 @@
 		<string>applinks:pivotdev.gbehavior.com</string>
 		<string>applinks:pivotqa.gbehavior.com</string>
 		<string>applinks:pivotuat.gbehavior.com</string>
+		<string>applinks:www1.gopivotsolutions.com</string>
+		<string>applinks:www.banksbucks.com</string>
+		<string>applinks:www.lilgasphealthyrewards.com</string>
 	</array>
 	<key>com.apple.developer.healthkit</key>
 	<true/>
