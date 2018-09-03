@@ -8,7 +8,7 @@
     {
       "size" : "20x20",
       "idiom" : "iphone",
-      "filename" : "pivot_icon.60.png",
+      "filename" : "GoPivot.icon.60.png",
       "scale" : "3x"
     },
     {
@@ -24,25 +24,25 @@
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "pivot_icon.80.png",
+      "filename" : "GoPivot.icon.80-1.png",
       "scale" : "2x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "pivot_icon.120-1.png",
+      "filename" : "GoPivot.icon.120-1.png",
       "scale" : "3x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "pivot_icon.120.png",
+      "filename" : "GoPivot.icon.120.png",
       "scale" : "2x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "pivot_icon.180.png",
+      "filename" : "GoPivot.icon.180.png",
       "scale" : "3x"
     },
     {
@@ -71,8 +71,9 @@
       "scale" : "1x"
     },
     {
-      "idiom" : "ipad",
       "size" : "40x40",
+      "idiom" : "ipad",
+      "filename" : "GoPivot.icon.80.png",
       "scale" : "2x"
     },
     {
@@ -91,8 +92,9 @@
       "scale" : "2x"
     },
     {
-      "idiom" : "ios-marketing",
       "size" : "1024x1024",
+      "idiom" : "ios-marketing",
+      "filename" : "GoPivot.icon.png",
       "scale" : "1x"
     }
   ],
