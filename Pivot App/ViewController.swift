@@ -150,6 +150,14 @@ extension ViewController: NotificationScriptMessageDelegate {
         }
     }
     
+    func onLoadFitbitUrl(url: URL) {
+        print("Loading Fitbit URL:\(String(describing:url))")
+        DispatchQueue.main.async {
+            let request = URLRequest(url: url)
+            self.webView.load(request)
+        }
+    }
+    
     @objc func onCallbackNotification(notification: Notification) {
         defer { self.dismissSafariVC() }
         

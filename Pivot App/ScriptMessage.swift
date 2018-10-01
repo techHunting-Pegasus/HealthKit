@@ -14,6 +14,7 @@ protocol NotificationScriptMessageDelegate: class {
     func onUserAuthenticationReceived(value: String)
     
     func onLoadSecureUrl(url: URL)
+    func onLoadFitbitUrl(url: URL)
 }
 
 class NotificationScriptMessageHandler: NSObject, WKScriptMessageHandler {
@@ -40,5 +41,10 @@ class NotificationScriptMessageHandler: NSObject, WKScriptMessageHandler {
         if let secureString = body["secureUrl"] as? String, let secureUrl = URL(string: secureString){
             delegate?.onLoadSecureUrl(url: secureUrl)
         }
+        
+        if let secureString = body["googleFitUrl"] as? String, let url = URL(string: secureString){
+            delegate?.onLoadFitbitUrl(url: url)
+        }
+
     }
 }
