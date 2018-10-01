@@ -9,7 +9,7 @@
 import UIKit
 
 class SettingsService: NSObject,  ApplicationService {
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         // check that all settings are initiated
         
         // 

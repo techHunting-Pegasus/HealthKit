@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     ]
     var window: UIWindow?
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         var result = true
         services.forEach {
             if $0.application?(application, didFinishLaunchingWithOptions: launchOptions) == false {
@@ -74,7 +74,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return result
     }
 
-    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
         var result = false
         services.forEach {
             if $0.application?(application, continue: userActivity, restorationHandler: restorationHandler) == true {
@@ -84,7 +84,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return result
     }
     
-    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         var result = false
         services.forEach {
             if $0.application?(app, open: url, options: options) == true {

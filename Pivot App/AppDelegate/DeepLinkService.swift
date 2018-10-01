@@ -10,7 +10,7 @@ import UIKit
 
 class DeepLinkService: NSObject, ApplicationService {
     
-    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
 
         if let sourceApp = options[.sourceApplication],
             String(describing: sourceApp) == "com.apple.SafariViewService" {
@@ -25,7 +25,7 @@ class DeepLinkService: NSObject, ApplicationService {
         return true
     }
     
-    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
         return true
     }
 }
