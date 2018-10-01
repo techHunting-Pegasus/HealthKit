@@ -369,7 +369,7 @@
 		9426658B211DBF68008A310F /* UAT2 */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_BUILD_NUMBER = 14;
+				BUNDLE_BUILD_NUMBER = 15;
 				BUNDLE_ID_SUFFIX = .uat2;
 				BUNDLE_VERSION = 1.1.0;
 				CODE_SIGN_ENTITLEMENTS = Pivot.entitlements;
@@ -446,7 +446,7 @@
 		943677371F96CA8400840058 /* QA */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_BUILD_NUMBER = 14;
+				BUNDLE_BUILD_NUMBER = 15;
 				BUNDLE_VERSION = 1.1.0;
 				CODE_SIGN_ENTITLEMENTS = Pivot.entitlements;
 				CODE_SIGN_STYLE = Automatic;
@@ -585,7 +585,7 @@
 		94D563821F85B99A00C2C72D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_BUILD_NUMBER = 14;
+				BUNDLE_BUILD_NUMBER = 15;
 				BUNDLE_VERSION = 1.1.0;
 				CODE_SIGN_ENTITLEMENTS = Pivot.entitlements;
 				CODE_SIGN_STYLE = Automatic;
@@ -604,7 +604,7 @@
 		94D563831F85B99A00C2C72D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_BUILD_NUMBER = 14;
+				BUNDLE_BUILD_NUMBER = 15;
 				BUNDLE_VERSION = 1.1.0;
 				CODE_SIGN_ENTITLEMENTS = Pivot.entitlements;
 				CODE_SIGN_STYLE = Automatic;
@@ -680,7 +680,7 @@
 		94F9FF761FD8CD840032B193 /* UAT */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_BUILD_NUMBER = 14;
+				BUNDLE_BUILD_NUMBER = 15;
 				BUNDLE_VERSION = 1.1.0;
 				CODE_SIGN_ENTITLEMENTS = Pivot.entitlements;
 				CODE_SIGN_STYLE = Automatic;
