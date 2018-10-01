@@ -12,6 +12,9 @@ import WebKit
 protocol NotificationScriptMessageDelegate: class {
     func onNotificationRegistration(promiseId: Int, value: Bool)
     func onUserAuthenticationReceived(value: String)
+    
+    func onLoadSecureUrl(url: URL)
+    func onLoadFitbitUrl(url: URL)
 }
 
 class NotificationScriptMessageHandler: NSObject, WKScriptMessageHandler {
@@ -33,6 +36,14 @@ class NotificationScriptMessageHandler: NSObject, WKScriptMessageHandler {
                 delegate?.onNotificationRegistration(promiseId: promiseId, value: false)
             default: break
             }
+        }
+        
+        if let secureString = body["secureUrl"] as? String, let secureUrl = URL(string: secureString){
+            delegate?.onLoadSecureUrl(url: secureUrl)
+        }
+        
+        if let secureString = body["googleFitUrl"] as? String, let url = URL(string: secureString){
+            delegate?.onLoadFitbitUrl(url: url)
         }
 
     }

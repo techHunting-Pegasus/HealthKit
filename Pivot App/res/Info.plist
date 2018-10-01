@@ -15,24 +15,39 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.0.4</string>
+	<string>${BUNDLE_VERSION}</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>GoPivot</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>gopivot</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
-	<string>4</string>
+	<string>${BUNDLE_BUILD_NUMBER}</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
-		<true/>
+		<false/>
 	</dict>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Please allow Pivot App access to photos for crash reporting.</string>
+	<string>Please allow $(EXECUTABLE_NAME) access to photos for crash reporting.</string>
 	<key>NSHealthShareUsageDescription</key>
 	<string>Please Allow $(EXECUTABLE_NAME) to access your Health Kit data.</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>Please allow $(EXECUTABLE_NAME) to get Updates from Apple HealthKit for health reporting.</string>
 	<key>PivotLoginURL</key>
-	<string>http://pivotdev.gbehavior.com</string>
+	<string>https://pivotdev.gbehavior.com</string>
 	<key>PivotAPIURL</key>
-	<string>http://pivotdev.gbehavior.com</string>
+	<string>https://pivotdev.gbehavior.com</string>
 	<key>HockeyAppKey</key>
 	<string>4ac49226d6ab41b597e21898a69dc837</string>
 	<key>UILaunchStoryboardName</key>
@@ -54,5 +69,14 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+<<<<<<< HEAD
+=======
+	<key>PivotLoginURL</key>
+	<string>https://www1.gopivotsolutions.com</string>
+	<key>PivotAPIURL</key>
+	<string>https://www1.gopivotsolutions.com</string>
+	<key>HockeyAppKey</key>
+	<string>4ac49226d6ab41b597e21898a69dc837</string>
+>>>>>>> develop
 </dict>
 </plist>

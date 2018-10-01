@@ -10,6 +10,17 @@ import UIKit
 
 class DeepLinkService: NSObject, ApplicationService {
     
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+
+        if let sourceApp = options[.sourceApplication],
+            String(describing: sourceApp) == "com.apple.SafariViewService" {
+            NotificationCenter.default.post(name: CallbackNotification,
+                                            object: nil,
+                                            userInfo: [CallbackNotificationURLKey: url])
+        }
+        return true
+    }
+    
     func application(_ application: UIApplication, willContinueUserActivityWithType userActivityType: String) -> Bool {
         return true
     }
