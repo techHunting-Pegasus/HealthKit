@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9426658D211DBFBD008A310F /* Info.uat2.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9426658C211DBFBC008A310F /* Info.uat2.plist */; };
 		9432D14E1FD1E3FE00A2B98A /* ScriptMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9432D14D1FD1E3FE00A2B98A /* ScriptMessage.swift */; };
 		943677551F96D58F00840058 /* SettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943677541F96D58F00840058 /* SettingsService.swift */; };
 		943B94FC201785EC00C3722A /* DeepLinkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943B94FB201785EC00C3722A /* DeepLinkService.swift */; };
@@ -244,7 +243,6 @@
 				94D5637D1F85B99A00C2C72D /* LaunchScreen.storyboard in Resources */,
 				94DCE1401F942B27007B76CD /* HockeySDKResources.bundle in Resources */,
 				94D5637A1F85B99A00C2C72D /* Assets.xcassets in Resources */,
-				9426658D211DBFBD008A310F /* Info.uat2.plist in Resources */,
 				94D563781F85B99A00C2C72D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
