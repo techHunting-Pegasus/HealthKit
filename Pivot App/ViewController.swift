@@ -150,11 +150,11 @@ extension ViewController: NotificationScriptMessageDelegate {
         }
     }
     
-    func onLoadFitbitUrl(url: URL) {
-        print("Loading Fitbit URL:\(String(describing:url))")
+    func onLoadGoogleFitUrl(url: URL) {
+        print("Loading Google Fit URL:\(String(describing:url))")
         DispatchQueue.main.async {
-            let request = URLRequest(url: url)
-            self.webView.load(request)
+            UIApplication.shared.openURL(url)
+            
         }
     }
     
@@ -163,26 +163,23 @@ extension ViewController: NotificationScriptMessageDelegate {
         
         guard
             let callbackURL = notification.userInfo?[CallbackNotificationURLKey] as? URL,
-            let webURL = webView.url,
-            let callbackComponents = URLComponents(url: callbackURL,
-                                                   resolvingAgainstBaseURL: true),
-            var webComponents = URLComponents(url: webURL, resolvingAgainstBaseURL: true)
+            var components = URLComponents(url: callbackURL, resolvingAgainstBaseURL: false)
         else {
             print("Failed to build Callback URL")
             return
         }
         
-        print("Callback Notification with URL:\(callbackURL)")
+        if components.scheme != "https" {
+            components.scheme = "https"
+        }
         
-        
-        webComponents.query = callbackComponents.query
-        webComponents.fragment = nil
-        
-        guard let url = webComponents.url else {
-            print("Failed to construct new URL for webview.")
+        guard let url = components.url else {
+            print("Failed to construct URL from Components")
             return
         }
-        print("Loading New URL for page: \(url)")
+        
+        print("Callback Notification with URL:\(url)")
+        
         let request = URLRequest(url: url)
 
         self.webView.load(request)
