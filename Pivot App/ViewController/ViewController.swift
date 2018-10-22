@@ -18,6 +18,8 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var webView: WKWebView!
     
+    var docController: UIDocumentInteractionController?
+    
     private var currentPromiseId: Int? = nil
     
     override func loadView() {
@@ -36,6 +38,7 @@ class ViewController: UIViewController {
         let webView = WKWebView(frame: CGRect(origin:CGPoint(x:0,y:20), size: .zero), configuration: webConfiguration)
         webView.translatesAutoresizingMaskIntoConstraints = false
         webView.uiDelegate = self
+        webView.navigationDelegate = self
         
         self.webView = webView
         self.view.addSubview(webView)
@@ -107,10 +110,10 @@ class ViewController: UIViewController {
         let javaScript = "window.resolvePromise(" + String(promiseId) + ", \"\(token)\")"
         webView?.evaluateJavaScript(javaScript, completionHandler: nil)
     }
+    
+
 }
 
-extension ViewController: WKUIDelegate {
-}
 
 extension ViewController: NotificationScriptMessageDelegate {
     
