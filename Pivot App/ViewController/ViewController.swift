@@ -29,7 +29,7 @@ class ViewController: UIViewController {
 
         let webConfiguration = WKWebViewConfiguration()
         let userContentController = WKUserContentController()
-        let messageHandler = NotificationScriptMessageHandler()
+        let messageHandler = ScriptMessageHandler()
         messageHandler.delegate = self
         
         userContentController.add(messageHandler, name: "observer")
@@ -110,15 +110,13 @@ class ViewController: UIViewController {
         let javaScript = "window.resolvePromise(" + String(promiseId) + ", \"\(token)\")"
         webView?.evaluateJavaScript(javaScript, completionHandler: nil)
     }
-    
-
 }
 
 
-extension ViewController: NotificationScriptMessageDelegate {
+extension ViewController: ScriptMessageDelegate {
     
     func onUserAuthenticationReceived(value: String) {
-        
+        UserDefaults.standard.set(value, forKey: Constants.user_authorization)
     }
     
     func onNotificationRegistration(promiseId: Int, value: Bool) {

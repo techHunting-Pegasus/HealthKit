@@ -9,7 +9,7 @@
 import UIKit
 import WebKit
 
-protocol NotificationScriptMessageDelegate: class {
+protocol ScriptMessageDelegate: class {
     func onNotificationRegistration(promiseId: Int, value: Bool)
     func onUserAuthenticationReceived(value: String)
     
@@ -17,13 +17,16 @@ protocol NotificationScriptMessageDelegate: class {
     func onLoadGoogleFitUrl(url: URL)
 }
 
-class NotificationScriptMessageHandler: NSObject, WKScriptMessageHandler {
-    weak var delegate: NotificationScriptMessageDelegate?
+class ScriptMessageHandler: NSObject, WKScriptMessageHandler {
+    weak var delegate: ScriptMessageDelegate?
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         guard let body = message.body as? [String: Any] else {
             print("Recieved invalid json from javascript")
             return
         }
+        
+        debugPrint("Received Script Message: \(body)")
+        
         if let userAuth = body["userGUID"] as? String {
             delegate?.onUserAuthenticationReceived(value: userAuth)
         }

@@ -12,7 +12,7 @@ import HealthKit
 class HealthStoreService: NSObject, ApplicationService {
     
     // MARK: - ApplicationService Methods
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         if HKHealthStore.isHealthDataAvailable() {
             requestAuthorization()
             enableBackgroundDeliveries()
