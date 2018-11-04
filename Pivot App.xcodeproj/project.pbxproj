@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9426658D211DBFBD008A310F /* Info.uat2.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9426658C211DBFBC008A310F /* Info.uat2.plist */; };
 		9432D14E1FD1E3FE00A2B98A /* ScriptMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9432D14D1FD1E3FE00A2B98A /* ScriptMessage.swift */; };
 		943677551F96D58F00840058 /* SettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943677541F96D58F00840058 /* SettingsService.swift */; };
 		943B94FC201785EC00C3722A /* DeepLinkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943B94FB201785EC00C3722A /* DeepLinkService.swift */; };
@@ -25,6 +24,8 @@
 		94DCE1411F942B27007B76CD /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94DCE13F1F942B27007B76CD /* HockeySDK.framework */; };
 		94DCE1441F942C23007B76CD /* ApplicationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DCE1431F942C23007B76CD /* ApplicationService.swift */; };
 		94DCE1461F942C5F007B76CD /* HockeyAppService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DCE1451F942C5F007B76CD /* HockeyAppService.swift */; };
+		94F68C67217D34F2005781B5 /* ViewController+FileDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F68C66217D34F2005781B5 /* ViewController+FileDownload.swift */; };
+		94F68C69217D356A005781B5 /* ViewController+WKDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F68C68217D356A005781B5 /* ViewController+WKDelegates.swift */; };
 		94F9FF721FD8B2B10032B193 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94F9FF711FD8B2B10032B193 /* HealthKit.framework */; };
 		94F9FF7A1FD8D3820032B193 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F9FF791FD8D3820032B193 /* NotificationService.swift */; };
 		94FDC6992011AA460050CA6B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FDC6982011AA460050CA6B /* Constants.swift */; };
@@ -54,6 +55,8 @@
 		94DCE13F1F942B27007B76CD /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HockeySDK.framework; sourceTree = "<group>"; };
 		94DCE1431F942C23007B76CD /* ApplicationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationService.swift; sourceTree = "<group>"; };
 		94DCE1451F942C5F007B76CD /* HockeyAppService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HockeyAppService.swift; sourceTree = "<group>"; };
+		94F68C66217D34F2005781B5 /* ViewController+FileDownload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+FileDownload.swift"; sourceTree = "<group>"; };
+		94F68C68217D356A005781B5 /* ViewController+WKDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+WKDelegates.swift"; sourceTree = "<group>"; };
 		94F9FF6F1FD8B29A0032B193 /* Pivot.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Pivot.entitlements; sourceTree = "<group>"; };
 		94F9FF711FD8B2B10032B193 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		94F9FF771FD8D2E10032B193 /* Info.uat.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.uat.plist; sourceTree = "<group>"; };
@@ -128,11 +131,11 @@
 		94D563711F85B99900C2C72D /* Pivot App */ = {
 			isa = PBXGroup;
 			children = (
+				94F68C65217D34CD005781B5 /* ViewController */,
 				943677381F96CD2C00840058 /* res */,
 				94DCE1421F942BF1007B76CD /* AppDelegate */,
 				946B9B881FE2406600296DC7 /* API */,
 				946B9B871FE23FD000296DC7 /* Storyboards */,
-				94D563741F85B99A00C2C72D /* ViewController.swift */,
 				9432D14D1FD1E3FE00A2B98A /* ScriptMessage.swift */,
 				946B9B8F1FE247FC00296DC7 /* Util.swift */,
 				94FDC6982011AA460050CA6B /* Constants.swift */,
@@ -162,6 +165,16 @@
 				9495DBB520260EFD00951BF9 /* HealthStore.swift */,
 			);
 			path = AppDelegate;
+			sourceTree = "<group>";
+		};
+		94F68C65217D34CD005781B5 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				94D563741F85B99A00C2C72D /* ViewController.swift */,
+				94F68C66217D34F2005781B5 /* ViewController+FileDownload.swift */,
+				94F68C68217D356A005781B5 /* ViewController+WKDelegates.swift */,
+			);
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 		94F9FF701FD8B2B10032B193 /* Frameworks */ = {
@@ -205,6 +218,7 @@
 				TargetAttributes = {
 					94D5636E1F85B99900C2C72D = {
 						CreatedOnToolsVersion = 9.0;
+						LastSwiftMigration = 1000;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -249,7 +263,6 @@
 				94D5637D1F85B99A00C2C72D /* LaunchScreen.storyboard in Resources */,
 				94DCE1401F942B27007B76CD /* HockeySDKResources.bundle in Resources */,
 				94D5637A1F85B99A00C2C72D /* Assets.xcassets in Resources */,
-				9426658D211DBFBD008A310F /* Info.uat2.plist in Resources */,
 				94D563781F85B99A00C2C72D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -278,11 +291,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				943B94FC201785EC00C3722A /* DeepLinkService.swift in Sources */,
+				94F68C69217D356A005781B5 /* ViewController+WKDelegates.swift in Sources */,
 				946B9B901FE247FC00296DC7 /* Util.swift in Sources */,
 				9432D14E1FD1E3FE00A2B98A /* ScriptMessage.swift in Sources */,
 				943677551F96D58F00840058 /* SettingsService.swift in Sources */,
 				94F9FF7A1FD8D3820032B193 /* NotificationService.swift in Sources */,
 				946B9B8E1FE245CF00296DC7 /* PivotAPI+RequestData.swift in Sources */,
+				94F68C67217D34F2005781B5 /* ViewController+FileDownload.swift in Sources */,
 				94D563751F85B99A00C2C72D /* ViewController.swift in Sources */,
 				94DCE1441F942C23007B76CD /* ApplicationService.swift in Sources */,
 				94DCE1461F942C5F007B76CD /* HockeyAppService.swift in Sources */,
@@ -376,7 +391,7 @@
 		9426658B211DBF68008A310F /* UAT2 */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_BUILD_NUMBER = 14;
+				BUNDLE_BUILD_NUMBER = 17;
 				BUNDLE_ID_SUFFIX = .uat2;
 				BUNDLE_VERSION = 1.1.0;
 				CODE_SIGN_ENTITLEMENTS = Pivot.entitlements;
@@ -388,7 +403,7 @@
 				);
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "${TARGET_NAME}";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = UAT2;
@@ -453,7 +468,7 @@
 		943677371F96CA8400840058 /* QA */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_BUILD_NUMBER = 14;
+				BUNDLE_BUILD_NUMBER = 17;
 				BUNDLE_VERSION = 1.1.0;
 				CODE_SIGN_ENTITLEMENTS = Pivot.entitlements;
 				CODE_SIGN_STYLE = Automatic;
@@ -464,7 +479,7 @@
 				);
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "${TARGET_NAME}";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = QA;
@@ -592,7 +607,7 @@
 		94D563821F85B99A00C2C72D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_BUILD_NUMBER = 14;
+				BUNDLE_BUILD_NUMBER = 17;
 				BUNDLE_VERSION = 1.1.0;
 				CODE_SIGN_ENTITLEMENTS = Pivot.entitlements;
 				CODE_SIGN_STYLE = Automatic;
@@ -603,7 +618,7 @@
 				);
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "${TARGET_NAME}";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -611,7 +626,7 @@
 		94D563831F85B99A00C2C72D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_BUILD_NUMBER = 14;
+				BUNDLE_BUILD_NUMBER = 17;
 				BUNDLE_VERSION = 1.1.0;
 				CODE_SIGN_ENTITLEMENTS = Pivot.entitlements;
 				CODE_SIGN_STYLE = Automatic;
@@ -622,7 +637,7 @@
 				);
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "${TARGET_NAME}";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -687,7 +702,7 @@
 		94F9FF761FD8CD840032B193 /* UAT */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_BUILD_NUMBER = 14;
+				BUNDLE_BUILD_NUMBER = 17;
 				BUNDLE_VERSION = 1.1.0;
 				CODE_SIGN_ENTITLEMENTS = Pivot.entitlements;
 				CODE_SIGN_STYLE = Automatic;
@@ -698,7 +713,7 @@
 				);
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "${TARGET_NAME}";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = UAT;
