@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SettingsService(),
         HockeyAppService(),
         NotificationService(),
-        HealthStoreService(),
+        HealthKitService(),
         DeepLinkService()
     ]
     var window: UIWindow?

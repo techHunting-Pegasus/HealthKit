@@ -1,5 +1,5 @@
 //
-//  HealthStore.swift
+//  HealthKitService.swift
 //  Pivot
 //
 //  Created by Ryan Schumacher on 2/3/18.
@@ -9,7 +9,7 @@
 import UIKit
 import HealthKit
 
-class HealthStoreService: NSObject, ApplicationService {
+class HealthKitService: NSObject, ApplicationService {
     
     // MARK: - ApplicationService Methods
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
