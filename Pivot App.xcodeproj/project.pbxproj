@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		941CB0EB2194815F002CD157 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941CB0EA2194815F002CD157 /* Logger.swift */; };
 		9432D14E1FD1E3FE00A2B98A /* ScriptMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9432D14D1FD1E3FE00A2B98A /* ScriptMessage.swift */; };
 		943677551F96D58F00840058 /* SettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943677541F96D58F00840058 /* SettingsService.swift */; };
 		943B94FC201785EC00C3722A /* DeepLinkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943B94FB201785EC00C3722A /* DeepLinkService.swift */; };
@@ -32,6 +33,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		941CB0EA2194815F002CD157 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		9426658C211DBFBC008A310F /* Info.uat2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.uat2.plist; sourceTree = "<group>"; };
 		9432D14D1FD1E3FE00A2B98A /* ScriptMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptMessage.swift; sourceTree = "<group>"; };
 		943677391F96CE3300840058 /* Info.qa.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.qa.plist; sourceTree = "<group>"; };
@@ -77,6 +79,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		941CB0E921947820002CD157 /* HealthKit */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = HealthKit;
+			sourceTree = "<group>";
+		};
 		943677381F96CD2C00840058 /* res */ = {
 			isa = PBXGroup;
 			children = (
@@ -131,12 +140,14 @@
 		94D563711F85B99900C2C72D /* Pivot App */ = {
 			isa = PBXGroup;
 			children = (
+				941CB0E921947820002CD157 /* HealthKit */,
 				94F68C65217D34CD005781B5 /* ViewController */,
 				943677381F96CD2C00840058 /* res */,
 				94DCE1421F942BF1007B76CD /* AppDelegate */,
 				946B9B881FE2406600296DC7 /* API */,
 				946B9B871FE23FD000296DC7 /* Storyboards */,
 				9432D14D1FD1E3FE00A2B98A /* ScriptMessage.swift */,
+				941CB0EA2194815F002CD157 /* Logger.swift */,
 				946B9B8F1FE247FC00296DC7 /* Util.swift */,
 				94FDC6982011AA460050CA6B /* Constants.swift */,
 				94D563791F85B99A00C2C72D /* Assets.xcassets */,
@@ -298,6 +309,7 @@
 				94F9FF7A1FD8D3820032B193 /* NotificationService.swift in Sources */,
 				946B9B8E1FE245CF00296DC7 /* PivotAPI+RequestData.swift in Sources */,
 				94F68C67217D34F2005781B5 /* ViewController+FileDownload.swift in Sources */,
+				941CB0EB2194815F002CD157 /* Logger.swift in Sources */,
 				94D563751F85B99A00C2C72D /* ViewController.swift in Sources */,
 				94DCE1441F942C23007B76CD /* ApplicationService.swift in Sources */,
 				94DCE1461F942C5F007B76CD /* HockeyAppService.swift in Sources */,

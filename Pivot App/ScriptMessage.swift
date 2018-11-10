@@ -21,33 +21,38 @@ class ScriptMessageHandler: NSObject, WKScriptMessageHandler {
     weak var delegate: ScriptMessageDelegate?
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         guard let body = message.body as? [String: Any] else {
-            print("Recieved invalid json from javascript")
+            Logger.log(.scriptMessageHandler, warning: "Recieved invalid json from javascript")
             return
         }
         
-        debugPrint("Received Script Message: \(body)")
+        Logger.log(.scriptMessageHandler, info: "Received Script Message: \(body)")
         
         if let userAuth = body["userGUID"] as? String {
+            Logger.log(.scriptMessageHandler, verbose: "Received 'userGUID': \(userAuth)")
             delegate?.onUserAuthenticationReceived(value: userAuth)
         }
         
         if let bodyValue = body["body"] as? String, let promiseId = body["promiseId"] as? Int {
+            Logger.log(.scriptMessageHandler, verbose: "Received Message \(bodyValue) with promiseId:\(promiseId)")
+
             switch bodyValue {
             case "enablePush":
                 delegate?.onNotificationRegistration(promiseId: promiseId, value: true)
             case "disablePush":
                 delegate?.onNotificationRegistration(promiseId: promiseId, value: false)
-            default: break
+            default:
+                Logger.log(.scriptMessageHandler, warning: "Unhandled Body Value \(bodyValue)")
             }
         }
         
         if let secureString = body["secureUrl"] as? String, let secureUrl = URL(string: secureString){
+            Logger.log(.scriptMessageHandler, verbose: "Received secureURL:\(secureUrl)")
             delegate?.onLoadSecureUrl(url: secureUrl)
         }
         
         if let secureString = body["googleFitUrl"] as? String, let url = URL(string: secureString){
+            Logger.log(.scriptMessageHandler, verbose: "Received googleFitUrl:\(url)")
             delegate?.onLoadGoogleFitUrl(url: url)
         }
-
     }
 }

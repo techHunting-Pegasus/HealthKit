@@ -50,7 +50,7 @@ class HealthStoreService: NSObject, ApplicationService {
 
         for id in typeIdentifiers {
             guard let type = HKObjectType.quantityType(forIdentifier: id) else { continue }
-            let query = HKObserverQuery(sampleType: type, predicate: nil) {
+            let query = HKObserverQuery(sampleType: type, predicate: nil) { [weak self]
                 (query, completionHandler, error) in
                 guard error == nil else {
                     print("HealthStoreService Error Creating Observer Query for SampleType: \(type)\nError: \(error!)")
@@ -58,6 +58,16 @@ class HealthStoreService: NSObject, ApplicationService {
                     return
                 }
                 print("HealthStoreService Received Observation for SampleType\(type)")
+                
+                switch type.identifier {
+                case HKQuantityTypeIdentifier.stepCount.rawValue:
+                    self?.sampleStepCount()
+                default:
+                    debugPrint("Unhandled Sample Type")
+                    break
+                }
+                
+                
 
                 completionHandler()
             }
@@ -96,6 +106,11 @@ class HealthStoreService: NSObject, ApplicationService {
         }
         return types
     }()
+    
+    func sampleStepCount() {
+        debugPrint("Begin Sampling Step Count...")
+        
+    }
     
     
 }
