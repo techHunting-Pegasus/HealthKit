@@ -43,5 +43,13 @@ class HealthKitFetchAllContainer {
     private func complete() {
         state = .ready
         Logger.log(.healthStoreService, verbose: "HKFetchAllCOntainer completed with \(samples.count) samples")
+        
+        DispatchQueue.global(qos: .background).async { [weak self] in
+            if let strongSelf = self,
+                let request = try? PivotAPI.uploadHealthData(strongSelf.samples).request() {
+                URLSession.shared.dataTask(with: request).resume()
+            }
+        }
+
     }
 }

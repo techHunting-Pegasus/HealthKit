@@ -11,6 +11,11 @@ import HealthKit
 
 class HealthKitService: NSObject, ApplicationService {
     
+    static let QueryLimit = HKObjectQueryNoLimit
+    static var LimitDate: Date = {
+        return Date(timeIntervalSinceNow: Date().timeIntervalSinceNow - (60 * 60 * 24 * 90))
+    }()
+    
     // MARK: - ApplicationService Methods
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         if HKHealthStore.isHealthDataAvailable() {
@@ -61,7 +66,7 @@ class HealthKitService: NSObject, ApplicationService {
         for id in quantityTypeIdentifiers {
             guard let type = HKObjectType.quantityType(forIdentifier: id) else { continue }
             
-            let aQuery = HKAnchoredObjectQuery(type: type, predicate: nil, anchor: HealthKitAnchor.anchor(for: type), limit: HKObjectQueryNoLimit) { [weak self] (query, samples, _, newAnchor, error) in
+            let aQuery = HKAnchoredObjectQuery(type: type, predicate: nil, anchor: HealthKitAnchor.anchor(for: type), limit: HealthKitService.QueryLimit) { [weak self] (query, samples, _, newAnchor, error) in
                 
                 if let error = error {
                     Logger.log(.healthStoreService, error: "HKAnchoredObjectQuery failed for SampleType: \(type)\nError: \(error)")
@@ -79,7 +84,11 @@ class HealthKitService: NSObject, ApplicationService {
                     HealthKitAnchor.set(anchor: anchor, for: type)
                 }
                 
-                self?.fetchAllContainer.add(samples: samples)
+                let filteredSamples = samples.filter { (sample) -> Bool in
+                    sample.startDate > HealthKitService.LimitDate
+                }
+                
+                self?.fetchAllContainer.add(samples: filteredSamples)
                 
             }
             
