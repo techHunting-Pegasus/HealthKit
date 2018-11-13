@@ -15,8 +15,10 @@ class HealthKitService: NSObject, ApplicationService {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         if HKHealthStore.isHealthDataAvailable() {
             requestAuthorization()
+            
+            // Must be done on App Launch
+            // https://developer.apple.com/documentation/healthkit/hkhealthstore/1614175-enablebackgrounddelivery
             enableBackgroundDeliveries()
-            beginObservations()
         }
         return true
     }
@@ -25,54 +27,67 @@ class HealthKitService: NSObject, ApplicationService {
     // MARK: - Helper Methods
     private func requestAuthorization() {
         
-        store.requestAuthorization(toShare: shareSet, read: readSet) { (success, error) in
-            if let error = error {
-                print("HealthStoreService RequestAuthorization Error: \(error)")
+        store.requestAuthorization(toShare: shareSet, read: readSet) { [weak self] (success, error) in
+            guard success else {
+                let debugError = error.debugDescription
+                Logger.log(.healthStoreService, error: "RequestAuthorization failed with Error: \(debugError)")
                 return
             }
-            print("HealthStoreService Successfully Requested Authorization.")
+            Logger.log(.healthStoreService, info: "RequestAuthorization succeeded!")
+            self?.fetchAllData()
         }
     }
     
     private func enableBackgroundDeliveries() {
 
-        let stepCount = HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.stepCount)!
-        store.enableBackgroundDelivery(for:stepCount, frequency: .hourly) { (success, error) in
-            guard error == nil else {
-                print("HealthStoreService enableBackgroundDeliveries Error: \(error!)")
-                return
+        for id in quantityTypeIdentifiers {
+            guard let type = HKQuantityType.quantityType(forIdentifier: id) else { continue }
+            store.enableBackgroundDelivery(for:type, frequency: .daily) { (success, error) in
+                guard success else {
+                    let debugError = error.debugDescription
+                    
+                    Logger.log(.healthStoreService, error: "EnableBackgroundDelivery failed with Error: \(debugError)")
+                    return
+                }
+                Logger.log(.healthStoreService, info: "RequestAuthorization succeeded!")
+
             }
-            print("HealthStoreService Successfully Enabled Background Delivereies.")
         }
     }
     
-    private func beginObservations() {
+    private func fetchAllData() {
 
-        for id in typeIdentifiers {
+        for id in quantityTypeIdentifiers {
             guard let type = HKObjectType.quantityType(forIdentifier: id) else { continue }
-            let query = HKObserverQuery(sampleType: type, predicate: nil) { [weak self]
-                (query, completionHandler, error) in
-                guard error == nil else {
-                    print("HealthStoreService Error Creating Observer Query for SampleType: \(type)\nError: \(error!)")
-                    completionHandler()
+            
+            let aQuery = HKAnchoredObjectQuery(type: type, predicate: nil, anchor: HealthKitAnchor.anchor(for: type), limit: HKObjectQueryNoLimit) { (query, samples, _, newAnchor, error) in
+                
+                if let error = error {
+                    Logger.log(.healthStoreService, error: "HKAnchoredObjectQuery failed for SampleType: \(type)\nError: \(error)")
                     return
                 }
-                print("HealthStoreService Received Observation for SampleType\(type)")
                 
-                switch type.identifier {
-                case HKQuantityTypeIdentifier.stepCount.rawValue:
-                    self?.sampleStepCount()
-                default:
-                    debugPrint("Unhandled Sample Type")
-                    break
+                guard let samples = samples else {
+                    Logger.log(.healthStoreService, warning: "HKAnchoredObjectQuery failed to get Samples for SampleType: \(type)")
+                    return
                 }
                 
+                Logger.log(.healthStoreService, info: "HKAnchoredObjectQuery SampleType: \(type) returned \(samples.count) samples")
                 
-
-                completionHandler()
+                if let anchor = newAnchor {
+                    HealthKitAnchor.set(anchor: anchor, for: type)
+                }
+                
+                for sample in samples {
+                    if let quantitySample = sample as? HKQuantitySample {
+                        quantitySample.quantityType
+                    }
+                    
+                }
+                
             }
             
-            store.execute(query)
+            store.execute(aQuery)
         }
     }
     
@@ -86,8 +101,14 @@ class HealthKitService: NSObject, ApplicationService {
 
         var result: Set<HKObjectType> = []
         
-        for id in typeIdentifiers {
+        for id in quantityTypeIdentifiers {
             if let type = HKQuantityType.quantityType(forIdentifier: id) {
+                result.insert(type)
+            }
+        }
+        
+        for id in characteristicTypeIdentifiers {
+            if let type = HKCharacteristicType.characteristicType(forIdentifier: id) {
                 result.insert(type)
             }
         }
@@ -95,15 +116,29 @@ class HealthKitService: NSObject, ApplicationService {
         return result
     }
     
-    private let typeIdentifiers: [HKQuantityTypeIdentifier] = {
+    private let quantityTypeIdentifiers: [HKQuantityTypeIdentifier] = {
         guard HKHealthStore.isHealthDataAvailable() else { return [] }
         var types = [
             HKQuantityTypeIdentifier.stepCount,
             HKQuantityTypeIdentifier.distanceWalkingRunning,
+            HKQuantityTypeIdentifier.flightsClimbed,
+            HKQuantityTypeIdentifier.bodyMass,
+            HKQuantityTypeIdentifier.basalEnergyBurned,
             HKQuantityTypeIdentifier.distanceCycling]
         if #available(iOS 10, *)  {
             types.append(HKQuantityTypeIdentifier.distanceSwimming)
         }
+        return types
+    }()
+    
+    private let characteristicTypeIdentifiers: [HKCharacteristicTypeIdentifier] = {
+        guard HKHealthStore.isHealthDataAvailable() else { return [] }
+        var types = [
+            HKCharacteristicTypeIdentifier.dateOfBirth,
+            HKCharacteristicTypeIdentifier.biologicalSex,
+            HKCharacteristicTypeIdentifier.bloodType,
+        ]
+        
         return types
     }()
     

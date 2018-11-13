@@ -41,7 +41,7 @@ class Logger {
     }
     
     static func log(_ tag: Tag, info text: String) {
-        guard Logger.instance.level >= .info else { return }
+        guard Logger.instance.level <= .info else { return }
         print("ℹ️\(tag.rawValue):\(text)")
     }
     
