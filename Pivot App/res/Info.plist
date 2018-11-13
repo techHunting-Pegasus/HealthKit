@@ -69,14 +69,11 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-<<<<<<< HEAD
-=======
 	<key>PivotLoginURL</key>
 	<string>https://www1.gopivotsolutions.com</string>
 	<key>PivotAPIURL</key>
-	<string>https://www1.gopivotsolutions.com</string>
+	<string>http://pivotdev2.gbehavior.com/pvDataMation/</string>
 	<key>HockeyAppKey</key>
 	<string>4ac49226d6ab41b597e21898a69dc837</string>
->>>>>>> develop
 </dict>
 </plist>

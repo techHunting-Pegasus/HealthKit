@@ -46,21 +46,22 @@ class HealthKitService: NSObject, ApplicationService {
                 guard success else {
                     let debugError = error.debugDescription
                     
-                    Logger.log(.healthStoreService, error: "EnableBackgroundDelivery failed with Error: \(debugError)")
+                    Logger.log(.healthStoreService, error: "EnableBackgroundDelivery failed for \(type) with Error: \(debugError)")
                     return
                 }
-                Logger.log(.healthStoreService, info: "RequestAuthorization succeeded!")
+                Logger.log(.healthStoreService, info: "Enable Background Delivery for \(type) succeeded!")
 
             }
         }
     }
     
     private func fetchAllData() {
+        fetchAllContainer.start()
 
         for id in quantityTypeIdentifiers {
             guard let type = HKObjectType.quantityType(forIdentifier: id) else { continue }
             
-            let aQuery = HKAnchoredObjectQuery(type: type, predicate: nil, anchor: HealthKitAnchor.anchor(for: type), limit: HKObjectQueryNoLimit) { (query, samples, _, newAnchor, error) in
+            let aQuery = HKAnchoredObjectQuery(type: type, predicate: nil, anchor: HealthKitAnchor.anchor(for: type), limit: HKObjectQueryNoLimit) { [weak self] (query, samples, _, newAnchor, error) in
                 
                 if let error = error {
                     Logger.log(.healthStoreService, error: "HKAnchoredObjectQuery failed for SampleType: \(type)\nError: \(error)")
@@ -78,12 +79,7 @@ class HealthKitService: NSObject, ApplicationService {
                     HealthKitAnchor.set(anchor: anchor, for: type)
                 }
                 
-                for sample in samples {
-                    if let quantitySample = sample as? HKQuantitySample {
-                        quantitySample.quantityType
-                    }
-                    
-                }
+                self?.fetchAllContainer.add(samples: samples)
                 
             }
             
@@ -93,6 +89,7 @@ class HealthKitService: NSObject, ApplicationService {
     
     // MARK: - Properties
     private let store = HKHealthStore()
+    private var fetchAllContainer = HealthKitFetchAllContainer()
 
     private let shareSet: Set<HKSampleType>? = nil
     

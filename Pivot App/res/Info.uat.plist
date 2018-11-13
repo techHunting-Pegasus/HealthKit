@@ -47,7 +47,7 @@
 	<key>PivotLoginURL</key>
 	<string>https://pivotuat.gbehavior.com</string>
 	<key>PivotAPIURL</key>
-	<string>https://pivotuat.gbehavior.com</string>
+	<string>http://pivotdev2.gbehavior.com/pvDataMation/</string>
 	<key>HockeyAppKey</key>
 	<string>11ff3ce390884ed7bfc46d9d46034136</string>
 	<key>UILaunchStoryboardName</key>

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		941CB0EB2194815F002CD157 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941CB0EA2194815F002CD157 /* Logger.swift */; };
 		941CB0ED219778E8002CD157 /* HealthKitAnchor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941CB0EC219778E8002CD157 /* HealthKitAnchor.swift */; };
+		941CB0EF219A6F62002CD157 /* HealthKitFetchAllContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941CB0EE219A6F62002CD157 /* HealthKitFetchAllContainer.swift */; };
 		9432D14E1FD1E3FE00A2B98A /* ScriptMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9432D14D1FD1E3FE00A2B98A /* ScriptMessage.swift */; };
 		943677551F96D58F00840058 /* SettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943677541F96D58F00840058 /* SettingsService.swift */; };
 		943B94FC201785EC00C3722A /* DeepLinkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943B94FB201785EC00C3722A /* DeepLinkService.swift */; };
@@ -16,6 +17,7 @@
 		946B9B8C1FE2424800296DC7 /* PivotAPIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946B9B8B1FE2424800296DC7 /* PivotAPIError.swift */; };
 		946B9B8E1FE245CF00296DC7 /* PivotAPI+RequestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946B9B8D1FE245CF00296DC7 /* PivotAPI+RequestData.swift */; };
 		946B9B901FE247FC00296DC7 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946B9B8F1FE247FC00296DC7 /* Util.swift */; };
+		949015A0219A79F500B80E99 /* HealthKitRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9490159F219A79F500B80E99 /* HealthKitRequest.swift */; };
 		9495DBB620260EFD00951BF9 /* HealthKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9495DBB520260EFD00951BF9 /* HealthKitService.swift */; };
 		94D563731F85B99900C2C72D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D563721F85B99900C2C72D /* AppDelegate.swift */; };
 		94D563751F85B99A00C2C72D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D563741F85B99A00C2C72D /* ViewController.swift */; };
@@ -36,6 +38,7 @@
 /* Begin PBXFileReference section */
 		941CB0EA2194815F002CD157 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		941CB0EC219778E8002CD157 /* HealthKitAnchor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitAnchor.swift; sourceTree = "<group>"; };
+		941CB0EE219A6F62002CD157 /* HealthKitFetchAllContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitFetchAllContainer.swift; sourceTree = "<group>"; };
 		9426658C211DBFBC008A310F /* Info.uat2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.uat2.plist; sourceTree = "<group>"; };
 		9432D14D1FD1E3FE00A2B98A /* ScriptMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptMessage.swift; sourceTree = "<group>"; };
 		943677391F96CE3300840058 /* Info.qa.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.qa.plist; sourceTree = "<group>"; };
@@ -47,6 +50,7 @@
 		946B9B8B1FE2424800296DC7 /* PivotAPIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PivotAPIError.swift; sourceTree = "<group>"; };
 		946B9B8D1FE245CF00296DC7 /* PivotAPI+RequestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PivotAPI+RequestData.swift"; sourceTree = "<group>"; };
 		946B9B8F1FE247FC00296DC7 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		9490159F219A79F500B80E99 /* HealthKitRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitRequest.swift; sourceTree = "<group>"; };
 		9495DBB520260EFD00951BF9 /* HealthKitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitService.swift; sourceTree = "<group>"; };
 		94D5636F1F85B99900C2C72D /* GoPivot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoPivot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		94D563721F85B99900C2C72D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -85,6 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				941CB0EC219778E8002CD157 /* HealthKitAnchor.swift */,
+				941CB0EE219A6F62002CD157 /* HealthKitFetchAllContainer.swift */,
 			);
 			path = HealthKit;
 			sourceTree = "<group>";
@@ -117,6 +122,7 @@
 				946B9B891FE2408000296DC7 /* PivotAPI.swift */,
 				946B9B8D1FE245CF00296DC7 /* PivotAPI+RequestData.swift */,
 				946B9B8B1FE2424800296DC7 /* PivotAPIError.swift */,
+				9490159F219A79F500B80E99 /* HealthKitRequest.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -312,7 +318,9 @@
 				94F9FF7A1FD8D3820032B193 /* NotificationService.swift in Sources */,
 				946B9B8E1FE245CF00296DC7 /* PivotAPI+RequestData.swift in Sources */,
 				94F68C67217D34F2005781B5 /* ViewController+FileDownload.swift in Sources */,
+				949015A0219A79F500B80E99 /* HealthKitRequest.swift in Sources */,
 				941CB0EB2194815F002CD157 /* Logger.swift in Sources */,
+				941CB0EF219A6F62002CD157 /* HealthKitFetchAllContainer.swift in Sources */,
 				94D563751F85B99A00C2C72D /* ViewController.swift in Sources */,
 				94DCE1441F942C23007B76CD /* ApplicationService.swift in Sources */,
 				94DCE1461F942C5F007B76CD /* HockeyAppService.swift in Sources */,
@@ -395,7 +403,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "Pivot App/res/Info${BUNDLE_ID_SUFFIX}.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "${BUNDLE_ID_BASE}${BUNDLE_ID_SUFFIX}";
 				SDKROOT = iphoneos;
@@ -472,7 +480,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "Pivot App/res/Info${BUNDLE_ID_SUFFIX}.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "${BUNDLE_ID_BASE}${BUNDLE_ID_SUFFIX}";
 				SDKROOT = iphoneos;
@@ -554,7 +562,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "Pivot App/res/Info${BUNDLE_ID_SUFFIX}.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "${BUNDLE_ID_BASE}${BUNDLE_ID_SUFFIX}";
@@ -611,7 +619,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "Pivot App/res/Info${BUNDLE_ID_SUFFIX}.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "${BUNDLE_ID_BASE}${BUNDLE_ID_SUFFIX}";
 				SDKROOT = iphoneos;
@@ -706,7 +714,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "Pivot App/res/Info${BUNDLE_ID_SUFFIX}.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "${BUNDLE_ID_BASE}${BUNDLE_ID_SUFFIX}";
 				SDKROOT = iphoneos;

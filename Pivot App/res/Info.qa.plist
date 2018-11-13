@@ -46,10 +46,10 @@
 	<string>Please allow $(EXECUTABLE_NAME) access to photos for crash reporting.</string>
 	<key>NSHealthUpdateUsageDescription</key>
 	<string>Please allow $(EXECUTABLE_NAME) to get Updates from Apple HealthKit for health reporting.</string>
-	<key>PivotAPIURL</key>
-	<string>https://pivotqa.gbehavior.com</string>
 	<key>PivotLoginURL</key>
 	<string>https://pivotqa.gbehavior.com</string>
+	<key>PivotAPIURL</key>
+	<string>http://pivotdev2.gbehavior.com/pvDataMation/</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>

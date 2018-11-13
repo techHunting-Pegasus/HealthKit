@@ -6,9 +6,11 @@
 //
 
 import Foundation
+import HealthKit
 
 enum PivotAPI {
     case refreshDevice(oldToken: String, newToken: String, userAuth: String)
+    case uploadHealthData([HKSample])
     
     static let apiVersion = "v1"
     
@@ -23,6 +25,8 @@ enum PivotAPI {
         switch self {
         case .refreshDevice:
             result = URL(string: "/\(PivotAPI.apiVersion)/users/refreshToken", relativeTo: apiUrl)
+        case .uploadHealthData:
+            result = URL(string: "/\(PivotAPI.apiVersion)/gimmeeData", relativeTo: apiUrl)
         }
         
         guard let finalResult = result else {
@@ -33,7 +37,7 @@ enum PivotAPI {
     
     func httpMethod() -> String {
         switch self {
-        case .refreshDevice:
+        case .refreshDevice, .uploadHealthData:
             return "POST"
         }
     }
@@ -43,6 +47,9 @@ enum PivotAPI {
             switch self {
             case .refreshDevice(let oldToken, let newToken, _):
                 return try JSONEncoder().encode(RefreshDeviceRequest(oldToken: oldToken, newToken: newToken))
+
+            case .uploadHealthData(let samples):
+                return try JSONEncoder().encode(HealthKitRequest(from: samples))
             }
         }
         catch {
@@ -53,6 +60,8 @@ enum PivotAPI {
         switch self {
         case .refreshDevice(_, _, let userAuth):
             request.addValue("Bearer \(userAuth)", forHTTPHeaderField: "Authorization")
+        case .uploadHealthData:
+            break
         }
     }
     

@@ -41,19 +41,15 @@
 		<true/>
 	</dict>
 	<key>NSHealthShareUsageDescription</key>
-	<string>Please allow GoPivot access to Apple HealtkKit information for reporting.</string>
-	<key>NSHealthUpdateUsageDescription</key>
-	<string>Please allow GoPivot to get Updates from Apple HealthKit for health reporting.</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Please allow $(EXECUTABLE_NAME) access to photos for crash reporting.</string>
-	<key>NSHealthShareUsageDescription</key>
 	<string>Please Allow $(EXECUTABLE_NAME) to access your Health Kit data.</string>
 	<key>NSHealthUpdateUsageDescription</key>
 	<string>Please allow $(EXECUTABLE_NAME) to get Updates from Apple HealthKit for health reporting.</string>
-	<key>PivotAPIURL</key>
-	<string>https://pivotdev.gbehavior.com</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Please allow $(EXECUTABLE_NAME) access to photos for crash reporting.</string>
 	<key>PivotLoginURL</key>
 	<string>https://pivotdev.gbehavior.com</string>
+	<key>PivotAPIURL</key>
+	<string>http://pivotdev2.gbehavior.com/pvDataMation/</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
