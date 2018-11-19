@@ -26,7 +26,7 @@ enum PivotAPI {
         case .refreshDevice:
             result = URL(string: "/\(PivotAPI.apiVersion)/users/refreshToken", relativeTo: apiUrl)
         case .uploadHealthData:
-            result = URL(string: "/\(PivotAPI.apiVersion)/gimmeeData", relativeTo: apiUrl)
+            result = URL(string: "/\(PivotAPI.apiVersion)/gimmeData", relativeTo: apiUrl)
         }
         
         guard let finalResult = result else {
