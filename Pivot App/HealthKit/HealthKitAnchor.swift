@@ -17,8 +17,11 @@ enum HealthKitAnchor {
             let anchor = NSKeyedUnarchiver.unarchiveObject(with: data) as? HKQueryAnchor else {
                 return HKQueryAnchor(fromValue: HKObjectQueryNoLimit)
         }
+        #if NO_ANCHOR
         return HKQueryAnchor(fromValue: HKObjectQueryNoLimit)
-//        return anchor
+        #else
+        return anchor
+        #endif
     }
     
     static func set(anchor: HKQueryAnchor, for sampleType: HKSampleType) {

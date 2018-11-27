@@ -21,6 +21,7 @@ class HealthKitFetchAllContainer {
     }
 
     private(set) var samples: [HKSample] = []
+    private(set) var anchors: [HKSampleType: HKQueryAnchor] = [:]
     private(set) var state: State = .ready
     
     private var timer: Timer?
@@ -36,8 +37,10 @@ class HealthKitFetchAllContainer {
         }
     }
     
-    func add(samples: [HKSample]) {
+    func add(samples: [HKSample], sampleType: HKSampleType, anchor: HKQueryAnchor) {
         self.samples += samples
+        
+        anchors[sampleType] = anchor
     }
     
     private func complete() {
@@ -47,7 +50,18 @@ class HealthKitFetchAllContainer {
         DispatchQueue.global(qos: .background).async { [weak self] in
             if let strongSelf = self,
                 let request = try? PivotAPI.uploadHealthData(strongSelf.samples).request() {
-                URLSession.shared.dataTask(with: request).resume()
+                let dataTask = URLSession.shared.dataTask(with: request) { [weak self] (data, response, error) in
+                    if let error = error {
+                        Logger.log(.healthStoreService, error: "HealthKitFetchAllContainer failed to upload data with error: \(error)")
+                        return
+                    }
+                    // Set anchors after successfull data upload.
+                    self?.anchors.forEach { (type, anchor) in
+                        HealthKitAnchor.set(anchor: anchor, for: type)
+                    }
+                }
+                
+                dataTask.resume()
             }
         }
 

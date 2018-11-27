@@ -12,7 +12,7 @@ import HealthKit
 class HealthKitService: NSObject, ApplicationService {
     
     static let QueryLimit = HKObjectQueryNoLimit
-    static var LimitDate: Date = {
+    static var LimitDate: Date = { // 90 days
         return Date(timeIntervalSinceNow: Date().timeIntervalSinceNow - (60 * 60 * 24 * 90))
     }()
     
@@ -78,17 +78,18 @@ class HealthKitService: NSObject, ApplicationService {
                     return
                 }
                 
-                Logger.log(.healthStoreService, info: "HKAnchoredObjectQuery SampleType: \(type) returned \(samples.count) samples")
-                
-                if let anchor = newAnchor {
-                    HealthKitAnchor.set(anchor: anchor, for: type)
+                guard let anchor = newAnchor else {
+                    Logger.log(.healthStoreService, warning: "HKAnchoredObjectQuery failed to get new HKQueryAnchor")
+                    return
                 }
-                
+
+                Logger.log(.healthStoreService, info: "HKAnchoredObjectQuery SampleType: \(type) returned \(samples.count) samples")
+
                 let filteredSamples = samples.filter { (sample) -> Bool in
                     sample.startDate > HealthKitService.LimitDate
                 }
                 
-                self?.fetchAllContainer.add(samples: filteredSamples)
+                self?.fetchAllContainer.add(samples: filteredSamples, sampleType: type, anchor: anchor)
                 
             }
             
