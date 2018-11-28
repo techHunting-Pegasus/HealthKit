@@ -67,11 +67,16 @@ class HealthKitRequest: Encodable {
 class QuantitySampleRequest: HealthKitRequest.Sample {
     enum QSRError: Error {
         case noQuantityFound
+        case noUnitFound
     }
     let quantity: Double
+    let unit: String
     
     init(from sample: HKQuantitySample) throws {
-        self.quantity = try QuantitySampleRequest.quantity(from: sample)
+        let unit = try QuantitySampleRequest.unit(from: sample)
+        self.quantity = sample.quantity.doubleValue(for: unit)
+        self.unit = unit.unitString
+
         let type = try QuantitySampleRequest.type(from: sample)
 
         super.init(from: sample, for: type)
@@ -83,6 +88,7 @@ class QuantitySampleRequest: HealthKitRequest.Sample {
         case startDate
         case endDate
         case type
+        case unit
     }
     
     override func encode(to encoder: Encoder) throws {
@@ -98,36 +104,62 @@ class QuantitySampleRequest: HealthKitRequest.Sample {
         try container.encode(dateFormatter.string(from: startDate), forKey: .startDate)
         try container.encode(dateFormatter.string(from: endDate), forKey: .endDate)
         try container.encode(quantity, forKey: .quantity)
+        try container.encode(unit, forKey: .unit)
 
     }
     
-    static func quantity(from sample: HKQuantitySample) throws -> Double {
+//    static func quantity(from sample: HKQuantitySample) throws -> String {
+//        switch sample.quantityType.identifier {
+//        case HKQuantityTypeIdentifier.stepCount.rawValue:
+//            return "count"
+//
+//        case HKQuantityTypeIdentifier.distanceWalkingRunning.rawValue:
+//            return "m"
+//
+//        case HKQuantityTypeIdentifier.flightsClimbed.rawValue:
+//            return "count"
+//
+//        case HKQuantityTypeIdentifier.bodyMass.rawValue:
+//            unit = "kg"
+//
+//        case HKQuantityTypeIdentifier.basalEnergyBurned.rawValue:
+//            unit = "kilocalorie"
+//
+//        case HKQuantityTypeIdentifier.distanceCycling.rawValue:
+//            unit =  "m"
+//
+//        default:
+//            throw QSRError.noUnitFound
+//        }
+//        return sample.quantity.doubleValue(for: unit)
+//    }
+    static func unit(from sample: HKQuantitySample) throws -> HKUnit {
         let unit: HKUnit
         switch sample.quantityType.identifier {
         case HKQuantityTypeIdentifier.stepCount.rawValue:
             unit = HKUnit.count()
             
         case HKQuantityTypeIdentifier.distanceWalkingRunning.rawValue:
-            unit = HKUnit.mile()
+            unit = HKUnit.meter()
             
         case HKQuantityTypeIdentifier.flightsClimbed.rawValue:
             unit = HKUnit.count()
             
         case HKQuantityTypeIdentifier.bodyMass.rawValue:
-            unit = HKUnit.pound()
+            unit = HKUnit.gramUnit(with: .kilo)
             
         case HKQuantityTypeIdentifier.basalEnergyBurned.rawValue:
-            unit = HKUnit.calorie()
+            unit = HKUnit.kilocalorie()
             
         case HKQuantityTypeIdentifier.distanceCycling.rawValue:
-            unit = HKUnit.mile()
+            unit = HKUnit.meter()
             
         default:
-            throw QSRError.noQuantityFound
+            throw QSRError.noUnitFound
         }
-        return sample.quantity.doubleValue(for: unit)
+        return unit
     }
-    
+
     static func type(from sample: HKQuantitySample) throws -> String {
         switch sample.quantityType.identifier {
         case HKQuantityTypeIdentifier.stepCount.rawValue:

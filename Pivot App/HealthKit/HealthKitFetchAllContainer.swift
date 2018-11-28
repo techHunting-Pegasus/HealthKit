@@ -38,9 +38,16 @@ class HealthKitFetchAllContainer {
     }
     
     func add(samples: [HKSample], sampleType: HKSampleType, anchor: HKQueryAnchor) {
+        guard state != .uploading else { return }
         self.samples += samples
         
         anchors[sampleType] = anchor
+    }
+    
+    private func reset() {
+        samples = []
+        anchors = [:]
+        state = .ready
     }
     
     private func complete() {
@@ -53,12 +60,15 @@ class HealthKitFetchAllContainer {
                 let dataTask = URLSession.shared.dataTask(with: request) { [weak self] (data, response, error) in
                     if let error = error {
                         Logger.log(.healthStoreService, error: "HealthKitFetchAllContainer failed to upload data with error: \(error)")
+                        self?.reset()
                         return
                     }
                     // Set anchors after successfull data upload.
                     self?.anchors.forEach { (type, anchor) in
                         HealthKitAnchor.set(anchor: anchor, for: type)
                     }
+                    
+                    self?.reset()
                 }
                 
                 dataTask.resume()
