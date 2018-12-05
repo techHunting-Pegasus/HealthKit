@@ -10,7 +10,7 @@ import HealthKit
 
 enum PivotAPI {
     case refreshDevice(oldToken: String, newToken: String, userAuth: String)
-    case uploadHealthData([HKSample])
+    case uploadHealthData([HKStatistics])
     
     static let apiVersion = "v1"
     

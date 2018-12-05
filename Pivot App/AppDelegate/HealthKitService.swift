@@ -60,42 +60,78 @@ class HealthKitService: NSObject, ApplicationService {
         }
     }
     
-    private func fetchAllData() {
+    private func fetchAllStatisticsData() {
         fetchAllContainer.start()
-
+        
         for id in quantityTypeIdentifiers {
             guard let type = HKObjectType.quantityType(forIdentifier: id) else { continue }
             
-            let aQuery = HKAnchoredObjectQuery(type: type, predicate: nil, anchor: HealthKitAnchor.anchor(for: type), limit: HealthKitService.QueryLimit) { [weak self] (query, samples, _, newAnchor, error) in
+            let date = Date()
+            let cal = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)!
+            let newDate = cal.startOfDay(for: date)
+            
+            let predicate = HKQuery.predicateForSamples(withStart: nil, end: newDate, options: .strictEndDate)
+
+            var interval = DateComponents()
+            interval.day = 1
+
+            let statQuery = HKStatisticsCollectionQuery(quantityType: type, quantitySamplePredicate: predicate, options: .cumulativeSum, anchorDate: newDate, intervalComponents: interval)
+            statQuery.initialResultsHandler = { [weak self] (query, results, error) in
                 
                 if let error = error {
-                    Logger.log(.healthStoreService, error: "HKAnchoredObjectQuery failed for SampleType: \(type)\nError: \(error)")
+                    Logger.log(.healthStoreService, error: "HKStatisticsCollectionQuery failed for SampleType: \(type)\nError: \(error)")
+                    return
+                }
+                guard let statistics = results?.statistics() else {
+                    Logger.log(.healthStoreService, error: "HKStatisticsCollectionQuery returned no statistics for SampleType: \(type)")
                     return
                 }
                 
-                guard let samples = samples else {
-                    Logger.log(.healthStoreService, warning: "HKAnchoredObjectQuery failed to get Samples for SampleType: \(type)")
-                    return
-                }
+                Logger.log(.healthStoreService, info: "HKStatisticsCollectionQuery SampleType: \(type) returned \(statistics.count) statistics")
                 
-                guard let anchor = newAnchor else {
-                    Logger.log(.healthStoreService, warning: "HKAnchoredObjectQuery failed to get new HKQueryAnchor")
-                    return
-                }
-
-                Logger.log(.healthStoreService, info: "HKAnchoredObjectQuery SampleType: \(type) returned \(samples.count) samples")
-
-                let filteredSamples = samples.filter { (sample) -> Bool in
-                    sample.startDate > HealthKitService.LimitDate
-                }
                 
-                self?.fetchAllContainer.add(samples: filteredSamples, sampleType: type, anchor: anchor)
-                
+                self?.fetchAllContainer.add(statistics: statistics)
             }
-            
-            store.execute(aQuery)
+
         }
     }
+    
+//    private func fetchAllSampleData() {
+//        fetchAllContainer.start()
+//
+//        for id in quantityTypeIdentifiers {
+//            guard let type = HKObjectType.quantityType(forIdentifier: id) else { continue }
+//
+//            let aQuery = HKAnchoredObjectQuery(type: type, predicate: nil, anchor: HealthKitAnchor.anchor(for: type), limit: HealthKitService.QueryLimit) { [weak self] (query, samples, _, newAnchor, error) in
+//
+//                if let error = error {
+//                    Logger.log(.healthStoreService, error: "HKAnchoredObjectQuery failed for SampleType: \(type)\nError: \(error)")
+//                    return
+//                }
+//
+//                guard let samples = samples else {
+//                    Logger.log(.healthStoreService, warning: "HKAnchoredObjectQuery failed to get Samples for SampleType: \(type)")
+//                    return
+//                }
+//
+//                guard let anchor = newAnchor else {
+//                    Logger.log(.healthStoreService, warning: "HKAnchoredObjectQuery failed to get new HKQueryAnchor")
+//                    return
+//                }
+//
+//                Logger.log(.healthStoreService, info: "HKAnchoredObjectQuery SampleType: \(type) returned \(samples.count) samples")
+//
+//                let filteredSamples = samples.filter { (sample) -> Bool in
+//                    sample.startDate > HealthKitService.LimitDate
+//                }
+//
+////                self?.fetchAllContainer.add(samples: filteredSamples, sampleType: type, anchor: anchor)
+//
+//            }
+//
+//            store.execute(aQuery)
+//        }
+//    }
     
     // MARK: - Properties
     private let store = HKHealthStore()

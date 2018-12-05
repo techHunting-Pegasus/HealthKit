@@ -10,6 +10,12 @@ import Foundation
 import HealthKit
 
 class HealthKitRequest: Encodable {
+    enum HKRError: Error {
+        case noQuantityFound
+        case noQuantityTypeFound
+        case noUnitFound
+    }
+
     var data: [Sample] = []
     
     class Sample: Encodable {
@@ -22,13 +28,19 @@ class HealthKitRequest: Encodable {
             self.endDate = sample.endDate
             self.type = type
         }
+        
+        fileprivate init(from stat: HKStatistics, for type: String) {
+            self.startDate = stat.startDate
+            self.endDate = stat.endDate
+            self.type = type
+        }
     }
     
     enum CodingKeys: String, CodingKey {
         case data
     }
     
-    init(from samples: [HKSample]) {
+    init(from samples: [HKStatistics]) {
         var index = 0
         var lastPercent: Int = 0
         data = samples.compactMap { (sample) -> Sample? in
@@ -39,12 +51,7 @@ class HealthKitRequest: Encodable {
                 index += 1
             }
             
-            switch sample {
-            case let quantitySample as HKQuantitySample:
-                return try? QuantitySampleRequest(from: quantitySample)
-            default:
-                return nil
-            }
+            return try? StatisticsSampleRequest(from: sample)
         }
         Logger.log(.healthStoreService, info: "Finished Processing Data!")
     }
@@ -64,20 +71,41 @@ class HealthKitRequest: Encodable {
     }
 }
 
-class QuantitySampleRequest: HealthKitRequest.Sample {
-    enum QSRError: Error {
-        case noQuantityFound
-        case noUnitFound
+class StatisticsSampleRequest: HealthKitRequest.Sample {
+    let quantity: Double
+    let unit: String
+    
+    init(from sample: HKStatistics) throws {
+        let unit = try HealthKitRequest.unit(from: sample.quantityType)
+        self.unit = unit.unitString
+        
+        let type = try HealthKitRequest.type(from: sample.quantityType)
+
+        guard let quantity = sample.sumQuantity() else {
+            Logger.log(.healthStoreService, warning: "Unable to get Sum for Statistics")
+            throw HealthKitRequest.HKRError.noQuantityTypeFound
+        }
+        self.quantity = quantity.doubleValue(for: unit)
+
+        
+        
+        super.init(from: sample, for: type)
+        
     }
+
+    
+}
+
+class QuantitySampleRequest: HealthKitRequest.Sample {
     let quantity: Double
     let unit: String
     
     init(from sample: HKQuantitySample) throws {
-        let unit = try QuantitySampleRequest.unit(from: sample)
+        let unit = try HealthKitRequest.unit(from: sample.quantityType)
         self.quantity = sample.quantity.doubleValue(for: unit)
         self.unit = unit.unitString
 
-        let type = try QuantitySampleRequest.type(from: sample)
+        let type = try HealthKitRequest.type(from: sample.quantityType)
 
         super.init(from: sample, for: type)
 
@@ -133,9 +161,13 @@ class QuantitySampleRequest: HealthKitRequest.Sample {
 //        }
 //        return sample.quantity.doubleValue(for: unit)
 //    }
-    static func unit(from sample: HKQuantitySample) throws -> HKUnit {
+    
+}
+
+extension HealthKitRequest {
+    static func unit(from type: HKQuantityType) throws -> HKUnit {
         let unit: HKUnit
-        switch sample.quantityType.identifier {
+        switch type.identifier {
         case HKQuantityTypeIdentifier.stepCount.rawValue:
             unit = HKUnit.count()
             
@@ -155,13 +187,13 @@ class QuantitySampleRequest: HealthKitRequest.Sample {
             unit = HKUnit.meter()
             
         default:
-            throw QSRError.noUnitFound
+            throw HKRError.noUnitFound
         }
         return unit
     }
 
-    static func type(from sample: HKQuantitySample) throws -> String {
-        switch sample.quantityType.identifier {
+    static func type(from type: HKQuantityType) throws -> String {
+        switch type.identifier {
         case HKQuantityTypeIdentifier.stepCount.rawValue:
             return "stepCount"
             
@@ -181,7 +213,7 @@ class QuantitySampleRequest: HealthKitRequest.Sample {
             return "distanceCycling"
             
         default:
-            throw QSRError.noQuantityFound
+            throw HKRError.noQuantityTypeFound
         }
     }
 }
