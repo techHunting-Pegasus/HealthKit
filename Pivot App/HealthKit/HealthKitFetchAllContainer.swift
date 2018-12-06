@@ -61,6 +61,13 @@ class HealthKitFetchAllContainer {
                         self?.reset()
                         return
                     }
+                    Logger.log(.healthStoreService, info: "HealthKitFetchAllContainer Uploaded dat with error")
+                    
+                    if let url = request.url, let httpResponse = response as? HTTPURLResponse {
+                        Logger.log(.healthStoreService, verbose: "Uploaded data to: \(url)")
+                        Logger.log(.healthStoreService, verbose: "With Response code: \(httpResponse.statusCode)")
+                    }
+                    
                     // Set anchors after successfull data upload.
                     self?.anchors.forEach { (type, anchor) in
                         HealthKitAnchor.set(anchor: anchor, for: type)
@@ -70,8 +77,13 @@ class HealthKitFetchAllContainer {
                 }
                 
                 dataTask.resume()
+                #if DEBUG
+                if let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+                    let url = documentsURL.appendingPathComponent("hkdata_\(NSDate().timeIntervalSince1970).json")
+                    try? request.httpBody?.write(to: url)
+                }
+                #endif
             }
         }
-
     }
 }

@@ -24,9 +24,9 @@ enum PivotAPI {
         
         switch self {
         case .refreshDevice:
-            result = URL(string: "/\(PivotAPI.apiVersion)/users/refreshToken", relativeTo: apiUrl)
+            result = apiUrl.appendingPathComponent("\(PivotAPI.apiVersion)/users/refreshToken")
         case .uploadHealthData:
-            result = URL(string: "/\(PivotAPI.apiVersion)/gimmeData", relativeTo: apiUrl)
+            result = apiUrl.appendingPathComponent("\(PivotAPI.apiVersion)/gimmeData")
         }
         
         guard let finalResult = result else {
@@ -38,7 +38,7 @@ enum PivotAPI {
     func httpMethod() -> String {
         switch self {
         case .refreshDevice, .uploadHealthData:
-            return "POST"
+            return "PUT"
         }
     }
     

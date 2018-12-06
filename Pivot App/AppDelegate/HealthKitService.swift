@@ -39,7 +39,7 @@ class HealthKitService: NSObject, ApplicationService {
                 return
             }
             Logger.log(.healthStoreService, info: "RequestAuthorization succeeded!")
-            self?.fetchAllData()
+            self?.fetchAllStatisticsData()
         }
     }
     
@@ -74,8 +74,16 @@ class HealthKitService: NSObject, ApplicationService {
 
             var interval = DateComponents()
             interval.day = 1
+            
+            let options: HKStatisticsOptions
+            switch type.aggregationStyle {
+            case .cumulative:
+                options = .cumulativeSum
+            case .discrete:
+                options = .discreteAverage
+            }
 
-            let statQuery = HKStatisticsCollectionQuery(quantityType: type, quantitySamplePredicate: predicate, options: .cumulativeSum, anchorDate: newDate, intervalComponents: interval)
+            let statQuery = HKStatisticsCollectionQuery(quantityType: type, quantitySamplePredicate: predicate, options: options, anchorDate: newDate, intervalComponents: interval)
             statQuery.initialResultsHandler = { [weak self] (query, results, error) in
                 
                 if let error = error {
@@ -92,7 +100,8 @@ class HealthKitService: NSObject, ApplicationService {
                 
                 self?.fetchAllContainer.add(statistics: statistics)
             }
-
+            
+            store.execute(statQuery)
         }
     }
     
