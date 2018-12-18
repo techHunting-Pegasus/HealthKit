@@ -12,6 +12,7 @@ import WebKit
 protocol ScriptMessageDelegate: class {
     func onNotificationRegistration(promiseId: Int, value: Bool)
     func onUserAuthenticationReceived(value: String)
+    func onEnableAppleHealthKit(promiseId: Int)
     
     func onLoadSecureUrl(url: URL)
     func onLoadGoogleFitUrl(url: URL)
@@ -40,6 +41,8 @@ class ScriptMessageHandler: NSObject, WKScriptMessageHandler {
                 delegate?.onNotificationRegistration(promiseId: promiseId, value: true)
             case "disablePush":
                 delegate?.onNotificationRegistration(promiseId: promiseId, value: false)
+            case "enableAHK":
+                delegate?.onEnableAppleHealthKit(promiseId: promiseId)
             default:
                 Logger.log(.scriptMessageHandler, warning: "Unhandled Body Value \(bodyValue)")
             }

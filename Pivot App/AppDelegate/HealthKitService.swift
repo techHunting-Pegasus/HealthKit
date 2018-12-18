@@ -9,7 +9,12 @@
 import UIKit
 import HealthKit
 
+typealias AuthorizationComplete = (Bool) -> Void
+
 class HealthKitService: NSObject, ApplicationService {
+    
+    static let instance = HealthKitService()
+    private override init() { super.init() }
     
     static let QueryLimit = HKObjectQueryNoLimit
     static var LimitDate: Date = { // 90 days
@@ -18,9 +23,7 @@ class HealthKitService: NSObject, ApplicationService {
     
     // MARK: - ApplicationService Methods
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        if HKHealthStore.isHealthDataAvailable() {
-            requestAuthorization()
-            
+        if HKHealthStore.isHealthDataAvailable() {            
             // Must be done on App Launch
             // https://developer.apple.com/documentation/healthkit/hkhealthstore/1614175-enablebackgrounddelivery
             enableBackgroundDeliveries()
@@ -30,9 +33,12 @@ class HealthKitService: NSObject, ApplicationService {
     
     
     // MARK: - Helper Methods
-    private func requestAuthorization() {
+    func requestAuthorization(completion: AuthorizationComplete?) {
         
         store.requestAuthorization(toShare: shareSet, read: readSet) { [weak self] (success, error) in
+            
+            completion?(success)
+            
             guard success else {
                 let debugError = error.debugDescription
                 Logger.log(.healthStoreService, error: "RequestAuthorization failed with Error: \(debugError)")

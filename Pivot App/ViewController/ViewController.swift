@@ -10,6 +10,7 @@ import UIKit
 import WebKit
 import UserNotifications
 import SafariServices
+import HealthKit
 
 let CallbackNotification = Notification.Name(rawValue: "CallbackNotification")
 let CallbackNotificationURLKey = "URL"
@@ -99,15 +100,21 @@ class ViewController: UIViewController {
             DispatchQueue.main.async { [weak self] in
                 if let token = change?[.newKey] as? String,
                     let promiseId = self?.currentPromiseId {
-                    self?.fulfillTokenPromise(promiseId: promiseId, token: token)
+                    self?.fulfillPromise(promiseId: promiseId, with: token)
                 }
             }
         default: break
         }
     }
     
-    private func fulfillTokenPromise(promiseId: Int, token: String) {
-        let javaScript = "window.resolvePromise(" + String(promiseId) + ", \"\(token)\")"
+    private func fulfillPromise(promiseId: Int, with token: String? = nil) {
+        Logger.log(.viewController, info: "Fulfilling Promise with ID: \(promiseId) and Token: \(token ?? "No Token")")
+        var javaScript = "window.resolvePromise(" + String(promiseId)
+        if let token = token {
+            javaScript += ", \"\(token)\")"
+        } else {
+            javaScript += ")"
+        }
         webView?.evaluateJavaScript(javaScript, completionHandler: nil)
     }
 }
@@ -122,16 +129,22 @@ extension ViewController: ScriptMessageDelegate {
     func onNotificationRegistration(promiseId: Int, value: Bool) {
         if let deviceToken = UserDefaults.standard.string(forKey: Constants.token_key) {
             // we are registered for notifications.
-            fulfillTokenPromise(promiseId: promiseId, token: deviceToken)
+            fulfillPromise(promiseId: promiseId, with: deviceToken)
         }
-        guard value == true else { return }
+        guard value == true else {
+            fulfillPromise(promiseId: promiseId)
+            return
+        }
         currentPromiseId = promiseId
         if #available(iOS 10, *) {
             let center = UNUserNotificationCenter.current()
-            center.requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
+            center.requestAuthorization(options: [.alert, .sound, .badge]) { [weak self] (granted, error) in
                 // Enable or disable features based on authorization.
-                guard granted == true else { return }
                 DispatchQueue.main.async {
+                    guard granted == true else {
+                        self?.fulfillPromise(promiseId: promiseId)
+                        return
+                    }
                     UIApplication.shared.registerForRemoteNotifications()
                 }
             }
@@ -141,7 +154,16 @@ extension ViewController: ScriptMessageDelegate {
             UIApplication.shared.registerForRemoteNotifications()
         }
     }
-    
+    func onEnableAppleHealthKit(promiseId: Int) {
+        if HKHealthStore.isHealthDataAvailable() {
+            HealthKitService.instance.requestAuthorization { [weak self] (success) in
+                DispatchQueue.main.async { [weak self] in
+                    self?.fulfillPromise(promiseId: promiseId)
+                }
+            }
+        }
+    }
+
     func onLoadSecureUrl(url: URL) {
         print("Loading Secure URL:\(String(describing:url))")
         DispatchQueue.main.async {

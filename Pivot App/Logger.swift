@@ -12,6 +12,7 @@ class Logger {
     enum Tag: String {
         case healthStoreService
         case scriptMessageHandler
+        case viewController
     }
     
     enum Level: Int, Comparable {

@@ -26,7 +26,7 @@ enum PivotAPI {
         case .refreshDevice:
             result = apiUrl.appendingPathComponent("\(PivotAPI.apiVersion)/users/refreshToken")
         case .uploadHealthData:
-            result = apiUrl.appendingPathComponent("\(PivotAPI.apiVersion)/gimmeData")
+            result = apiUrl.appendingPathComponent("\(PivotAPI.apiVersion)/gimmeData/junkdata")
         }
         
         guard let finalResult = result else {
