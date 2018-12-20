@@ -30,7 +30,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>12</string>
+	<string>${BUNDLE_BUILD_NUMBER}</string>
 	<key>HockeyAppKey</key>
 	<string>4ac49226d6ab41b597e21898a69dc837</string>
 	<key>LSRequiresIPhoneOS</key>
