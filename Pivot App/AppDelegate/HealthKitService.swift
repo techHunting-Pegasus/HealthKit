@@ -73,10 +73,12 @@ class HealthKitService: NSObject, ApplicationService {
             guard let type = HKObjectType.quantityType(forIdentifier: id) else { continue }
             
             let date = Date()
-            let cal = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)!
+            let cal = NSCalendar.current
             let newDate = cal.startOfDay(for: date)
             
-            let predicate = HKQuery.predicateForSamples(withStart: nil, end: newDate, options: .strictEndDate)
+            let startDate = cal.date(byAdding: .month, value: -3, to: newDate)
+            
+            let predicate = HKQuery.predicateForSamples(withStart: startDate, end: newDate, options: .strictEndDate)
 
             var interval = DateComponents()
             interval.day = 1
@@ -102,7 +104,6 @@ class HealthKitService: NSObject, ApplicationService {
                 }
                 
                 Logger.log(.healthStoreService, info: "HKStatisticsCollectionQuery SampleType: \(type) returned \(statistics.count) statistics")
-                
                 
                 self?.fetchAllContainer.add(statistics: statistics)
             }
