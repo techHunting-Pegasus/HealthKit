@@ -76,7 +76,12 @@ class HealthKitService: NSObject, ApplicationService {
             let cal = NSCalendar.current
             let newDate = cal.startOfDay(for: date)
             
-            let startDate = cal.date(byAdding: .month, value: -3, to: newDate)
+            let startDate: Date?
+            if let anchorDate = HealthKitAnchor.anchor(for: type) {
+                startDate = anchorDate
+            } else {
+                startDate = cal.date(byAdding: .month, value: -3, to: newDate) ?? nil
+            }
             
             let predicate = HKQuery.predicateForSamples(withStart: startDate, end: newDate, options: .strictEndDate)
 
@@ -111,44 +116,7 @@ class HealthKitService: NSObject, ApplicationService {
             store.execute(statQuery)
         }
     }
-    
-//    private func fetchAllSampleData() {
-//        fetchAllContainer.start()
-//
-//        for id in quantityTypeIdentifiers {
-//            guard let type = HKObjectType.quantityType(forIdentifier: id) else { continue }
-//
-//            let aQuery = HKAnchoredObjectQuery(type: type, predicate: nil, anchor: HealthKitAnchor.anchor(for: type), limit: HealthKitService.QueryLimit) { [weak self] (query, samples, _, newAnchor, error) in
-//
-//                if let error = error {
-//                    Logger.log(.healthStoreService, error: "HKAnchoredObjectQuery failed for SampleType: \(type)\nError: \(error)")
-//                    return
-//                }
-//
-//                guard let samples = samples else {
-//                    Logger.log(.healthStoreService, warning: "HKAnchoredObjectQuery failed to get Samples for SampleType: \(type)")
-//                    return
-//                }
-//
-//                guard let anchor = newAnchor else {
-//                    Logger.log(.healthStoreService, warning: "HKAnchoredObjectQuery failed to get new HKQueryAnchor")
-//                    return
-//                }
-//
-//                Logger.log(.healthStoreService, info: "HKAnchoredObjectQuery SampleType: \(type) returned \(samples.count) samples")
-//
-//                let filteredSamples = samples.filter { (sample) -> Bool in
-//                    sample.startDate > HealthKitService.LimitDate
-//                }
-//
-////                self?.fetchAllContainer.add(samples: filteredSamples, sampleType: type, anchor: anchor)
-//
-//            }
-//
-//            store.execute(aQuery)
-//        }
-//    }
-    
+        
     // MARK: - Properties
     private let store = HKHealthStore()
     private var fetchAllContainer = HealthKitFetchAllContainer()

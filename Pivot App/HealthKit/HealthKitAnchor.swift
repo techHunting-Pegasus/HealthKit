@@ -11,30 +11,30 @@ import HealthKit
 
 enum HealthKitAnchor {
 
-    static func anchor(for sampleType: HKSampleType) -> HKQueryAnchor {
-        guard let udName = name(for: sampleType),
-            let data = UserDefaults.standard.object(forKey: udName) as? Data,
-            let anchor = NSKeyedUnarchiver.unarchiveObject(with: data) as? HKQueryAnchor else {
-                return HKQueryAnchor(fromValue: HKObjectQueryNoLimit)
+    static func anchor(for sampleType: HKSampleType) -> Date? {
+        let udName = name(for: sampleType)
+        
+        guard let date = UserDefaults.standard.object(forKey: udName) as? Date else {
+            UserDefaults.standard.set(nil, forKey: udName)
+            return nil
         }
+        
         #if NO_ANCHOR
-        return HKQueryAnchor(fromValue: HKObjectQueryNoLimit)
+        return nil
         #else
-        return anchor
+        return date
         #endif
     }
     
-    static func set(anchor: HKQueryAnchor, for sampleType: HKSampleType) {
-        guard let udName = name(for: sampleType) else { return }
+    static func set(anchor: Date, for sampleType: HKSampleType) {
+        let udName = name(for: sampleType) 
         
-        let archive = NSKeyedArchiver.archivedData(withRootObject: anchor)
-        
-        UserDefaults.standard.setValue(archive, forKeyPath: udName)
+        UserDefaults.standard.setValue(anchor, forKeyPath: udName)
     }
     
-    private static func name(for sampleType: HKSampleType) -> String? {
+    private static func name(for sampleType: HKSampleType) -> String {
         
-        return "achor_\(sampleType.identifier)"
+        return "anchor_\(sampleType.identifier)"
         
     }
 }

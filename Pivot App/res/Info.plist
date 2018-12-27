@@ -45,9 +45,13 @@
 	<key>NSHealthUpdateUsageDescription</key>
 	<string>Please allow $(EXECUTABLE_NAME) to get Updates from Apple HealthKit for health reporting.</string>
 	<key>PivotLoginURL</key>
-	<string>https://pivotdev.gbehavior.com</string>
+	<string>https://www1.gopivotsolutions.com</string>
 	<key>PivotAPIURL</key>
-	<string>https://pivotdev.gbehavior.com</string>
+	<string>http://pivotdev2.gbehavior.com/pvDataMation/</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+	</array>
 	<key>HockeyAppKey</key>
 	<string>4ac49226d6ab41b597e21898a69dc837</string>
 	<key>UILaunchStoryboardName</key>
@@ -69,11 +73,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>PivotLoginURL</key>
-	<string>https://www1.gopivotsolutions.com</string>
-	<key>PivotAPIURL</key>
-	<string>http://pivotdev2.gbehavior.com/pvDataMation/</string>
-	<key>HockeyAppKey</key>
-	<string>4ac49226d6ab41b597e21898a69dc837</string>
 </dict>
 </plist>

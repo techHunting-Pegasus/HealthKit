@@ -21,7 +21,7 @@ class HealthKitFetchAllContainer {
     }
 
     private(set) var statistics: [HKStatistics] = []
-    private(set) var anchors: [HKSampleType: HKQueryAnchor] = [:]
+    private(set) var anchorDates: [HKSampleType: Date] = [:]
     private(set) var state: State = .ready
     
     private var timer: Timer?
@@ -37,14 +37,16 @@ class HealthKitFetchAllContainer {
         }
     }
     
-    func add(statistics: [HKStatistics]) {
+    func add(statistics: [HKStatistics], type: HKSampleType, anchor: Date) {
         guard state != .uploading else { return }
         self.statistics += statistics
+        
+        anchorDates[type] = anchor
     }
 
     private func reset() {
         statistics = []
-        anchors = [:]
+        anchorDates = [:]
         state = .ready
     }
     
@@ -61,7 +63,7 @@ class HealthKitFetchAllContainer {
                         self?.reset()
                         return
                     }
-                    Logger.log(.healthStoreService, info: "HealthKitFetchAllContainer Uploaded dat with error")
+                    Logger.log(.healthStoreService, info: "HealthKitFetchAllContainer Successfully Uploaded Data!")
                     
                     if let url = request.url, let httpResponse = response as? HTTPURLResponse {
                         Logger.log(.healthStoreService, verbose: "Uploaded data to: \(url)")
@@ -69,7 +71,7 @@ class HealthKitFetchAllContainer {
                     }
                     
                     // Set anchors after successfull data upload.
-                    self?.anchors.forEach { (type, anchor) in
+                    self?.anchorDates.forEach { (type, anchor) in
                         HealthKitAnchor.set(anchor: anchor, for: type)
                     }
                     

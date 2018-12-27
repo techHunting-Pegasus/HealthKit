@@ -48,6 +48,10 @@
 	<string>https://pivotuat.gbehavior.com</string>
 	<key>PivotAPIURL</key>
 	<string>http://pivotdev2.gbehavior.com/pvDataMation/</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+	</array>
 	<key>HockeyAppKey</key>
 	<string>11ff3ce390884ed7bfc46d9d46034136</string>
 	<key>UILaunchStoryboardName</key>
