@@ -176,7 +176,7 @@ extension ViewController: ScriptMessageDelegate {
     func onLoadGoogleFitUrl(url: URL) {
         print("Loading Google Fit URL:\(String(describing:url))")
         DispatchQueue.main.async {
-            UIApplication.shared.openURL(url)
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
             
         }
     }
