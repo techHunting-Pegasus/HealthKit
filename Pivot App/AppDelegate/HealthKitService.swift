@@ -57,17 +57,17 @@ class HealthKitService: NSObject, ApplicationService {
 
             guard let type = HKQuantityType.quantityType(forIdentifier: id) else { continue }
 
-            let startDate: Date
-            if let anchorDate = HealthKitAnchor.anchor(for: type) {
-                startDate = anchorDate
-            } else {
-                let threeMonths: Double = 60 * 60 * 24 * 90
-                startDate = Date().addingTimeInterval( -1.0 * threeMonths)
-            }
+//            let startDate: Date
+//            if let anchorDate = HealthKitAnchor.anchor(for: type) {
+//                startDate = anchorDate
+//            } else {
+//                let threeMonths: Double = 60 * 60 * 24 * 90
+//                startDate = Date().addingTimeInterval( -1.0 * threeMonths)
+//            }
+//
+//            let predicate = HKObserverQuery.predicateForSamples(withStart: startDate, end: nil, options: .strictStartDate)
 
-            let predicate = HKObserverQuery.predicateForSamples(withStart: startDate, end: nil, options: .strictStartDate)
-
-            let query = HKObserverQuery(sampleType: type, predicate: predicate) {[weak self] (query, completionHandler, _error) in
+            let query = HKObserverQuery(sampleType: type, predicate: nil) {[weak self] (query, completionHandler, _error) in
                 if let error = _error {
                     Logger.log(.healthStoreService, error: "Observer Query failed for Quantity Type: \(type) with error:\(error)")
                     completionHandler()
@@ -77,17 +77,55 @@ class HealthKitService: NSObject, ApplicationService {
                 Logger.log(.healthStoreService, info: "Observer Query Succeeded for Quantity Type: \(type)")
 
                 self?.fetchStatisticsData(for: type) { (query, results, error, newDate) in
+                    var didSucceed = false
+                    defer {
+                        if didSucceed == false {
+                            completionHandler()
+                        }
+                    }
                     if let error = error {
                         Logger.log(.healthStoreService, error: "ObserverQuery HKStatisticsCollectionQuery failed for SampleType: \(type)\nError: \(error)")
                         return
                     }
                     guard let statistics = results?.statistics() else {
-                        Logger.log(.healthStoreService, error: "ObserverQuery HKStatisticsCollectionQuery returned no statistics for SampleType: \(type)")
+                        Logger.log(.healthStoreService, error: "ObserverQuery HKStatisticsCollectionQuery failed to get statistics for SampleType: \(type)")
+                        return
+                    }
+                    guard statistics.count > 0 else {
+                        Logger.log(.healthStoreService, info: "ObserverQuery HKStatisticsCollectionQuery returned empty statistics for SampleType: \(type)")
                         return
                     }
 
                     Logger.log(.healthStoreService, info: "ObserverQuery HKStatisticsCollectionQuery SampleType: \(type) returned \(statistics.count) statistics")
 
+                    guard let request = try? PivotAPI.uploadHealthData(statistics).request() else {
+                        Logger.log(.healthStoreService, error: "ObserverQuery PivotAPI failed to build request for: \(type)")
+                        return
+                    }
+
+                    didSucceed = true
+
+                    URLSession.shared.dataTask(with: request) { (data, response, error) in
+
+                        defer {
+                            completionHandler()
+                        }
+
+                        if let error = error {
+                            Logger.log(.healthStoreService, error: "ObserverQuery HKStatisticsCollectionQuery failed to upload data with error: \(error)")
+                            return
+                        }
+                        Logger.log(.healthStoreService, info: "ObserverQuery HKStatisticsCollectionQuery Successfully Uploaded Data!")
+
+                        if let url = request.url, let httpResponse = response as? HTTPURLResponse {
+                            Logger.log(.healthStoreService, verbose: "Uploaded data to: \(url)")
+                            Logger.log(.healthStoreService, verbose: "With Response code: \(httpResponse.statusCode)")
+                        }
+
+                        // Update the anchor on success
+                        HealthKitAnchor.set(anchor: newDate, for: type)
+
+                    }
                 }
 
             }
