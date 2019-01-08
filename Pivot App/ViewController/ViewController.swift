@@ -158,12 +158,15 @@ extension ViewController: ScriptMessageDelegate {
         if HKHealthStore.isHealthDataAvailable() {
             HealthKitService.instance.requestAuthorization { [weak self] (success) in
                 DispatchQueue.main.async { [weak self] in
-                    self?.fulfillPromise(promiseId: promiseId)
+                    self?.fulfillPromise(promiseId: promiseId, with: success.description)
                 }
             }
         }
     }
-
+    func onReceiveAppleHealthKitTokens(promiseId: Int, value: Any) {
+        // the value string should be a stringified JSON object with values including
+        // 
+    }
     func onLoadSecureUrl(url: URL) {
         print("Loading Secure URL:\(String(describing:url))")
         DispatchQueue.main.async {
