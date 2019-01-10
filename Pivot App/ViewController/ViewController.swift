@@ -163,10 +163,11 @@ extension ViewController: ScriptMessageDelegate {
             }
         }
     }
-    func onReceiveAppleHealthKitTokens(promiseId: Int, value: Any) {
-        // the value string should be a stringified JSON object with values including
-        // 
+    func onReceiveAppleHealthKitTokens(promiseId: Int, tokens: HealthKitTokens) {
+        HealthKitService.instance.storeTokens(tokens)
+        HealthKitService.instance.fetchAllStatisticsData()
     }
+
     func onLoadSecureUrl(url: URL) {
         print("Loading Secure URL:\(String(describing:url))")
         DispatchQueue.main.async {

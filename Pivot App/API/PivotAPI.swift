@@ -10,7 +10,7 @@ import HealthKit
 
 enum PivotAPI {
     case refreshDevice(oldToken: String, newToken: String, userAuth: String)
-    case uploadHealthData([HKStatistics])
+    case uploadHealthData(token: String, data: [HKStatistics])
     
     static let apiVersion = "v1"
     
@@ -25,8 +25,8 @@ enum PivotAPI {
         switch self {
         case .refreshDevice:
             result = apiUrl.appendingPathComponent("\(PivotAPI.apiVersion)/users/refreshToken")
-        case .uploadHealthData:
-            result = apiUrl.appendingPathComponent("\(PivotAPI.apiVersion)/gimmeData/junkdata")
+        case .uploadHealthData(let token, _):
+            result = apiUrl.appendingPathComponent("\(PivotAPI.apiVersion)/gimmeData/\(token)")
         }
         
         guard let finalResult = result else {
@@ -48,7 +48,7 @@ enum PivotAPI {
             case .refreshDevice(let oldToken, let newToken, _):
                 return try JSONEncoder().encode(RefreshDeviceRequest(oldToken: oldToken, newToken: newToken))
 
-            case .uploadHealthData(let samples):
+            case .uploadHealthData(_, let samples):
                 return try JSONEncoder().encode(HealthKitRequest(from: samples))
             }
         }
