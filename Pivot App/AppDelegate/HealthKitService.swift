@@ -38,7 +38,7 @@ class HealthKitService: NSObject, ApplicationService {
     // MARK: - Helper Methods
     func requestAuthorization(completion: AuthorizationComplete?) {
 
-        store.requestAuthorization(toShare: shareSet, read: readSet) { [weak self] (success, error) in
+        store.requestAuthorization(toShare: shareSet, read: readSet) { (success, error) in
 
             completion?(success)
 
@@ -48,24 +48,19 @@ class HealthKitService: NSObject, ApplicationService {
                 return
             }
             Logger.log(.healthStoreService, info: "RequestAuthorization succeeded!")
-            self?.fetchAllStatisticsData()
         }
+    }
+
+    func storeTokens(_ tokens: HealthKitTokens) {
+        UserDefaults.standard.set(tokens.accessToken, forKey: Constants.access_token)
+        UserDefaults.standard.set(tokens.refreshToken, forKey: Constants.refresh_token)
+        UserDefaults.standard.set(tokens.dataMationID, forKey: Constants.datamation_id)
     }
 
     private func startObserverQueries() {
         for id in quantityTypeIdentifiers {
 
             guard let type = HKQuantityType.quantityType(forIdentifier: id) else { continue }
-
-//            let startDate: Date
-//            if let anchorDate = HealthKitAnchor.anchor(for: type) {
-//                startDate = anchorDate
-//            } else {
-//                let threeMonths: Double = 60 * 60 * 24 * 90
-//                startDate = Date().addingTimeInterval( -1.0 * threeMonths)
-//            }
-//
-//            let predicate = HKObserverQuery.predicateForSamples(withStart: startDate, end: nil, options: .strictStartDate)
 
             let query = HKObserverQuery(sampleType: type, predicate: nil) {[weak self] (query, completionHandler, _error) in
                 if let error = _error {
@@ -96,9 +91,14 @@ class HealthKitService: NSObject, ApplicationService {
                         return
                     }
 
+                    guard let accessToken = UserDefaults.standard.string(forKey: Constants.access_token) else {
+                        Logger.log(.healthStoreService, info: "ObserverQuery HKStatisticsCollectionQuery No Access Token Found...")
+                        return
+                    }
+
                     Logger.log(.healthStoreService, info: "ObserverQuery HKStatisticsCollectionQuery SampleType: \(type) returned \(statistics.count) statistics")
 
-                    guard let request = try? PivotAPI.uploadHealthData(statistics).request() else {
+                    guard let request = try? PivotAPI.uploadHealthData(token: accessToken, data: statistics).request() else {
                         Logger.log(.healthStoreService, error: "ObserverQuery PivotAPI failed to build request for: \(type)")
                         return
                     }
@@ -150,7 +150,7 @@ class HealthKitService: NSObject, ApplicationService {
         }
     }
 
-    private func fetchAllStatisticsData() {
+    func fetchAllStatisticsData() {
         fetchAllContainer.start()
 
         for id in quantityTypeIdentifiers {

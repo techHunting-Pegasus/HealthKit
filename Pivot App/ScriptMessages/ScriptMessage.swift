@@ -13,6 +13,7 @@ protocol ScriptMessageDelegate: class {
     func onNotificationRegistration(promiseId: Int, value: Bool)
     func onUserAuthenticationReceived(value: String)
     func onEnableAppleHealthKit(promiseId: Int)
+    func onReceiveAppleHealthKitTokens(promiseId: Int, tokens: HealthKitTokens)
     
     func onLoadSecureUrl(url: URL)
     func onLoadGoogleFitUrl(url: URL)
@@ -43,6 +44,11 @@ class ScriptMessageHandler: NSObject, WKScriptMessageHandler {
                 delegate?.onNotificationRegistration(promiseId: promiseId, value: false)
             case "enableAHK":
                 delegate?.onEnableAppleHealthKit(promiseId: promiseId)
+            case "receiveAHKtokens":
+                if let promiseValue = body["datamationResponse"] as? [String: Any],
+                    let tokens = HealthKitTokens(with: promiseValue) {
+                    delegate?.onReceiveAppleHealthKitTokens(promiseId: promiseId, tokens: tokens)
+                }
             default:
                 Logger.log(.scriptMessageHandler, warning: "Unhandled Body Value \(bodyValue)")
             }

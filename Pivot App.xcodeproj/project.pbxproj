@@ -10,6 +10,7 @@
 		941CB0EB2194815F002CD157 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941CB0EA2194815F002CD157 /* Logger.swift */; };
 		941CB0ED219778E8002CD157 /* HealthKitAnchor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941CB0EC219778E8002CD157 /* HealthKitAnchor.swift */; };
 		941CB0EF219A6F62002CD157 /* HealthKitFetchAllContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941CB0EE219A6F62002CD157 /* HealthKitFetchAllContainer.swift */; };
+		94303D6721E6CEC700041ABF /* HealthKitTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94303D6621E6CEC700041ABF /* HealthKitTokens.swift */; };
 		9432D14E1FD1E3FE00A2B98A /* ScriptMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9432D14D1FD1E3FE00A2B98A /* ScriptMessage.swift */; };
 		943677551F96D58F00840058 /* SettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943677541F96D58F00840058 /* SettingsService.swift */; };
 		943B94FC201785EC00C3722A /* DeepLinkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943B94FB201785EC00C3722A /* DeepLinkService.swift */; };
@@ -40,6 +41,7 @@
 		941CB0EC219778E8002CD157 /* HealthKitAnchor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitAnchor.swift; sourceTree = "<group>"; };
 		941CB0EE219A6F62002CD157 /* HealthKitFetchAllContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitFetchAllContainer.swift; sourceTree = "<group>"; };
 		9426658C211DBFBC008A310F /* Info.uat2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.uat2.plist; sourceTree = "<group>"; };
+		94303D6621E6CEC700041ABF /* HealthKitTokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitTokens.swift; sourceTree = "<group>"; };
 		9432D14D1FD1E3FE00A2B98A /* ScriptMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptMessage.swift; sourceTree = "<group>"; };
 		943677391F96CE3300840058 /* Info.qa.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.qa.plist; sourceTree = "<group>"; };
 		9436773A1F96CE3300840058 /* Info.dev.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.dev.plist; sourceTree = "<group>"; };
@@ -92,6 +94,15 @@
 				941CB0EE219A6F62002CD157 /* HealthKitFetchAllContainer.swift */,
 			);
 			path = HealthKit;
+			sourceTree = "<group>";
+		};
+		94303D6521E6CEA800041ABF /* ScriptMessages */ = {
+			isa = PBXGroup;
+			children = (
+				9432D14D1FD1E3FE00A2B98A /* ScriptMessage.swift */,
+				94303D6621E6CEC700041ABF /* HealthKitTokens.swift */,
+			);
+			path = ScriptMessages;
 			sourceTree = "<group>";
 		};
 		943677381F96CD2C00840058 /* res */ = {
@@ -149,13 +160,13 @@
 		94D563711F85B99900C2C72D /* Pivot App */ = {
 			isa = PBXGroup;
 			children = (
+				94303D6521E6CEA800041ABF /* ScriptMessages */,
 				941CB0E921947820002CD157 /* HealthKit */,
 				94F68C65217D34CD005781B5 /* ViewController */,
 				943677381F96CD2C00840058 /* res */,
 				94DCE1421F942BF1007B76CD /* AppDelegate */,
 				946B9B881FE2406600296DC7 /* API */,
 				946B9B871FE23FD000296DC7 /* Storyboards */,
-				9432D14D1FD1E3FE00A2B98A /* ScriptMessage.swift */,
 				941CB0EA2194815F002CD157 /* Logger.swift */,
 				946B9B8F1FE247FC00296DC7 /* Util.swift */,
 				94FDC6982011AA460050CA6B /* Constants.swift */,
@@ -315,6 +326,7 @@
 				946B9B901FE247FC00296DC7 /* Util.swift in Sources */,
 				9432D14E1FD1E3FE00A2B98A /* ScriptMessage.swift in Sources */,
 				943677551F96D58F00840058 /* SettingsService.swift in Sources */,
+				94303D6721E6CEC700041ABF /* HealthKitTokens.swift in Sources */,
 				94F9FF7A1FD8D3820032B193 /* NotificationService.swift in Sources */,
 				946B9B8E1FE245CF00296DC7 /* PivotAPI+RequestData.swift in Sources */,
 				94F68C67217D34F2005781B5 /* ViewController+FileDownload.swift in Sources */,

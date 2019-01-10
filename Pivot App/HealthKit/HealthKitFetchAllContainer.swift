@@ -55,8 +55,14 @@ class HealthKitFetchAllContainer {
         Logger.log(.healthStoreService, verbose: "HKFetchAllCOntainer completed with \(statistics.count) statistics")
         
         DispatchQueue.global(qos: .background).async { [weak self] in
+
+            guard let accessToken = UserDefaults.standard.string(forKey: Constants.access_token) else {
+                Logger.log(.healthStoreService, info: "HealthKitFetchAllContainer No Access Token Found...")
+                return
+            }
+
             if let strongSelf = self,
-                let request = try? PivotAPI.uploadHealthData(strongSelf.statistics).request() {
+                let request = try? PivotAPI.uploadHealthData(token: accessToken, data: strongSelf.statistics).request() {
                 let dataTask = URLSession.shared.dataTask(with: request) { [weak self] (data, response, error) in
                     if let error = error {
                         Logger.log(.healthStoreService, error: "HealthKitFetchAllContainer failed to upload data with error: \(error)")
