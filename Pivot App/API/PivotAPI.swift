@@ -9,7 +9,7 @@ import Foundation
 import HealthKit
 
 enum PivotAPI {
-    case refreshDevice(oldToken: String, newToken: String, userAuth: String)
+    case refreshDevice(oldToken: String, refreshToken: String)
     case uploadHealthData(token: String, data: [HKStatistics])
     
     static let apiVersion = "v1"
@@ -23,8 +23,8 @@ enum PivotAPI {
         }
         
         switch self {
-        case .refreshDevice:
-            result = apiUrl.appendingPathComponent("\(PivotAPI.apiVersion)/users/refreshToken")
+        case .refreshDevice(let accessToken, let refreshToken):
+            result = apiUrl.appendingPathComponent("\(PivotAPI.apiVersion)/reAuth/\(accessToken)/\(refreshToken)")
         case .uploadHealthData(let token, _):
             result = apiUrl.appendingPathComponent("\(PivotAPI.apiVersion)/gimmeData/\(token)")
         }
@@ -37,7 +37,9 @@ enum PivotAPI {
     
     func httpMethod() -> String {
         switch self {
-        case .refreshDevice, .uploadHealthData:
+        case .refreshDevice:
+            return "GET"
+        case .uploadHealthData:
             return "PUT"
         }
     }
@@ -45,8 +47,8 @@ enum PivotAPI {
     func httpBody() throws -> Data? {
         do {
             switch self {
-            case .refreshDevice(let oldToken, let newToken, _):
-                return try JSONEncoder().encode(RefreshDeviceRequest(oldToken: oldToken, newToken: newToken))
+            case .refreshDevice(let oldToken, let userAuth):
+                return try JSONEncoder().encode(RefreshDeviceRequest(oldToken: oldToken, userAuth: userAuth))
 
             case .uploadHealthData(_, let samples):
                 return try JSONEncoder().encode(HealthKitRequest(from: samples))
@@ -58,7 +60,7 @@ enum PivotAPI {
     }
     func addHeaders(request: inout URLRequest) {
         switch self {
-        case .refreshDevice(_, _, let userAuth):
+        case .refreshDevice(_, let userAuth):
             request.addValue("Bearer \(userAuth)", forHTTPHeaderField: "Authorization")
         case .uploadHealthData:
             break

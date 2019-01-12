@@ -15,7 +15,7 @@ extension PivotAPI {
 
     struct RefreshDeviceRequest: Encodable {
         let oldToken: String
-        let newToken: String
+        let userAuth: String
     }
 
 }

@@ -22,6 +22,12 @@ class HealthKitService: NSObject, ApplicationService {
         return Date(timeIntervalSinceNow: Date().timeIntervalSinceNow - (60 * 60 * 24 * 90))
     }()
 
+    let operationQueue: OperationQueue = {
+        let queue = OperationQueue()
+        queue.qualityOfService = .background
+        return queue
+    }()
+
     // MARK: - ApplicationService Methods
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         if HKHealthStore.isHealthDataAvailable() {
@@ -96,36 +102,34 @@ class HealthKitService: NSObject, ApplicationService {
                         return
                     }
 
-                    Logger.log(.healthStoreService, info: "ObserverQuery HKStatisticsCollectionQuery SampleType: \(type) returned \(statistics.count) statistics")
-
-                    guard let request = try? PivotAPI.uploadHealthData(token: accessToken, data: statistics).request() else {
-                        Logger.log(.healthStoreService, error: "ObserverQuery PivotAPI failed to build request for: \(type)")
+                    guard let refreshToken = UserDefaults.standard.string(forKey: Constants.refresh_token) else {
+                        Logger.log(.healthStoreService, info: "ObserverQuery HKStatisticsCollectionQuery No Refresh Token Found...")
                         return
                     }
 
+                    Logger.log(.healthStoreService, info: "ObserverQuery HKStatisticsCollectionQuery SampleType: \(type) returned \(statistics.count) statistics")
+
                     didSucceed = true
 
-                    URLSession.shared.dataTask(with: request) { (data, response, error) in
+                    let operation = HealthKitUploadOperation(userToken: accessToken, refreshToken: refreshToken, data: statistics)
+
+                    operation.completionBlock = { [weak operation] in
 
                         defer {
                             completionHandler()
                         }
 
-                        if let error = error {
+                        if let error = operation?.error {
                             Logger.log(.healthStoreService, error: "ObserverQuery HKStatisticsCollectionQuery failed to upload data with error: \(error)")
                             return
                         }
                         Logger.log(.healthStoreService, info: "ObserverQuery HKStatisticsCollectionQuery Successfully Uploaded Data!")
 
-                        if let url = request.url, let httpResponse = response as? HTTPURLResponse {
-                            Logger.log(.healthStoreService, verbose: "Uploaded data to: \(url)")
-                            Logger.log(.healthStoreService, verbose: "With Response code: \(httpResponse.statusCode)")
-                        }
-
                         // Update the anchor on success
                         HealthKitAnchor.set(anchor: newDate, for: type)
-
                     }
+
+                    self?.operationQueue.addOperation(operation)
                 }
 
             }

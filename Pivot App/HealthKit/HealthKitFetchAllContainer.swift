@@ -23,7 +23,13 @@ class HealthKitFetchAllContainer {
     private(set) var statistics: [HKStatistics] = []
     private(set) var anchorDates: [HKSampleType: Date] = [:]
     private(set) var state: State = .ready
-    
+
+    let operationQueue: OperationQueue = {
+        let queue = OperationQueue()
+        queue.qualityOfService = .background
+        return queue
+    }()
+
     private var timer: Timer?
     init() { }
     
@@ -54,44 +60,36 @@ class HealthKitFetchAllContainer {
         state = .ready
         Logger.log(.healthStoreService, verbose: "HKFetchAllCOntainer completed with \(statistics.count) statistics")
         
-        DispatchQueue.global(qos: .background).async { [weak self] in
 
-            guard let accessToken = UserDefaults.standard.string(forKey: Constants.access_token) else {
-                Logger.log(.healthStoreService, info: "HealthKitFetchAllContainer No Access Token Found...")
+        guard let accessToken = UserDefaults.standard.string(forKey: Constants.access_token) else {
+            Logger.log(.healthStoreService, info: "HealthKitFetchAllContainer No Access Token Found...")
+            return
+        }
+
+        guard let refreshToken = UserDefaults.standard.string(forKey: Constants.refresh_token) else {
+            Logger.log(.healthStoreService, info: "HealthKitFetchAllContainer No Refresh Token Found...")
+            return
+        }
+
+        let operation = HealthKitUploadOperation(userToken: accessToken, refreshToken: refreshToken, data: statistics)
+
+        operation.completionBlock = { [weak self, weak operation] in
+
+            if let error = operation?.error {
+                Logger.log(.healthStoreService, error: "HealthKitFetchAllContainer failed to upload data with error: \(error)")
+                self?.reset()
                 return
             }
+            Logger.log(.healthStoreService, info: "HealthKitFetchAllContainer Successfully Uploaded Data!")
 
-            if let strongSelf = self,
-                let request = try? PivotAPI.uploadHealthData(token: accessToken, data: strongSelf.statistics).request() {
-                let dataTask = URLSession.shared.dataTask(with: request) { [weak self] (data, response, error) in
-                    if let error = error {
-                        Logger.log(.healthStoreService, error: "HealthKitFetchAllContainer failed to upload data with error: \(error)")
-                        self?.reset()
-                        return
-                    }
-                    Logger.log(.healthStoreService, info: "HealthKitFetchAllContainer Successfully Uploaded Data!")
-                    
-                    if let url = request.url, let httpResponse = response as? HTTPURLResponse {
-                        Logger.log(.healthStoreService, verbose: "Uploaded data to: \(url)")
-                        Logger.log(.healthStoreService, verbose: "With Response code: \(httpResponse.statusCode)")
-                    }
-                    
-                    // Set anchors after successfull data upload.
-                    self?.anchorDates.forEach { (type, anchor) in
-                        HealthKitAnchor.set(anchor: anchor, for: type)
-                    }
-                    
-                    self?.reset()
-                }
-                
-                dataTask.resume()
-                #if DEBUG
-                if let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-                    let url = documentsURL.appendingPathComponent("hkdata_\(NSDate().timeIntervalSince1970).json")
-                    try? request.httpBody?.write(to: url)
-                }
-                #endif
+            // Set anchors after successfull data upload.
+            self?.anchorDates.forEach { (type, anchor) in
+                HealthKitAnchor.set(anchor: anchor, for: type)
             }
+
+            self?.reset()
         }
+
+        operationQueue.addOperation(operation)
     }
 }
