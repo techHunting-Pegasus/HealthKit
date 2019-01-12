@@ -17,8 +17,8 @@ class NotificationService: NSObject, ApplicationService {
         
         let newToken = tokenParts.joined()
         if let oldToken = UserDefaults.standard.string(forKey: Constants.token_key),
-            let userAuth = UserDefaults.standard.string(forKey: Constants.user_authorization),
-            let request = try? PivotAPI.refreshDevice(oldToken: oldToken, newToken: newToken, userAuth: userAuth).request() {
+            let refreshToken = UserDefaults.standard.string(forKey: Constants.refresh_token),
+            let request = try? PivotAPI.refreshDevice(oldToken: oldToken, refreshToken: refreshToken).request() {
             URLSession.shared.dataTask(with: request)
             
         }
