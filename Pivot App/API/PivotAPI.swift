@@ -60,8 +60,8 @@ enum PivotAPI {
     }
     func addHeaders(request: inout URLRequest) {
         switch self {
-        case .refreshDevice(_, let userAuth):
-            request.addValue("Bearer \(userAuth)", forHTTPHeaderField: "Authorization")
+        case .refreshDevice:
+            break
         case .uploadHealthData:
             break
         }

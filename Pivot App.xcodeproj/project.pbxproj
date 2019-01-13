@@ -12,8 +12,6 @@
 		941CB0EF219A6F62002CD157 /* HealthKitFetchAllContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941CB0EE219A6F62002CD157 /* HealthKitFetchAllContainer.swift */; };
 		94303D6721E6CEC700041ABF /* HealthKitTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94303D6621E6CEC700041ABF /* HealthKitTokens.swift */; };
 		94303D6921E6EDFE00041ABF /* HealthKitUploadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94303D6821E6EDFE00041ABF /* HealthKitUploadOperation.swift */; };
-		94303D6B21E96F8D00041ABF /* HealthKitPostDataOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94303D6A21E96F8D00041ABF /* HealthKitPostDataOperation.swift */; };
-		94303D6D21E96FB200041ABF /* HealthKitRefreshTokenOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94303D6C21E96FB200041ABF /* HealthKitRefreshTokenOperation.swift */; };
 		9432D14E1FD1E3FE00A2B98A /* ScriptMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9432D14D1FD1E3FE00A2B98A /* ScriptMessage.swift */; };
 		943677551F96D58F00840058 /* SettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943677541F96D58F00840058 /* SettingsService.swift */; };
 		943B94FC201785EC00C3722A /* DeepLinkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943B94FB201785EC00C3722A /* DeepLinkService.swift */; };
@@ -46,8 +44,6 @@
 		9426658C211DBFBC008A310F /* Info.uat2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.uat2.plist; sourceTree = "<group>"; };
 		94303D6621E6CEC700041ABF /* HealthKitTokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitTokens.swift; sourceTree = "<group>"; };
 		94303D6821E6EDFE00041ABF /* HealthKitUploadOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitUploadOperation.swift; sourceTree = "<group>"; };
-		94303D6A21E96F8D00041ABF /* HealthKitPostDataOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitPostDataOperation.swift; sourceTree = "<group>"; };
-		94303D6C21E96FB200041ABF /* HealthKitRefreshTokenOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitRefreshTokenOperation.swift; sourceTree = "<group>"; };
 		9432D14D1FD1E3FE00A2B98A /* ScriptMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptMessage.swift; sourceTree = "<group>"; };
 		943677391F96CE3300840058 /* Info.qa.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.qa.plist; sourceTree = "<group>"; };
 		9436773A1F96CE3300840058 /* Info.dev.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.dev.plist; sourceTree = "<group>"; };
@@ -99,8 +95,6 @@
 				941CB0EC219778E8002CD157 /* HealthKitAnchor.swift */,
 				941CB0EE219A6F62002CD157 /* HealthKitFetchAllContainer.swift */,
 				94303D6821E6EDFE00041ABF /* HealthKitUploadOperation.swift */,
-				94303D6A21E96F8D00041ABF /* HealthKitPostDataOperation.swift */,
-				94303D6C21E96FB200041ABF /* HealthKitRefreshTokenOperation.swift */,
 			);
 			path = HealthKit;
 			sourceTree = "<group>";
@@ -332,7 +326,6 @@
 			files = (
 				943B94FC201785EC00C3722A /* DeepLinkService.swift in Sources */,
 				94F68C69217D356A005781B5 /* ViewController+WKDelegates.swift in Sources */,
-				94303D6B21E96F8D00041ABF /* HealthKitPostDataOperation.swift in Sources */,
 				946B9B901FE247FC00296DC7 /* Util.swift in Sources */,
 				9432D14E1FD1E3FE00A2B98A /* ScriptMessage.swift in Sources */,
 				943677551F96D58F00840058 /* SettingsService.swift in Sources */,
@@ -352,7 +345,6 @@
 				94D563731F85B99900C2C72D /* AppDelegate.swift in Sources */,
 				946B9B8C1FE2424800296DC7 /* PivotAPIError.swift in Sources */,
 				94FDC6992011AA460050CA6B /* Constants.swift in Sources */,
-				94303D6D21E96FB200041ABF /* HealthKitRefreshTokenOperation.swift in Sources */,
 				9495DBB620260EFD00951BF9 /* HealthKitService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
