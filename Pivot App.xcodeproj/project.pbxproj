@@ -12,6 +12,7 @@
 		941CB0EF219A6F62002CD157 /* HealthKitFetchAllContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941CB0EE219A6F62002CD157 /* HealthKitFetchAllContainer.swift */; };
 		94303D6721E6CEC700041ABF /* HealthKitTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94303D6621E6CEC700041ABF /* HealthKitTokens.swift */; };
 		94303D6921E6EDFE00041ABF /* HealthKitUploadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94303D6821E6EDFE00041ABF /* HealthKitUploadOperation.swift */; };
+		94303D6F21EC0D2300041ABF /* HealthKitRefreshTokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94303D6E21EC0D2300041ABF /* HealthKitRefreshTokenResponse.swift */; };
 		9432D14E1FD1E3FE00A2B98A /* ScriptMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9432D14D1FD1E3FE00A2B98A /* ScriptMessage.swift */; };
 		943677551F96D58F00840058 /* SettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943677541F96D58F00840058 /* SettingsService.swift */; };
 		943B94FC201785EC00C3722A /* DeepLinkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943B94FB201785EC00C3722A /* DeepLinkService.swift */; };
@@ -44,6 +45,7 @@
 		9426658C211DBFBC008A310F /* Info.uat2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.uat2.plist; sourceTree = "<group>"; };
 		94303D6621E6CEC700041ABF /* HealthKitTokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitTokens.swift; sourceTree = "<group>"; };
 		94303D6821E6EDFE00041ABF /* HealthKitUploadOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitUploadOperation.swift; sourceTree = "<group>"; };
+		94303D6E21EC0D2300041ABF /* HealthKitRefreshTokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitRefreshTokenResponse.swift; sourceTree = "<group>"; };
 		9432D14D1FD1E3FE00A2B98A /* ScriptMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptMessage.swift; sourceTree = "<group>"; };
 		943677391F96CE3300840058 /* Info.qa.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.qa.plist; sourceTree = "<group>"; };
 		9436773A1F96CE3300840058 /* Info.dev.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.dev.plist; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 				946B9B8D1FE245CF00296DC7 /* PivotAPI+RequestData.swift */,
 				946B9B8B1FE2424800296DC7 /* PivotAPIError.swift */,
 				9490159F219A79F500B80E99 /* HealthKitRequest.swift */,
+				94303D6E21EC0D2300041ABF /* HealthKitRefreshTokenResponse.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -336,6 +339,7 @@
 				949015A0219A79F500B80E99 /* HealthKitRequest.swift in Sources */,
 				941CB0EB2194815F002CD157 /* Logger.swift in Sources */,
 				941CB0EF219A6F62002CD157 /* HealthKitFetchAllContainer.swift in Sources */,
+				94303D6F21EC0D2300041ABF /* HealthKitRefreshTokenResponse.swift in Sources */,
 				94D563751F85B99A00C2C72D /* ViewController.swift in Sources */,
 				94303D6921E6EDFE00041ABF /* HealthKitUploadOperation.swift in Sources */,
 				94DCE1441F942C23007B76CD /* ApplicationService.swift in Sources */,

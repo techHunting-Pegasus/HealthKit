@@ -13,19 +13,24 @@ class HealthKitUploadOperation: Operation {
 
     enum UploadError: Error {
         case createUploadRequestFailed
+        case invalidUploadResponse(Error?)
+        case unknownUploadResponseCode(Int, Error?)
+
         case createRefreshRequestFailed
-        case invalidResponse(Error?)
-        case unknownResponseCode(Int, Error?)
+        case emptyRefreshTokenResponse
+        case invalidRefreshResponse(Error?)
+        case unknownRefreshResponseCode(Int, Error?)
     }
 
-    private(set) var userToken: String
-    let refreshToken: String
+    private(set) var accessToken: String
+    private(set) var refreshToken: String
     let data: [HKStatistics]
-
     var error: Error?
 
-    init(userToken: String, refreshToken: String, data: [HKStatistics]) {
-        self.userToken = userToken
+    private var hasRefreshedToken: Bool = false
+
+    init(accessToken: String, refreshToken: String, data: [HKStatistics]) {
+        self.accessToken = accessToken
         self.refreshToken = refreshToken
         self.data = data
         super.init()
@@ -63,10 +68,13 @@ class HealthKitUploadOperation: Operation {
 
         isExecuting = true
 
-        guard let uploadRequest = try? PivotAPI.uploadHealthData(token: userToken,
+        startUploadRequest()
+    }
+    private func startUploadRequest() {
+        guard let uploadRequest = try? PivotAPI.uploadHealthData(token: accessToken,
                                                                  data: data).request() else {
-            finish(with: UploadError.createUploadRequestFailed)
-            return
+                                                                    finish(with: UploadError.createUploadRequestFailed)
+                                                                    return
         }
 
         let task = URLSession.shared.dataTask(with: uploadRequest) {[weak self] (data, response, error) in
@@ -74,7 +82,7 @@ class HealthKitUploadOperation: Operation {
             guard self?.isCancelled == false else { return }
 
             guard let httpResponse = response as? HTTPURLResponse else {
-                self?.finish(with: UploadError.invalidResponse(error))
+                self?.finish(with: UploadError.invalidUploadResponse(error))
                 return
             }
 
@@ -82,10 +90,10 @@ class HealthKitUploadOperation: Operation {
             switch statusCode {
             case 200:
                 self?.finish()
-            case 401:
+            case 401 where self?.hasRefreshedToken == false:
                 self?.callRefreshToken()
             default:
-                self?.finish(with: UploadError.unknownResponseCode(statusCode, error))
+                self?.finish(with: UploadError.unknownUploadResponseCode(statusCode, error))
             }
 
         }
@@ -95,7 +103,7 @@ class HealthKitUploadOperation: Operation {
 
     private func callRefreshToken() {
 
-        guard let request = try? PivotAPI.refreshDevice(oldToken: userToken, refreshToken: refreshToken).request() else {
+        guard let request = try? PivotAPI.refreshDevice(oldToken: accessToken, refreshToken: refreshToken).request() else {
             finish(with: UploadError.createRefreshRequestFailed)
             return
         }
@@ -103,26 +111,26 @@ class HealthKitUploadOperation: Operation {
         let task = URLSession.shared.dataTask(with: request) { [weak self] (data, response, error) in
             guard self?.isCancelled == false else { return }
 
-//            guard let httpResponse = response as? HTTPURLResponse else {
-//                self?.finish(with: UploadError.invalidResponse(error))
-//                return
-//            }
-
-            if let data = data, let stringData = String(data: data, encoding: String.Encoding.utf8) {
-                print("RefreshToken Response: \(stringData)")
+            guard let data = data else {
+                self?.finish(with: UploadError.emptyRefreshTokenResponse)
+                return
             }
 
-            self?.finish()
+            guard let tokenResponse = try? JSONDecoder().decode(HealthKitRefreshTokenResponse.self, from: data) else {
+                self?.finish(with: UploadError.invalidRefreshResponse(nil))
+                return
+            }
 
-//            let statusCode = httpResponse.statusCode
-//            switch statusCode {
-//            case 200:
-//                self?.finish()
-//            case 401:
-//                self?.callRefreshToken()
-//            default:
-//                self?.finish(with: UploadError.unknownResponseCode(statusCode, error))
-//            }
+
+            // Update tokens
+            UserDefaults.standard.set(tokenResponse.accessToken, forKey: Constants.access_token)
+            self?.accessToken = tokenResponse.accessToken
+
+            UserDefaults.standard.set(tokenResponse.refreshToken, forKey: Constants.refresh_token)
+            self?.refreshToken = tokenResponse.refreshToken
+            self?.hasRefreshedToken = true
+
+            self?.startUploadRequest()
 
 
         }

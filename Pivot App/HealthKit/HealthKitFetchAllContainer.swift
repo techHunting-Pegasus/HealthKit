@@ -71,7 +71,7 @@ class HealthKitFetchAllContainer {
             return
         }
 
-        let operation = HealthKitUploadOperation(userToken: accessToken, refreshToken: refreshToken, data: statistics)
+        let operation = HealthKitUploadOperation(accessToken: accessToken, refreshToken: refreshToken, data: statistics)
 
         operation.completionBlock = { [weak self, weak operation] in
 
