@@ -47,8 +47,8 @@ enum PivotAPI {
     func httpBody() throws -> Data? {
         do {
             switch self {
-            case .refreshDevice(let oldToken, let userAuth):
-                return try JSONEncoder().encode(RefreshDeviceRequest(oldToken: oldToken, userAuth: userAuth))
+            case .refreshDevice:
+                return nil
 
             case .uploadHealthData(_, let samples):
                 return try JSONEncoder().encode(HealthKitRequest(from: samples))
