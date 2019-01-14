@@ -56,26 +56,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         services.forEach { $0.applicationWillTerminate?(application) }
     }
-    
+
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         services.forEach { $0.application?(application, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken) }
     }
-    
+
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         services.forEach { $0.application?(application, didFailToRegisterForRemoteNotificationsWithError: error) }
     }
-    
+
     func application(_ application: UIApplication, willContinueUserActivityWithType userActivityType: String) -> Bool {
         var result = false
         services.forEach {
-            if $0.application?(application, willContinueUserActivityWithType: userActivityType) == true{
+            if $0.application?(application, willContinueUserActivityWithType: userActivityType) == true {
                 result = true
             }
         }
         return result
     }
 
-    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+    func application(_ application: UIApplication,
+                     continue userActivity: NSUserActivity,
+                     restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
         var result = false
         services.forEach {
             if $0.application?(application, continue: userActivity, restorationHandler: restorationHandler) == true {
@@ -84,7 +86,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         return result
     }
-    
+
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         var result = false
         services.forEach {

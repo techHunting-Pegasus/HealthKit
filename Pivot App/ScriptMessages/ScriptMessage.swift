@@ -14,7 +14,7 @@ protocol ScriptMessageDelegate: class {
     func onUserAuthenticationReceived(value: String)
     func onEnableAppleHealthKit(promiseId: Int)
     func onReceiveAppleHealthKitTokens(promiseId: Int, tokens: HealthKitTokens)
-    
+
     func onLoadSecureUrl(url: URL)
     func onLoadGoogleFitUrl(url: URL)
 }
@@ -26,14 +26,14 @@ class ScriptMessageHandler: NSObject, WKScriptMessageHandler {
             Logger.log(.scriptMessageHandler, warning: "Recieved invalid json from javascript")
             return
         }
-        
+
         Logger.log(.scriptMessageHandler, info: "Received Script Message: \(body)")
-        
+
         if let userAuth = body["userGUID"] as? String {
             Logger.log(.scriptMessageHandler, verbose: "Received 'userGUID': \(userAuth)")
             delegate?.onUserAuthenticationReceived(value: userAuth)
         }
-        
+
         if let bodyValue = body["body"] as? String, let promiseId = body["promiseId"] as? Int {
             Logger.log(.scriptMessageHandler, verbose: "Received Message \(bodyValue) with promiseId:\(promiseId)")
 
@@ -53,13 +53,13 @@ class ScriptMessageHandler: NSObject, WKScriptMessageHandler {
                 Logger.log(.scriptMessageHandler, warning: "Unhandled Body Value \(bodyValue)")
             }
         }
-        
-        if let secureString = body["secureUrl"] as? String, let secureUrl = URL(string: secureString){
+
+        if let secureString = body["secureUrl"] as? String, let secureUrl = URL(string: secureString) {
             Logger.log(.scriptMessageHandler, verbose: "Received secureURL:\(secureUrl)")
             delegate?.onLoadSecureUrl(url: secureUrl)
         }
-        
-        if let secureString = body["googleFitUrl"] as? String, let url = URL(string: secureString){
+
+        if let secureString = body["googleFitUrl"] as? String, let url = URL(string: secureString) {
             Logger.log(.scriptMessageHandler, verbose: "Received googleFitUrl:\(url)")
             delegate?.onLoadGoogleFitUrl(url: url)
         }

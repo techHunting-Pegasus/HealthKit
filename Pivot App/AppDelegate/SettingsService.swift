@@ -9,9 +9,9 @@
 import UIKit
 
 class SettingsService: NSObject,  ApplicationService {
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         // check that all settings are initiated
-        
+
         // 
         let currentLoginURL = UserDefaults.standard.string(forKey: "login_url")
         if currentLoginURL == nil  || currentLoginURL == "" {

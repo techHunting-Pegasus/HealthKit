@@ -17,19 +17,19 @@ class HealthKitRequest: Encodable {
     }
 
     var data: [HealthKitData] = []
-    
+
     enum CodingKeys: String, CodingKey {
         case data
     }
-    
+
     init(from samples: [HKStatistics]) {
         data = samples.compactMap { (sample) -> HealthKitData? in
-            
+
             return try? SampleData(from: sample)
         }
         Logger.log(.healthStoreService, info: "Finished Processing Data!")
     }
-    
+
     init(from querySamples: [HKSample]) {
         var index = 0
         var lastPercent: Int = 0
@@ -50,7 +50,7 @@ class HealthKitRequest: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        
+
         var dataContainer = container.nestedUnkeyedContainer(forKey: .data)
         try data.forEach { (sample) in
             if let sample = sample as? SampleData {
@@ -72,7 +72,7 @@ class HealthKitData: Encodable {
         self.type = type
         self.source = source
     }
-    
+
     fileprivate init(from stat: HKStatistics, for type: String, from source: String? = nil) {
         self.startDate = stat.startDate
         self.endDate = stat.endDate
@@ -84,11 +84,11 @@ class HealthKitData: Encodable {
 class SampleData: HealthKitData {
     let quantity: Double
     let unit: String
-    
+
     init(from sample: HKStatistics) throws {
         let unit = try HealthKitRequest.unit(from: sample.quantityType)
         self.unit = unit.unitString
-        
+
         let type = try HealthKitRequest.type(from: sample.quantityType)
 
         let quantity: HKQuantity
@@ -108,24 +108,23 @@ class SampleData: HealthKitData {
             quantity = averageQuantity
         }
         self.quantity = quantity.doubleValue(for: unit)
-        
+
         super.init(from: sample, for: type)
-        
+
     }
-    
+
     init(from sample: HKQuantitySample) throws {
         let unit = try HealthKitRequest.unit(from: sample.quantityType)
         self.quantity = sample.quantity.doubleValue(for: unit)
         self.unit = unit.unitString
-        
+
         let type = try HealthKitRequest.type(from: sample.quantityType)
-        
+
         let source = sample.sourceRevision.source.name
-        
+
         super.init(from: sample, for: type, from: source)
     }
 
-    
     enum CodingKeys: String, CodingKey {
         case quantity
         case startDate
@@ -134,16 +133,15 @@ class SampleData: HealthKitData {
         case unit
         case source
     }
-    
+
     override func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        
+
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
         dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
-        
-        
+
         try container.encode(type, forKey: .type)
         try container.encode(dateFormatter.string(from: startDate), forKey: .startDate)
         try container.encode(dateFormatter.string(from: endDate), forKey: .endDate)
@@ -152,9 +150,7 @@ class SampleData: HealthKitData {
         if let source = source {
             try container.encode(source, forKey: .source)
         }
-        
     }
-
 }
 
 //class QuantitySampleRequest: HealthKitData {
@@ -221,22 +217,22 @@ extension HealthKitRequest {
         switch type.identifier {
         case HKQuantityTypeIdentifier.stepCount.rawValue:
             unit = HKUnit.count()
-            
+
         case HKQuantityTypeIdentifier.distanceWalkingRunning.rawValue:
             unit = HKUnit.meter()
-            
+
         case HKQuantityTypeIdentifier.flightsClimbed.rawValue:
             unit = HKUnit.count()
-            
+
         case HKQuantityTypeIdentifier.bodyMass.rawValue:
             unit = HKUnit.gramUnit(with: .kilo)
-            
+
         case HKQuantityTypeIdentifier.basalEnergyBurned.rawValue:
             unit = HKUnit.kilocalorie()
-            
+
         case HKQuantityTypeIdentifier.distanceCycling.rawValue:
             unit = HKUnit.meter()
-            
+
         default:
             throw HKRError.noUnitFound
         }
@@ -247,22 +243,22 @@ extension HealthKitRequest {
         switch type.identifier {
         case HKQuantityTypeIdentifier.stepCount.rawValue:
             return "stepCount"
-            
+
         case HKQuantityTypeIdentifier.distanceWalkingRunning.rawValue:
             return "distanceWalkingRunning"
-            
+
         case HKQuantityTypeIdentifier.flightsClimbed.rawValue:
             return "flightsClimbed"
-            
+
         case HKQuantityTypeIdentifier.bodyMass.rawValue:
             return "bodyMass"
-            
+
         case HKQuantityTypeIdentifier.basalEnergyBurned.rawValue:
             return "basalEnergyBurned"
-            
+
         case HKQuantityTypeIdentifier.distanceCycling.rawValue:
             return "distanceCycling"
-            
+
         default:
             throw HKRError.noQuantityTypeFound
         }

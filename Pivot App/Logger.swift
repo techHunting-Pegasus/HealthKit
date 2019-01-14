@@ -14,7 +14,7 @@ class Logger {
         case scriptMessageHandler
         case viewController
     }
-    
+
     enum Level: Int, Comparable {
         case verbose
         case info
@@ -25,7 +25,7 @@ class Logger {
             return lhs.rawValue < rhs.rawValue
         }
     }
-    
+
     private static let instance = Logger()
 
     #if DEBUG
@@ -35,22 +35,22 @@ class Logger {
     #endif
 
     private init() { }
-    
+
     static func log(_ tag: Tag, verbose text: String) {
         guard Logger.instance.level >= .verbose else { return }
         print("\(tag.rawValue):\(text)")
     }
-    
+
     static func log(_ tag: Tag, info text: String) {
         guard Logger.instance.level <= .info else { return }
         print("ℹ️\(tag.rawValue):\(text)")
     }
-    
+
     static func log(_ tag: Tag, warning text: String) {
         guard Logger.instance.level >= .warnings else { return }
         print("⚠️\(tag.rawValue):\(text)")
     }
-    
+
     static func log(_ tag: Tag, error text: String) {
         guard Logger.instance.level >= .errors else { return }
         print("🚨\(tag.rawValue):\(text)")

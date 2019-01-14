@@ -8,7 +8,7 @@
 import Foundation
 
 class Util {
-    
+
     static func appVersion() -> String {
         let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
         return version ?? "0.0"

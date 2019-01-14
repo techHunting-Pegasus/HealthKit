@@ -71,10 +71,9 @@ class HealthKitUploadOperation: Operation {
         startUploadRequest()
     }
     private func startUploadRequest() {
-        guard let uploadRequest = try? PivotAPI.uploadHealthData(token: accessToken,
-                                                                 data: data).request() else {
-                                                                    finish(with: UploadError.createUploadRequestFailed)
-                                                                    return
+        guard let uploadRequest = try? PivotAPI.uploadHealthData(token: accessToken, data: data).request() else {
+            finish(with: UploadError.createUploadRequestFailed)
+            return
         }
 
         let task = URLSession.shared.dataTask(with: uploadRequest) {[weak self] (data, response, error) in
@@ -123,15 +122,14 @@ class HealthKitUploadOperation: Operation {
 
 
             // Update tokens
-            UserDefaults.standard.set(tokenResponse.accessToken, forKey: Constants.access_token)
+            UserDefaults.standard.set(tokenResponse.accessToken, forKey: Constants.accessToken)
             self?.accessToken = tokenResponse.accessToken
 
-            UserDefaults.standard.set(tokenResponse.refreshToken, forKey: Constants.refresh_token)
+            UserDefaults.standard.set(tokenResponse.refreshToken, forKey: Constants.refreshToken)
             self?.refreshToken = tokenResponse.refreshToken
             self?.hasRefreshedToken = true
 
             self?.startUploadRequest()
-
 
         }
         task.resume()

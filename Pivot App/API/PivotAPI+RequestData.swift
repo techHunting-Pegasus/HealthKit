@@ -8,7 +8,7 @@
 import Foundation
 
 extension PivotAPI {
-    
+
     static func formattedVersion() -> String {
         return "iOS Version \(Util.appVersion())"
     }

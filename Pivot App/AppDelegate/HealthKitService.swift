@@ -58,9 +58,9 @@ class HealthKitService: NSObject, ApplicationService {
     }
 
     func storeTokens(_ tokens: HealthKitTokens) {
-        UserDefaults.standard.set(tokens.accessToken, forKey: Constants.access_token)
-        UserDefaults.standard.set(tokens.refreshToken, forKey: Constants.refresh_token)
-        UserDefaults.standard.set(tokens.dataMationID, forKey: Constants.datamation_id)
+        UserDefaults.standard.set(tokens.accessToken, forKey: Constants.accessToken)
+        UserDefaults.standard.set(tokens.refreshToken, forKey: Constants.refreshToken)
+        UserDefaults.standard.set(tokens.dataMationID, forKey: Constants.datamationId)
     }
 
     private func startObserverQueries() {
@@ -97,12 +97,12 @@ class HealthKitService: NSObject, ApplicationService {
                         return
                     }
 
-                    guard let accessToken = UserDefaults.standard.string(forKey: Constants.access_token) else {
+                    guard let accessToken = UserDefaults.standard.string(forKey: Constants.accessToken) else {
                         Logger.log(.healthStoreService, info: "ObserverQuery HKStatisticsCollectionQuery No Access Token Found...")
                         return
                     }
 
-                    guard let refreshToken = UserDefaults.standard.string(forKey: Constants.refresh_token) else {
+                    guard let refreshToken = UserDefaults.standard.string(forKey: Constants.refreshToken) else {
                         Logger.log(.healthStoreService, info: "ObserverQuery HKStatisticsCollectionQuery No Refresh Token Found...")
                         return
                     }

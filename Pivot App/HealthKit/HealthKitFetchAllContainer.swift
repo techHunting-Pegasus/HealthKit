@@ -9,7 +9,7 @@
 import Foundation
 import HealthKit
 
-protocol HealthKitFetchAllContainerDelegate {
+protocol HealthKitFetchAllContainerDelegate: class {
     func fetchAllContainer(_: HealthKitFetchAllContainer, didComplete success: Bool)
 }
 
@@ -32,7 +32,7 @@ class HealthKitFetchAllContainer {
 
     private var timer: Timer?
     init() { }
-    
+
     func start() {
         guard state == .ready else { return }
         state = .waiting
@@ -42,11 +42,11 @@ class HealthKitFetchAllContainer {
             }
         }
     }
-    
+
     func add(statistics: [HKStatistics], type: HKSampleType, anchor: Date) {
         guard state != .uploading else { return }
         self.statistics += statistics
-        
+
         anchorDates[type] = anchor
     }
 
@@ -55,18 +55,17 @@ class HealthKitFetchAllContainer {
         anchorDates = [:]
         state = .ready
     }
-    
+
     private func complete() {
         state = .ready
         Logger.log(.healthStoreService, verbose: "HKFetchAllCOntainer completed with \(statistics.count) statistics")
-        
 
-        guard let accessToken = UserDefaults.standard.string(forKey: Constants.access_token) else {
+        guard let accessToken = UserDefaults.standard.string(forKey: Constants.accessToken) else {
             Logger.log(.healthStoreService, info: "HealthKitFetchAllContainer No Access Token Found...")
             return
         }
 
-        guard let refreshToken = UserDefaults.standard.string(forKey: Constants.refresh_token) else {
+        guard let refreshToken = UserDefaults.standard.string(forKey: Constants.refreshToken) else {
             Logger.log(.healthStoreService, info: "HealthKitFetchAllContainer No Refresh Token Found...")
             return
         }

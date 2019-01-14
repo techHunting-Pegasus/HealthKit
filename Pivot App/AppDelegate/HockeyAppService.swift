@@ -11,8 +11,8 @@ import UIKit
 import HockeySDK
 
 class HockeyAppService: NSObject, ApplicationService {
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+
         if let hockeyAppKey = Bundle.main.object(forInfoDictionaryKey: "HockeyAppKey") as? String {
             BITHockeyManager.shared().configure(withIdentifier: hockeyAppKey)
             BITHockeyManager.shared().start()
