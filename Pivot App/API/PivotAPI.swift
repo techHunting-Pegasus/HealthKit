@@ -60,9 +60,10 @@ enum PivotAPI {
     func addHeaders(request: inout URLRequest) {
         switch self {
         case .refreshDevice:
-            break
+            request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Accept")        // the expected response is also JSON
         case .uploadHealthData:
-            break
+            request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")  // the request is JSON
+            request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Accept")        // the expected response is also JSON
         }
     }
 

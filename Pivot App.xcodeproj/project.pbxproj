@@ -13,6 +13,7 @@
 		94303D6721E6CEC700041ABF /* HealthKitTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94303D6621E6CEC700041ABF /* HealthKitTokens.swift */; };
 		94303D6921E6EDFE00041ABF /* HealthKitUploadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94303D6821E6EDFE00041ABF /* HealthKitUploadOperation.swift */; };
 		94303D6F21EC0D2300041ABF /* HealthKitRefreshTokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94303D6E21EC0D2300041ABF /* HealthKitRefreshTokenResponse.swift */; };
+		94303D7221F0201200041ABF /* HealthKitItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94303D7121F0201200041ABF /* HealthKitItem.swift */; };
 		9432D14E1FD1E3FE00A2B98A /* ScriptMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9432D14D1FD1E3FE00A2B98A /* ScriptMessage.swift */; };
 		943677551F96D58F00840058 /* SettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943677541F96D58F00840058 /* SettingsService.swift */; };
 		943B94FC201785EC00C3722A /* DeepLinkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943B94FB201785EC00C3722A /* DeepLinkService.swift */; };
@@ -46,6 +47,7 @@
 		94303D6621E6CEC700041ABF /* HealthKitTokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitTokens.swift; sourceTree = "<group>"; };
 		94303D6821E6EDFE00041ABF /* HealthKitUploadOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitUploadOperation.swift; sourceTree = "<group>"; };
 		94303D6E21EC0D2300041ABF /* HealthKitRefreshTokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitRefreshTokenResponse.swift; sourceTree = "<group>"; };
+		94303D7121F0201200041ABF /* HealthKitItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitItem.swift; sourceTree = "<group>"; };
 		9432D14D1FD1E3FE00A2B98A /* ScriptMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptMessage.swift; sourceTree = "<group>"; };
 		943677391F96CE3300840058 /* Info.qa.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.qa.plist; sourceTree = "<group>"; };
 		9436773A1F96CE3300840058 /* Info.dev.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.dev.plist; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 				941CB0EC219778E8002CD157 /* HealthKitAnchor.swift */,
 				941CB0EE219A6F62002CD157 /* HealthKitFetchAllContainer.swift */,
 				94303D6821E6EDFE00041ABF /* HealthKitUploadOperation.swift */,
+				94303D7121F0201200041ABF /* HealthKitItem.swift */,
 			);
 			path = HealthKit;
 			sourceTree = "<group>";
@@ -338,6 +341,7 @@
 				94F68C67217D34F2005781B5 /* ViewController+FileDownload.swift in Sources */,
 				949015A0219A79F500B80E99 /* HealthKitRequest.swift in Sources */,
 				941CB0EB2194815F002CD157 /* Logger.swift in Sources */,
+				94303D7221F0201200041ABF /* HealthKitItem.swift in Sources */,
 				941CB0EF219A6F62002CD157 /* HealthKitFetchAllContainer.swift in Sources */,
 				94303D6F21EC0D2300041ABF /* HealthKitRefreshTokenResponse.swift in Sources */,
 				94D563751F85B99A00C2C72D /* ViewController.swift in Sources */,
@@ -435,7 +439,7 @@
 		9426658B211DBF68008A310F /* UAT2 */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_BUILD_NUMBER = 22;
+				BUNDLE_BUILD_NUMBER = 24;
 				BUNDLE_ID_SUFFIX = .uat2;
 				BUNDLE_VERSION = 1.1.0;
 				CODE_SIGN_ENTITLEMENTS = Pivot.entitlements;
@@ -447,6 +451,7 @@
 				);
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "${TARGET_NAME}";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = NO_ANCHOR;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -512,7 +517,7 @@
 		943677371F96CA8400840058 /* QA */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_BUILD_NUMBER = 22;
+				BUNDLE_BUILD_NUMBER = 24;
 				BUNDLE_VERSION = 1.1.0;
 				CODE_SIGN_ENTITLEMENTS = Pivot.entitlements;
 				CODE_SIGN_STYLE = Automatic;
@@ -523,6 +528,7 @@
 				);
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "${TARGET_NAME}";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = NO_ANCHOR;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -651,7 +657,7 @@
 		94D563821F85B99A00C2C72D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_BUILD_NUMBER = 22;
+				BUNDLE_BUILD_NUMBER = 24;
 				BUNDLE_VERSION = 1.1.0;
 				CODE_SIGN_ENTITLEMENTS = Pivot.entitlements;
 				CODE_SIGN_STYLE = Automatic;
@@ -662,6 +668,7 @@
 				);
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "${TARGET_NAME}";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG NO_ANCHOR";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -670,7 +677,7 @@
 		94D563831F85B99A00C2C72D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_BUILD_NUMBER = 22;
+				BUNDLE_BUILD_NUMBER = 24;
 				BUNDLE_VERSION = 1.1.0;
 				CODE_SIGN_ENTITLEMENTS = Pivot.entitlements;
 				CODE_SIGN_STYLE = Automatic;
@@ -746,7 +753,7 @@
 		94F9FF761FD8CD840032B193 /* UAT */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_BUILD_NUMBER = 22;
+				BUNDLE_BUILD_NUMBER = 24;
 				BUNDLE_VERSION = 1.1.0;
 				CODE_SIGN_ENTITLEMENTS = Pivot.entitlements;
 				CODE_SIGN_STYLE = Automatic;
@@ -757,6 +764,7 @@
 				);
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "${TARGET_NAME}";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = NO_ANCHOR;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

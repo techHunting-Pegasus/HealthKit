@@ -240,32 +240,14 @@ class HealthKitService: NSObject, ApplicationService {
         return result
     }
 
-    private let quantityTypeIdentifiers: [HKQuantityTypeIdentifier] = {
-        guard HKHealthStore.isHealthDataAvailable() else { return [] }
-        var types = [
-            HKQuantityTypeIdentifier.stepCount,
-            HKQuantityTypeIdentifier.distanceWalkingRunning,
-            HKQuantityTypeIdentifier.flightsClimbed,
-            HKQuantityTypeIdentifier.bodyMass,
-            HKQuantityTypeIdentifier.basalEnergyBurned,
-            HKQuantityTypeIdentifier.dietaryEnergyConsumed,
-            HKQuantityTypeIdentifier.dietaryProtein,
-            HKQuantityTypeIdentifier.dietarySugar,
-            HKQuantityTypeIdentifier.dietaryWater,
-
-
-            HKQuantityTypeIdentifier.distanceCycling]
-        if #available(iOS 10, *)  {
-            types.append(HKQuantityTypeIdentifier.distanceSwimming)
-        }
-        return types
-    }()
+    private var  quantityTypeIdentifiers: [HKQuantityTypeIdentifier] {
+        return HealthKitItems.quantityTypeIdentifiers
+    }
 
     private let characteristicTypeIdentifiers: [HKCharacteristicTypeIdentifier] = {
         guard HKHealthStore.isHealthDataAvailable() else { return [] }
         var types = [
             HKCharacteristicTypeIdentifier.dateOfBirth,
-            HKCharacteristicTypeIdentifier.biologicalSex,
             HKCharacteristicTypeIdentifier.bloodType,
             ]
 
