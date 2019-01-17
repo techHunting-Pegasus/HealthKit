@@ -10,7 +10,6 @@ import Foundation
 import HealthKit
 
 struct HealthKitItem {
-//    let identifier: HKQuantityTypeIdentifier
     let unit: HKUnit
     let name: String
 
@@ -74,6 +73,5 @@ class HealthKitItems {
         .dietaryFiber: HealthKitItem("dietaryFiber", unit: HKUnit.gram()),
         .dietarySodium: HealthKitItem("dietarySodium", unit: HKUnit.gram()),
         .dietaryCalcium: HealthKitItem("dietaryCalcium", unit: HKUnit.gram()),
-
     ]
 }

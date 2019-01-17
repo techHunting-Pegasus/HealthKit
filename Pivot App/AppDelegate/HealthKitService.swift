@@ -141,7 +141,7 @@ class HealthKitService: NSObject, ApplicationService {
 
         for id in quantityTypeIdentifiers {
             guard let type = HKQuantityType.quantityType(forIdentifier: id) else { continue }
-            store.enableBackgroundDelivery(for:type, frequency: .daily) { (success, error) in
+            store.enableBackgroundDelivery(for:type, frequency: .hourly) { (success, error) in
                 guard success else {
                     let debugError = error.debugDescription
 
@@ -191,7 +191,7 @@ class HealthKitService: NSObject, ApplicationService {
             startDate = cal.date(byAdding: .month, value: -3, to: newDate) ?? nil
         }
 
-        let predicate = HKQuery.predicateForSamples(withStart: startDate, end: newDate, options: .strictEndDate)
+        let predicate = HKQuery.predicateForSamples(withStart: startDate, end: date, options: .strictEndDate)
 
         var interval = DateComponents()
         interval.day = 1
