@@ -164,6 +164,7 @@ extension ViewController: ScriptMessageDelegate {
     func onReceiveAppleHealthKitTokens(promiseId: Int, tokens: HealthKitTokens) {
         HealthKitService.instance.storeTokens(tokens)
         HealthKitService.instance.fetchAllStatisticsData()
+        self.fulfillPromise(promiseId: promiseId)
     }
 
     func onLoadSecureUrl(url: URL) {
