@@ -30,8 +30,16 @@ class HealthKitItems {
         return Array(items.keys)
     }
 
+    static var categoryTypeIdentifiers: [HKCategoryTypeIdentifier] {
+        return Array(categoryItems.keys)
+    }
+
     static func name(for type: HKQuantityType) throws -> String {
         return try name(for: HKQuantityTypeIdentifier(rawValue: type.identifier))
+    }
+
+    static func name(for type: HKCategoryType) throws -> String {
+        return try name(for: HKCategoryTypeIdentifier(rawValue: type.identifier))
     }
 
     static func name(for identifier: HKQuantityTypeIdentifier) throws -> String {
@@ -40,12 +48,31 @@ class HealthKitItems {
         }
         return name
     }
+
+    static func name(for identifier: HKCategoryTypeIdentifier) throws -> String {
+        guard let name = categoryItems[identifier]?.name else {
+            throw HKIError.noNameFound
+        }
+        return name
+    }
+
     static func unit(for type: HKQuantityType) throws -> HKUnit {
         return try unit(for: HKQuantityTypeIdentifier(rawValue: type.identifier))
     }
 
+    static func unit(for type: HKCategoryType) throws -> HKUnit {
+        return try unit(for: HKCategoryTypeIdentifier(rawValue: type.identifier))
+    }
+
     static func unit(for identifier: HKQuantityTypeIdentifier) throws -> HKUnit {
         guard let unit = items[identifier]?.unit else {
+            throw HKIError.noUnitFound
+        }
+        return unit
+    }
+
+    static func unit(for identifier: HKCategoryTypeIdentifier) throws -> HKUnit {
+        guard let unit = categoryItems[identifier]?.unit else {
             throw HKIError.noUnitFound
         }
         return unit
@@ -73,5 +100,9 @@ class HealthKitItems {
         .dietaryFiber: HealthKitItem("dietaryFiber", unit: HKUnit.gram()),
         .dietarySodium: HealthKitItem("dietarySodium", unit: HKUnit.gram()),
         .dietaryCalcium: HealthKitItem("dietaryCalcium", unit: HKUnit.gram()),
+    ]
+
+    static let categoryItems: [HKCategoryTypeIdentifier: HealthKitItem] = [
+        HKCategoryTypeIdentifier.sleepAnalysis: HealthKitItem("sleepAnalysis", unit: HKUnit.hour())
     ]
 }

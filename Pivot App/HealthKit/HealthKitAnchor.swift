@@ -12,19 +12,19 @@ import HealthKit
 enum HealthKitAnchor {
 
     static func anchor(for sampleType: HKSampleType) -> Date? {
-//        let udName = name(for: sampleType)
-//
-//        guard let date = UserDefaults.standard.object(forKey: udName) as? Date else {
-//            UserDefaults.standard.set(nil, forKey: udName)
-//            return nil
-//        }
-//
-//        #if NO_ANCHOR
-//        return nil
-//        #else
-//        return date
-//        #endif
+        let udName = name(for: sampleType)
+
+        guard let date = UserDefaults.standard.object(forKey: udName) as? Date else {
+            UserDefaults.standard.set(nil, forKey: udName)
+            return nil
+        }
+
+        #if NO_ANCHOR
         return nil
+        #else
+        return date
+        #endif
+//        return nil
     }
 
     static func set(anchor: Date, for sampleType: HKSampleType) {

@@ -16,4 +16,6 @@ final class Constants {
     static let accessToken = "access_token"
     static let datamationId = "datamation_id"
     static let refreshToken = "refresh_token"
+
+    static let dataPath = "data_path"
 }

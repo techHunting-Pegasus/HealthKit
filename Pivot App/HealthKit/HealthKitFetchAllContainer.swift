@@ -21,6 +21,7 @@ class HealthKitFetchAllContainer {
     }
 
     private(set) var statistics: [HKStatistics] = []
+    private(set) var samples: [HKSample] = []
     private(set) var anchorDates: [HKSampleType: Date] = [:]
     private(set) var state: State = .ready
 
@@ -50,8 +51,16 @@ class HealthKitFetchAllContainer {
         anchorDates[type] = anchor
     }
 
+    func add(samples: [HKSample], type: HKSampleType, anchor: Date) {
+        guard state != .uploading else { return }
+        self.samples += samples
+
+        anchorDates[type] = anchor
+    }
+
     private func reset() {
         statistics = []
+        samples = []
         anchorDates = [:]
         state = .ready
     }
@@ -70,7 +79,11 @@ class HealthKitFetchAllContainer {
             return
         }
 
-        let operation = HealthKitUploadOperation(accessToken: accessToken, refreshToken: refreshToken, data: statistics)
+        var data: [Any] = statistics
+        data.append(contentsOf: samples)
+
+        let operation = HealthKitUploadOperation(accessToken: accessToken, refreshToken: refreshToken,
+                                                 data: data)
 
         operation.completionBlock = { [weak self, weak operation] in
 

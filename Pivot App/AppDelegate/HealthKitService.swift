@@ -11,8 +11,14 @@ import HealthKit
 
 typealias AuthorizationComplete = (Bool) -> Void
 typealias InitialResultsHandlerType = ((HKStatisticsCollectionQuery, HKStatisticsCollection?, Error?, Date) -> Void)?
+typealias CategoryResultsHandlerType = (HKSampleQuery, [HKSample]?, Error?) -> Void
 
 class HealthKitService: NSObject, ApplicationService {
+
+    enum StartDate {
+        case oneMonth
+        case threeMonths
+    }
 
     static let instance = HealthKitService()
     private override init() { super.init() }
@@ -77,7 +83,7 @@ class HealthKitService: NSObject, ApplicationService {
 
                 Logger.log(.healthStoreService, info: "Observer Query Succeeded for Quantity Type: \(type)")
 
-                self?.fetchStatisticsData(for: type) { (query, results, error, newDate) in
+                self?.fetchStatisticsData(for: type, start: .oneMonth) { (query, results, error, newDate) in
                     var didSucceed = false
                     defer {
                         if didSucceed == false {
@@ -160,7 +166,7 @@ class HealthKitService: NSObject, ApplicationService {
         for id in quantityTypeIdentifiers {
             guard let type = HKObjectType.quantityType(forIdentifier: id) else { continue }
 
-            fetchStatisticsData(for: type) { [weak self] (query, results, error, newDate) in
+            fetchStatisticsData(for: type, start: .threeMonths) { [weak self] (query, results, error, newDate) in
 
                 if let error = error {
                     Logger.log(.healthStoreService, error: "HKStatisticsCollectionQuery failed for SampleType: \(type)\nError: \(error)")
@@ -176,22 +182,47 @@ class HealthKitService: NSObject, ApplicationService {
                 self?.fetchAllContainer.add(statistics: statistics, type: type, anchor: newDate)
             }
         }
+
+        for id in categoryTypeIdentifiers {
+            guard let type = HKObjectType.categoryType(forIdentifier: id) else { continue }
+
+            fetchCategoryData(for: type, start: .threeMonths) { [weak self] (query, samples: [HKSample]?, error) in
+                if let error = error {
+                    Logger.log(.healthStoreService, error: "HKCategorySample failed for SampleType: \(type)\nError: \(error)")
+                    return
+                }
+
+                guard let results = samples else {
+                    Logger.log(.healthStoreService, error: "HKCategorySample returned no data for SampleType: \(type)")
+                    return
+                }
+
+                Logger.log(.healthStoreService, info: "HKStatisticsCollectionQuery SampleType: \(type) returned \(results.count) Samples")
+
+                // TODO: Use date returned from fetch method
+                self?.fetchAllContainer.add(samples: results, type: type, anchor: Date())
+            }
+        }
     }
 
-    private func fetchStatisticsData(for type: HKQuantityType, completion: InitialResultsHandlerType) {
+    private func fetchStatisticsData(for type: HKQuantityType, start: StartDate,
+                                     completion: InitialResultsHandlerType) {
 
         let date = Date()
         let cal = NSCalendar.current
         let newDate = cal.startOfDay(for: date)
 
         let startDate: Date?
-        if let anchorDate = HealthKitAnchor.anchor(for: type) {
-            startDate = anchorDate
-        } else {
-            startDate = cal.date(byAdding: .month, value: -3, to: newDate) ?? nil
+
+        switch start {
+        case .oneMonth:
+            startDate = cal.date(byAdding: .month, value: -1, to: newDate)
+        case .threeMonths:
+            startDate = cal.date(byAdding: .month, value: -3, to: newDate)
         }
 
-        let predicate = HKQuery.predicateForSamples(withStart: startDate, end: date, options: .strictEndDate)
+        let predicate = HKQuery.predicateForSamples(withStart: startDate, end: nil,
+                                                    options: .strictEndDate)
 
         var interval = DateComponents()
         interval.day = 1
@@ -211,7 +242,30 @@ class HealthKitService: NSObject, ApplicationService {
         }
 
         store.execute(statQuery)
+    }
 
+    private func fetchCategoryData(for type: HKCategoryType, start: StartDate,
+                                   completion: @escaping CategoryResultsHandlerType) {
+        let date = Date()
+        let cal = NSCalendar.current
+        let newDate = cal.startOfDay(for: date)
+
+        let startDate: Date?
+
+        switch start {
+        case .oneMonth:
+            startDate = cal.date(byAdding: .month, value: -1, to: newDate)
+        case .threeMonths:
+            startDate = cal.date(byAdding: .month, value: -3, to: newDate)
+        }
+
+        let predicate = HKQuery.predicateForSamples(withStart: startDate, end: nil,
+                                                    options: .strictEndDate)
+
+        let query = HKSampleQuery(sampleType: type, predicate: predicate, limit: HKObjectQueryNoLimit,
+                                  sortDescriptors: nil, resultsHandler: completion)
+
+        store.execute(query)
     }
 
     // MARK: - Properties
@@ -231,6 +285,12 @@ class HealthKitService: NSObject, ApplicationService {
             }
         }
 
+        for id in categoryTypeIdentifiers {
+            if let type = HKObjectType.categoryType(forIdentifier: id) {
+                result.insert(type)
+            }
+        }
+
         for id in characteristicTypeIdentifiers {
             if let type = HKCharacteristicType.characteristicType(forIdentifier: id) {
                 result.insert(type)
@@ -242,6 +302,10 @@ class HealthKitService: NSObject, ApplicationService {
 
     private var  quantityTypeIdentifiers: [HKQuantityTypeIdentifier] {
         return HealthKitItems.quantityTypeIdentifiers
+    }
+
+    private var categoryTypeIdentifiers: [HKCategoryTypeIdentifier] {
+        return HealthKitItems.categoryTypeIdentifiers
     }
 
     private let characteristicTypeIdentifiers: [HKCharacteristicTypeIdentifier] = {

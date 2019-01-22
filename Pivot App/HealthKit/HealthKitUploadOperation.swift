@@ -24,12 +24,12 @@ class HealthKitUploadOperation: Operation {
 
     private(set) var accessToken: String
     private(set) var refreshToken: String
-    let data: [HKStatistics]
+    let data: [Any]
     var error: Error?
 
     private var hasRefreshedToken: Bool = false
 
-    init(accessToken: String, refreshToken: String, data: [HKStatistics]) {
+    init(accessToken: String, refreshToken: String, data: [Any]) {
         self.accessToken = accessToken
         self.refreshToken = refreshToken
         self.data = data
@@ -128,6 +128,8 @@ class HealthKitUploadOperation: Operation {
             UserDefaults.standard.set(tokenResponse.refreshToken, forKey: Constants.refreshToken)
             self?.refreshToken = tokenResponse.refreshToken
             self?.hasRefreshedToken = true
+
+            UserDefaults.standard.set(tokenResponse.dataPath, forKey: Constants.dataPath)
 
             self?.startUploadRequest()
 
