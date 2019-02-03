@@ -9,6 +9,8 @@
 import Foundation
 import HealthKit
 
+typealias FetchAllContainerCompletion = () -> Void
+
 protocol HealthKitFetchAllContainerDelegate: class {
     func fetchAllContainer(_: HealthKitFetchAllContainer, didComplete success: Bool)
 }
@@ -31,6 +33,8 @@ class HealthKitFetchAllContainer {
         return queue
     }()
 
+    private var completionOperations: [FetchAllContainerCompletion] = []
+
     private var timer: Timer?
     init() { }
 
@@ -38,34 +42,52 @@ class HealthKitFetchAllContainer {
         guard state == .ready else { return }
         state = .waiting
         DispatchQueue.main.async {
-            self.timer = Timer.scheduledTimer(withTimeInterval: 30.0, repeats: false) { [weak self] (_) in
+            self.timer = Timer.scheduledTimer(withTimeInterval: 20.0, repeats: false) { [weak self] (_) in
                 self?.complete()
             }
         }
     }
 
-    func add(statistics: [HKStatistics], type: HKSampleType, anchor: Date) {
+    func add(statistics: [HKStatistics], type: HKSampleType, anchor: Date,
+             completion: FetchAllContainerCompletion? = nil) {
         guard state != .uploading else { return }
         self.statistics += statistics
 
         anchorDates[type] = anchor
+
+        if let completion = completion {
+            completionOperations.append(completion)
+        }
     }
 
-    func add(samples: [HKSample], type: HKSampleType, anchor: Date) {
+    func add(samples: [HKSample], type: HKSampleType, anchor: Date,
+        completion: FetchAllContainerCompletion? = nil) {
         guard state != .uploading else { return }
         self.samples += samples
 
         anchorDates[type] = anchor
+
+        if let completion = completion {
+            completionOperations.append(completion)
+        }
+
     }
-    func add(workouts: [HKWorkout]) {
+    func add(workouts: [HKWorkout],
+        completion: FetchAllContainerCompletion? = nil) {
         guard state != .uploading else { return }
         self.samples.append(contentsOf: workouts)
+
+        if let completion = completion {
+            completionOperations.append(completion)
+        }
+
     }
 
     private func reset() {
         statistics = []
         samples = []
         anchorDates = [:]
+        completionOperations = []
         state = .ready
     }
 
@@ -91,9 +113,16 @@ class HealthKitFetchAllContainer {
 
         operation.completionBlock = { [weak self, weak operation] in
 
+            defer {
+                self?.completionOperations.forEach {
+                    $0()
+                }
+
+                self?.reset()
+            }
+
             if let error = operation?.error {
                 Logger.log(.healthStoreService, error: "HealthKitFetchAllContainer failed to upload data with error: \(error)")
-                self?.reset()
                 return
             }
             Logger.log(.healthStoreService, info: "HealthKitFetchAllContainer Successfully Uploaded Data!")
@@ -102,8 +131,6 @@ class HealthKitFetchAllContainer {
             self?.anchorDates.forEach { (type, anchor) in
                 HealthKitAnchor.set(anchor: anchor, for: type)
             }
-
-            self?.reset()
         }
 
         operationQueue.addOperation(operation)

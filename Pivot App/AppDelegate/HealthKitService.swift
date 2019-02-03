@@ -71,6 +71,9 @@ class HealthKitService: NSObject, ApplicationService {
     }
 
     private func startObserverQueries() {
+
+        fetchAllContainer.start()
+
         for id in quantityTypeIdentifiers {
 
             guard let type = HKQuantityType.quantityType(forIdentifier: id) else { continue }
@@ -104,39 +107,14 @@ class HealthKitService: NSObject, ApplicationService {
                         return
                     }
 
-                    guard let accessToken = UserDefaults.standard.string(forKey: Constants.accessToken) else {
-                        Logger.log(.healthStoreService, info: "ObserverQuery HKStatisticsCollectionQuery No Access Token Found...")
-                        return
-                    }
-
-                    guard let refreshToken = UserDefaults.standard.string(forKey: Constants.refreshToken) else {
-                        Logger.log(.healthStoreService, info: "ObserverQuery HKStatisticsCollectionQuery No Refresh Token Found...")
-                        return
-                    }
-
                     Logger.log(.healthStoreService, info: "ObserverQuery HKStatisticsCollectionQuery SampleType: \(type) returned \(statistics.count) statistics")
 
                     didSucceed = true
 
-                    let operation = HealthKitUploadOperation(accessToken: accessToken, refreshToken: refreshToken, data: statistics)
-
-                    operation.completionBlock = { [weak operation] in
-
-                        defer {
-                            completionHandler()
-                        }
-
-                        if let error = operation?.error {
-                            Logger.log(.healthStoreService, error: "ObserverQuery HKStatisticsCollectionQuery failed to upload data with error: \(error)")
-                            return
-                        }
-                        Logger.log(.healthStoreService, info: "ObserverQuery HKStatisticsCollectionQuery Successfully Uploaded Data!")
-
-                        // Update the anchor on success
-                        HealthKitAnchor.set(anchor: newDate, for: type)
+                    self?.fetchAllContainer.add(statistics: statistics, type: type, anchor: newDate) {
+                        completionHandler()
                     }
 
-                    self?.operationQueue.addOperation(operation)
                 }
 
             }
@@ -159,19 +137,8 @@ class HealthKitService: NSObject, ApplicationService {
                     return
                 }
 
-                let operation = HealthKitUploadOperation(accessToken: accessToken, refreshToken: refreshToken, data: workouts)
-
-                operation.completionBlock = { [weak operation] in
-
-                    defer {
-                        completionHandler()
-                    }
-
-                    if let error = operation?.error {
-                        Logger.log(.healthStoreService, error: "ObserverQuery WorkoutQuery failed to upload data with error: \(error)")
-                        return
-                    }
-                    Logger.log(.healthStoreService, info: "ObserverQuery WorkoutQuery Successfully Uploaded Data!")
+                self?.fetchAllContainer.add(workouts: workouts) {
+                    completionHandler()
                 }
 
             }
