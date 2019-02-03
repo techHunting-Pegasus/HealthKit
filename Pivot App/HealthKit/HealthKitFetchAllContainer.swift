@@ -57,6 +57,10 @@ class HealthKitFetchAllContainer {
 
         anchorDates[type] = anchor
     }
+    func add(workouts: [HKWorkout]) {
+        guard state != .uploading else { return }
+        self.samples.append(contentsOf: workouts)
+    }
 
     private func reset() {
         statistics = []

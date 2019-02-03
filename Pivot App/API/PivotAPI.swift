@@ -30,7 +30,7 @@ enum PivotAPI {
                 let url = URL(string: dataPath.replacingOccurrences(of: "{accessToken}", with: token)) {
                 result = url
             } else {
-                result = apiUrl.appendingPathComponent("\(PivotAPI.apiVersion)/gimmeData/\(token)")
+                result = apiUrl.appendingPathComponent("\(PivotAPI.apiVersion)/gimmedata/\(token)")
             }
         }
 

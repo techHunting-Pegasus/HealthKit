@@ -12,6 +12,7 @@ import HealthKit
 typealias AuthorizationComplete = (Bool) -> Void
 typealias InitialResultsHandlerType = ((HKStatisticsCollectionQuery, HKStatisticsCollection?, Error?, Date) -> Void)?
 typealias CategoryResultsHandlerType = (HKSampleQuery, [HKSample]?, Error?) -> Void
+typealias WorkoutResultsHandlerType = (HKSampleQuery, [HKWorkout], Date) -> Void
 
 class HealthKitService: NSObject, ApplicationService {
 
@@ -139,8 +140,43 @@ class HealthKitService: NSObject, ApplicationService {
                 }
 
             }
+
             store.execute(query)
         }
+
+        let workoutQuery = HKObserverQuery(sampleType: HKWorkoutType.workoutType(), predicate: nil) {
+            [weak self] (query, completionHandler, error) in
+
+            self?.fetchWorkoutData(start: .oneMonth) { [weak self] (query, workouts, newDate) in
+
+                guard let accessToken = UserDefaults.standard.string(forKey: Constants.accessToken) else {
+                    Logger.log(.healthStoreService, info: "ObserverQuery WorkoutQuery No Access Token Found...")
+                    return
+                }
+
+                guard let refreshToken = UserDefaults.standard.string(forKey: Constants.refreshToken) else {
+                    Logger.log(.healthStoreService, info: "ObserverQuery WorkoutQuery No Refresh Token Found...")
+                    return
+                }
+
+                let operation = HealthKitUploadOperation(accessToken: accessToken, refreshToken: refreshToken, data: workouts)
+
+                operation.completionBlock = { [weak operation] in
+
+                    defer {
+                        completionHandler()
+                    }
+
+                    if let error = operation?.error {
+                        Logger.log(.healthStoreService, error: "ObserverQuery WorkoutQuery failed to upload data with error: \(error)")
+                        return
+                    }
+                    Logger.log(.healthStoreService, info: "ObserverQuery WorkoutQuery Successfully Uploaded Data!")
+                }
+
+            }
+        }
+        store.execute(workoutQuery)
     }
 
     private func enableBackgroundDeliveries() {
@@ -203,6 +239,11 @@ class HealthKitService: NSObject, ApplicationService {
                 self?.fetchAllContainer.add(samples: results, type: type, anchor: Date())
             }
         }
+
+        fetchWorkoutData(start: .threeMonths) { [weak self] (query, workouts, newDate) in
+
+            self?.fetchAllContainer.add(workouts: workouts)
+        }
     }
 
     private func fetchStatisticsData(for type: HKQuantityType, start: StartDate,
@@ -242,6 +283,51 @@ class HealthKitService: NSObject, ApplicationService {
         }
 
         store.execute(statQuery)
+    }
+
+    private func fetchWorkoutData(start: StartDate, complete: @escaping WorkoutResultsHandlerType) {
+        let date = Date()
+        let cal = NSCalendar.current
+        let newDate = cal.startOfDay(for: date)
+
+        let startDate: Date?
+
+        switch start {
+        case .oneMonth:
+            startDate = cal.date(byAdding: .month, value: -1, to: newDate)
+        case .threeMonths:
+            startDate = cal.date(byAdding: .month, value: -3, to: newDate)
+        }
+
+//        guard let distanceType = HKObjectType.quantityType(forIdentifier: .distanceWalkingRunning) else {
+//            fatalError("*** Unable to create the distance type ***")
+//        }
+
+        let predicate = HKQuery.predicateForSamples(withStart: startDate, end: nil,
+                                                    options: .strictEndDate)
+
+
+        let query = HKSampleQuery(sampleType: HKWorkoutType.workoutType(), predicate: predicate, limit: 0, sortDescriptors: nil) { (query, _samples, _error) in
+
+            if let error = _error {
+                Logger.log(.healthStoreService, error: "HKSampleQuery for Workouts failed with Error: \(error)")
+                return
+            }
+
+            guard let samples = _samples else {
+                Logger.log(.healthStoreService, error: "HKSampleQuery for Workouts found no samples")
+                return
+            }
+
+            let workouts = samples.compactMap { (sample) -> HKWorkout? in
+                return sample as? HKWorkout
+            }
+
+            complete(query, workouts, Date())
+        }
+
+        store.execute(query)
+
     }
 
     private func fetchCategoryData(for type: HKCategoryType, start: StartDate,
@@ -297,6 +383,8 @@ class HealthKitService: NSObject, ApplicationService {
             }
         }
 
+        result.insert(HKWorkoutType.workoutType())
+
         return result
     }
 
@@ -322,6 +410,4 @@ class HealthKitService: NSObject, ApplicationService {
         debugPrint("Begin Sampling Step Count...")
 
     }
-
-
 }

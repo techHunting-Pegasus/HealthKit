@@ -24,7 +24,6 @@ enum HealthKitAnchor {
         #else
         return date
         #endif
-//        return nil
     }
 
     static func set(anchor: Date, for sampleType: HKSampleType) {
