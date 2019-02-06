@@ -46,6 +46,8 @@
 	<string>Please allow $(EXECUTABLE_NAME) access to photos for crash reporting.</string>
 	<key>NSHealthUpdateUsageDescription</key>
 	<string>Please allow $(EXECUTABLE_NAME) to get Updates from Apple HealthKit for health reporting.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Please Allow $(EXECUTABLE_NAME) to access your Camera to take photos for your Profile Picture and health tracking.</string>
 	<key>PivotLoginURL</key>
 	<string>https://pivotqa.gbehavior.com</string>
 	<key>PivotAPIURL</key>

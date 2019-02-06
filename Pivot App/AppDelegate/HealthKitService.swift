@@ -127,16 +127,6 @@ class HealthKitService: NSObject, ApplicationService {
 
             self?.fetchWorkoutData(start: .oneMonth) { [weak self] (query, workouts, newDate) in
 
-                guard let accessToken = UserDefaults.standard.string(forKey: Constants.accessToken) else {
-                    Logger.log(.healthStoreService, info: "ObserverQuery WorkoutQuery No Access Token Found...")
-                    return
-                }
-
-                guard let refreshToken = UserDefaults.standard.string(forKey: Constants.refreshToken) else {
-                    Logger.log(.healthStoreService, info: "ObserverQuery WorkoutQuery No Refresh Token Found...")
-                    return
-                }
-
                 self?.fetchAllContainer.add(workouts: workouts) {
                     completionHandler()
                 }
