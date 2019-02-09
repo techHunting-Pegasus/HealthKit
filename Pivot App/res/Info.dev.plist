@@ -49,7 +49,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string>Please Allow $(EXECUTABLE_NAME) to access your Camera to take photos for your Profile Picture and health tracking.</string>
 	<key>PivotAPIURL</key>
-	<string>http://pivotdev2.gbehavior.com/pvDataMation/</string>
+	<string>https://dm.gopivotsolutions.com/pvDataMation/</string>
 	<key>PivotLoginURL</key>
 	<string>https://pivotdev.gbehavior.com</string>
 	<key>UIBackgroundModes</key>
