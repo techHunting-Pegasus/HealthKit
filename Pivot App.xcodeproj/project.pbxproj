@@ -469,7 +469,7 @@
 			buildSettings = {
 				BUNDLE_BUILD_NUMBER = 28;
 				BUNDLE_ID_SUFFIX = .uat2;
-				BUNDLE_VERSION = 1.1.0;
+				BUNDLE_VERSION = 1.1.1;
 				CODE_SIGN_ENTITLEMENTS = Pivot.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T85Z44958S;
@@ -546,7 +546,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_BUILD_NUMBER = 28;
-				BUNDLE_VERSION = 1.1.0;
+				BUNDLE_VERSION = 1.1.1;
 				CODE_SIGN_ENTITLEMENTS = Pivot.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T85Z44958S;
@@ -686,7 +686,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_BUILD_NUMBER = 28;
-				BUNDLE_VERSION = 1.1.0;
+				BUNDLE_VERSION = 1.1.1;
 				CODE_SIGN_ENTITLEMENTS = Pivot.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T85Z44958S;
@@ -706,7 +706,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_BUILD_NUMBER = 28;
-				BUNDLE_VERSION = 1.1.0;
+				BUNDLE_VERSION = 1.1.1;
 				CODE_SIGN_ENTITLEMENTS = Pivot.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T85Z44958S;
@@ -782,7 +782,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_BUILD_NUMBER = 28;
-				BUNDLE_VERSION = 1.1.0;
+				BUNDLE_VERSION = 1.1.1;
 				CODE_SIGN_ENTITLEMENTS = Pivot.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T85Z44958S;

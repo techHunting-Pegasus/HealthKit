@@ -49,7 +49,6 @@ class ViewController: UIViewController {
         webView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         webView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         webView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20.0).isActive = true
-
     }
 
     override func viewDidLoad() {
@@ -80,6 +79,14 @@ class ViewController: UIViewController {
 
     func dismissSafariVC() {
         self.dismiss(animated: true)
+    }
+
+    func presentWebView(for url: URL) {
+        DispatchQueue.main.async {
+            let viewController = SFSafariViewController(url: url)
+            viewController.delegate = self
+            self.present(viewController, animated: true)
+        }
     }
 
     override func observeValue(forKeyPath _keyPath: String?, of object: Any?,
