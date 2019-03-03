@@ -95,11 +95,12 @@ class HealthKitItems {
         .dietaryCarbohydrates: HealthKitItem("dietaryCarbohydrates", unit: HKUnit.gram()),
         .dietaryProtein: HealthKitItem("dietaryProtein", unit: HKUnit.gram()),
         .dietarySugar: HealthKitItem("dietarySugar", unit: HKUnit.gram()),
-        .dietaryWater: HealthKitItem("dietaryWater", unit: HKUnit.gram()),
         .dietaryIron: HealthKitItem("dietaryIron", unit: HKUnit.gram()),
         .dietaryFiber: HealthKitItem("dietaryFiber", unit: HKUnit.gram()),
         .dietarySodium: HealthKitItem("dietarySodium", unit: HKUnit.gram()),
         .dietaryCalcium: HealthKitItem("dietaryCalcium", unit: HKUnit.gram()),
+
+        .dietaryWater: HealthKitItem("dietaryWater", unit: HKUnit.liter()),
     ]
 
     static let categoryItems: [HKCategoryTypeIdentifier: HealthKitItem] = [
