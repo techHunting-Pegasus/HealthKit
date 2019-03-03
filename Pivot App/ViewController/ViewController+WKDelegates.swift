@@ -36,7 +36,7 @@ extension ViewController: WKUIDelegate, WKNavigationDelegate {
             return
 
         }
-        guard let oldURLHost = webView.url?.host, oldURLHost == url.host else {
+        if let oldURLHost = webView.url?.host, oldURLHost.isEmpty == false, oldURLHost != url.host {
             debugPrint("\tNavigating to external host")
             decisionHandler(.cancel)
             presentWebView(for: url)
