@@ -16,7 +16,7 @@ extension ViewController: WKUIDelegate, WKNavigationDelegate {
 
         debugPrint("Deciding Policy for WebView URL: \(navigationAction.request.url?.absoluteString ?? "No URL Available")")
 
-        let regexPattern: String = "program/.*/programGuide"
+        let regexPattern: String = "program/.*/(program|user)Guide"
 
         guard
             let url = navigationAction.request.url,
@@ -30,12 +30,19 @@ extension ViewController: WKUIDelegate, WKNavigationDelegate {
         let range = NSRange(location: 0, length: components.path.utf16.count)
 
         guard regex.firstMatch(in: components.path, options: [], range: range) == nil else {
-            debugPrint("\tCancelling Navigation")
+            debugPrint("\tCancelling Navigation, loading grogram guide")
             decisionHandler(.cancel)
             loadFile(url: url)
             return
-
         }
+
+        guard !components.path.lowercased().hasSuffix(".pdf") else {
+            debugPrint("\tCancelling Navigation, loading PDF")
+            decisionHandler(.cancel)
+            loadFile(url: url)
+            return
+        }
+
         if let oldURLHost = webView.url?.host, oldURLHost.isEmpty == false, oldURLHost != url.host {
             debugPrint("\tNavigating to external host")
             decisionHandler(.cancel)
