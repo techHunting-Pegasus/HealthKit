@@ -13,7 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     lazy var services: [ApplicationService] = [
         SettingsService(),
-        HockeyAppService(),
+        AppCenterService(),
         NotificationService(),
         HealthKitService.instance,
         DeepLinkService()

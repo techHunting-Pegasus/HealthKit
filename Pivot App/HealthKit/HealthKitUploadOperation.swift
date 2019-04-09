@@ -62,6 +62,12 @@ class HealthKitUploadOperation: Operation {
         self.error = error
         isExecuting = false
         isFinished = true
+
+        if let error = error {
+            Analytics.track(event: .healthKitDataUploadFailed(error, data.count))
+        } else {
+            Analytics.track(event: .healthKitDataUploadSucceeded(data.count))
+        }
     }
 
     override func start() {

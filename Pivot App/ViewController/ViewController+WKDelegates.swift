@@ -43,7 +43,11 @@ extension ViewController: WKUIDelegate, WKNavigationDelegate {
             return
         }
 
-        if let oldURLHost = webView.url?.host, oldURLHost.isEmpty == false, oldURLHost != url.host {
+        if let oldURLHost = webView.url?.host,
+            oldURLHost.isEmpty == false, oldURLHost != url.host,
+            //Check that this is not an iFrame
+            navigationAction.targetFrame == nil {
+            
             debugPrint("\tNavigating to external host")
             decisionHandler(.cancel)
             presentWebView(for: url)

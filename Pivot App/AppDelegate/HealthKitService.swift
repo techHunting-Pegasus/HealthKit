@@ -61,6 +61,7 @@ class HealthKitService: NSObject, ApplicationService {
                 return
             }
             Logger.log(.healthStoreService, info: "RequestAuthorization succeeded!")
+            Analytics.track(event: .healthKitEnabled)
         }
     }
 

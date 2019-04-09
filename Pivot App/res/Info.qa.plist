@@ -19,6 +19,12 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>appcenter-9a073a03-312b-4569-a864-02d15b1c0d27</string>
+			</array>
+		</dict>
+		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
@@ -31,8 +37,8 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>${BUNDLE_BUILD_NUMBER}</string>
-	<key>HockeyAppKey</key>
-	<string>9a073a03312b4569a86402d15b1c0d27</string>
+	<key>AppCenterKey</key>
+	<string>9a073a03-312b-4569-a864-02d15b1c0d27</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>

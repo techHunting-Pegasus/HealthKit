@@ -215,6 +215,8 @@ extension ViewController: ScriptMessageDelegate {
         let request = URLRequest(url: url)
 
         self.webView.load(request)
+
+        Analytics.track(event: .openDeepLink(url))
     }
 }
 

@@ -19,6 +19,12 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>appcenter-4ac49226-d6ab-41b5-97e2-1898a69dc837</string>
+			</array>
+		</dict>
+		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
@@ -54,8 +60,8 @@
 	<array>
 		<string>fetch</string>
 	</array>
-	<key>HockeyAppKey</key>
-	<string>4ac49226d6ab41b597e21898a69dc837</string>
+	<key>AppCenterKey</key>
+	<string>4ac49226-d6ab-41b5-97e2-1898a69dc837</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
