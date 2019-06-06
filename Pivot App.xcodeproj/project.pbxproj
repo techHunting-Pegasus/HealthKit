@@ -480,7 +480,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_BUILD_NUMBER = 31;
-				BUNDLE_VERSION = 1.1.2;
+				BUNDLE_VERSION = 1.1.3;
 				CODE_SIGN_ENTITLEMENTS = Pivot.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T85Z44958S;
@@ -620,7 +620,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_BUILD_NUMBER = 31;
-				BUNDLE_VERSION = 1.1.2;
+				BUNDLE_VERSION = 1.1.3;
 				CODE_SIGN_ENTITLEMENTS = Pivot.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T85Z44958S;
@@ -640,7 +640,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_BUILD_NUMBER = 31;
-				BUNDLE_VERSION = 1.1.2;
+				BUNDLE_VERSION = 1.1.3;
 				CODE_SIGN_ENTITLEMENTS = Pivot.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T85Z44958S;
