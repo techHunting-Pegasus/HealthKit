@@ -53,6 +53,7 @@ class CategoryData: HealthKitData {
         case .asleep: sleepValue = "asleep"
         case .inBed: sleepValue = "inBed"
         case .awake: sleepValue = "awake"
+        @unknown default: sleepValue = "unknown"
         }
 
         try container.encode(sleepValue, forKey: .value)

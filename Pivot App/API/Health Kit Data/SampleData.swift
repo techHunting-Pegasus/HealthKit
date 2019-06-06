@@ -34,6 +34,9 @@ class SampleData: HealthKitData {
                 throw HealthKitRequest.HKRError.noQuantityTypeFound
             }
             quantity = averageQuantity
+        @unknown default:
+            assertionFailure("Unknown aggregation style")
+            quantity = HKQuantity(unit: .count(), doubleValue: 0.0)
         }
         self.quantity = quantity.doubleValue(for: unit)
 

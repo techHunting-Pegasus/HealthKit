@@ -232,6 +232,9 @@ class HealthKitService: NSObject, ApplicationService {
             options = .cumulativeSum
         case .discrete:
             options = .discreteAverage
+        @unknown default:
+            assertionFailure("Cannot find additional aggregation style")
+            options = .cumulativeSum
         }
 
         let statQuery = HKStatisticsCollectionQuery(quantityType: type, quantitySamplePredicate: predicate, options: options, anchorDate: newDate, intervalComponents: interval)
