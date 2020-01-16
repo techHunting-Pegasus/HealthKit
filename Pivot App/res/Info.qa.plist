@@ -57,7 +57,7 @@
 	<key>PivotLoginURL</key>
 	<string>https://pivotqa.gbehavior.com</string>
 	<key>PivotAPIURL</key>
-	<string>http://pivotdev2.gbehavior.com/pvDataMation/</string>
+	<string>https://pivotdev2.gbehavior.com/pvDataMation/</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>

@@ -480,7 +480,7 @@
 		943677371F96CA8400840058 /* QA */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_BUILD_NUMBER = 33;
+				BUNDLE_BUILD_NUMBER = 35;
 				BUNDLE_VERSION = 1.1.3;
 				CODE_SIGN_ENTITLEMENTS = Pivot.entitlements;
 				CODE_SIGN_STYLE = Automatic;
@@ -624,7 +624,7 @@
 		94D563821F85B99A00C2C72D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_BUILD_NUMBER = 33;
+				BUNDLE_BUILD_NUMBER = 35;
 				BUNDLE_VERSION = 1.1.3;
 				CODE_SIGN_ENTITLEMENTS = Pivot.entitlements;
 				CODE_SIGN_STYLE = Automatic;
@@ -647,7 +647,7 @@
 		94D563831F85B99A00C2C72D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_BUILD_NUMBER = 33;
+				BUNDLE_BUILD_NUMBER = 35;
 				BUNDLE_VERSION = 1.1.3;
 				CODE_SIGN_ENTITLEMENTS = Pivot.entitlements;
 				CODE_SIGN_STYLE = Automatic;
