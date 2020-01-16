@@ -11,6 +11,7 @@ import HealthKit
 enum PivotAPI {
     case refreshDevice(oldToken: String, refreshToken: String)
     case uploadHealthData(token: String, data: [Any])
+    case trackAppVisit(authToken: String)
 
     static let apiVersion = "v1"
 
@@ -30,7 +31,12 @@ enum PivotAPI {
                 let url = URL(string: dataPath.replacingOccurrences(of: "{accessToken}", with: token)) {
                 result = url
             } else {
-                result = apiUrl.appendingPathComponent("\(PivotAPI.apiVersion)/gimmedata/\(token)")
+                result = apiUrl.appendingPathComponent("\(PivotAPI.apiVersion)/gimmeData/\(token)")
+            }
+        case .trackAppVisit:
+            if let loginURL = UserDefaults.standard.string(forKey: Constants.loginUrl),
+                let url = URL(string: loginURL)?.appendingPathComponent("/v1/auth/metrics/appVisit") {
+                result = url
             }
         }
 
@@ -46,6 +52,8 @@ enum PivotAPI {
             return "GET"
         case .uploadHealthData:
             return "PUT"
+        case .trackAppVisit:
+            return "POST"
         }
     }
 
@@ -57,6 +65,9 @@ enum PivotAPI {
 
             case .uploadHealthData(_, let data):
                 return try JSONEncoder().encode(HealthKitRequest(from: data))
+                
+            case .trackAppVisit:
+                return nil
             }
         } catch {
             throw APIError.badRequestBody(error: error)
@@ -69,6 +80,8 @@ enum PivotAPI {
         case .uploadHealthData:
             request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")  // the request is JSON
             request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Accept")        // the expected response is also JSON
+        case .trackAppVisit(let token):
+            request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         }
     }
 

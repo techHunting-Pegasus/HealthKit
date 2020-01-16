@@ -54,7 +54,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if let websiteUrl = UserDefaults.standard.string(forKey: "login_url") {
+        if let websiteUrl = UserDefaults.standard.string(forKey: Constants.loginUrl) {
             guard let requestUrl = URL(string: websiteUrl) else { return }
             loadURL(url: requestUrl)
         }

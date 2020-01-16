@@ -13,10 +13,10 @@ class SettingsService: NSObject,  ApplicationService {
         // check that all settings are initiated
 
         // 
-        let currentLoginURL = UserDefaults.standard.string(forKey: "login_url")
+        let currentLoginURL = UserDefaults.standard.string(forKey: Constants.loginUrl)
         if currentLoginURL == nil  || currentLoginURL == "" {
             if let loginURL = Bundle.main.object(forInfoDictionaryKey: "PivotLoginURL") as? String {
-                UserDefaults.standard.set(loginURL, forKey: "login_url")
+                UserDefaults.standard.set(loginURL, forKey: Constants.loginUrl)
             }
         }
         return true
