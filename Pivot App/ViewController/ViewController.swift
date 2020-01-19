@@ -160,7 +160,11 @@ extension ViewController: ScriptMessageDelegate {
                         self?.fulfillPromise(promiseId: promiseId)
                         return
                     }
+                    #if targetEnvironment(simulator)
+                    self?.fulfillPromise(promiseId: promiseId)
+                    #else
                     UIApplication.shared.registerForRemoteNotifications()
+                    #endif
                 }
             }
         } else {
