@@ -12,6 +12,16 @@ import UserNotifications
 import SafariServices
 
 extension ViewController: WKUIDelegate, WKNavigationDelegate {
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        guard hasCompletedFirstNavigation == false else { return }
+        
+        if #available(iOS 11.0, *) {
+            trackAppVisit()
+        }
+        hasCompletedFirstNavigation = true
+    }
+    
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
 
         debugPrint("Deciding Policy for WebView URL: \(navigationAction.request.url?.absoluteString ?? "No URL Available")")

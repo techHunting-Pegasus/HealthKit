@@ -22,6 +22,7 @@ class ViewController: UIViewController {
     var docController: UIDocumentInteractionController?
 
     private var currentPromiseId: Int?
+    var hasCompletedFirstNavigation = false
 
     override func loadView() {
         self.view = UIView()
@@ -72,14 +73,9 @@ class ViewController: UIViewController {
                                                object: nil)
         
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(applicationDidBecomeActive),
-                                               name: UIApplication.didBecomeActiveNotification,
+                                               selector: #selector(applicationWillEnterForeground),
+                                               name: UIApplication.willEnterForegroundNotification,
                                                object: nil)
-        
-        if #available(iOS 11.0, *) {
-            trackAppVisit()
-        }
-
     }
 
     func loadURL(url: URL) {
@@ -285,7 +281,7 @@ extension ViewController {
             URLSession.shared.dataTask(with: request).resume()
         }
     }
-    @objc func applicationDidBecomeActive(noti: NSNotification) {
+    @objc func applicationWillEnterForeground(noti: NSNotification) {
         if #available(iOS 11.0, *) {
             trackAppVisit()
         }
