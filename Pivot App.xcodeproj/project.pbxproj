@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		44848B4523D4BFE600A6A522 /* PivotJWT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44848B4423D4BFE600A6A522 /* PivotJWT.swift */; };
 		9408C9CB220623F7005901C8 /* HealthKitData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9408C9CA220623F7005901C8 /* HealthKitData.swift */; };
 		9408C9CD22062423005901C8 /* CategoryData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9408C9CC22062423005901C8 /* CategoryData.swift */; };
 		9408C9CF22062443005901C8 /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9408C9CE22062443005901C8 /* SampleData.swift */; };
@@ -49,6 +50,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		44848B4423D4BFE600A6A522 /* PivotJWT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PivotJWT.swift; sourceTree = "<group>"; };
 		9408C9CA220623F7005901C8 /* HealthKitData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitData.swift; sourceTree = "<group>"; };
 		9408C9CC22062423005901C8 /* CategoryData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryData.swift; sourceTree = "<group>"; };
 		9408C9CE22062443005901C8 /* SampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
@@ -112,6 +114,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		44848B4323D4BFCD00A6A522 /* JWT */ = {
+			isa = PBXGroup;
+			children = (
+				44848B4423D4BFE600A6A522 /* PivotJWT.swift */,
+			);
+			path = JWT;
+			sourceTree = "<group>";
+		};
 		9408C9C9220623E1005901C8 /* Health Kit Data */ = {
 			isa = PBXGroup;
 			children = (
@@ -199,6 +209,7 @@
 		94D563711F85B99900C2C72D /* Pivot App */ = {
 			isa = PBXGroup;
 			children = (
+				44848B4323D4BFCD00A6A522 /* JWT */,
 				94303D6521E6CEA800041ABF /* ScriptMessages */,
 				941CB0E921947820002CD157 /* HealthKit */,
 				94F68C65217D34CD005781B5 /* ViewController */,
@@ -393,6 +404,7 @@
 				946B9B8C1FE2424800296DC7 /* PivotAPIError.swift in Sources */,
 				9408C9D12206248B005901C8 /* WorkoutData.swift in Sources */,
 				94FDC6992011AA460050CA6B /* Constants.swift in Sources */,
+				44848B4523D4BFE600A6A522 /* PivotJWT.swift in Sources */,
 				9495DBB620260EFD00951BF9 /* HealthKitService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -70,6 +70,16 @@ class ViewController: UIViewController {
                                                selector: #selector(onCallbackNotification),
                                                name: CallbackNotification,
                                                object: nil)
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(applicationDidBecomeActive),
+                                               name: UIApplication.didBecomeActiveNotification,
+                                               object: nil)
+        
+        if #available(iOS 11.0, *) {
+            trackAppVisit()
+        }
+
     }
 
     func loadURL(url: URL) {
@@ -232,4 +242,62 @@ extension ViewController: SFSafariViewControllerDelegate {
         }
     }
 
+}
+
+// - Tracking
+extension ViewController {
+    
+    
+    @available(iOS 11.0, *)
+    func fetchValidAuthJWT(completion: @escaping (PivotJWT?) -> Void) {
+        DispatchQueue.main.async {
+            WKWebsiteDataStore.default().httpCookieStore.getAllCookies {
+                var result: PivotJWT?
+                if let authCookie = $0.first(where: { $0.name == "pivot_jwt" }), authCookie.isExpired == false {
+                    // Check if cookie containing JWT is expired
+                    Logger.log(.viewController, verbose: "Found valid JWT Cookie")
+                    if let pivotJWT = try? PivotJWT(jwt: authCookie.value), pivotJWT.isExpired == false {
+                        Logger.log(.viewController, verbose: "Found valid PivotJWT")
+                        // Valid PivotJWT found, return result
+                        result = pivotJWT
+                    } else {
+                        Logger.log(.viewController, verbose: "Failed to find valid PivotJWT")
+                    }
+                } else {
+                    Logger.log(.viewController, verbose: "Failed to find valid JWT Cookie")
+                }
+                completion(result)
+            }
+        }
+    }
+    @available(iOS 11.0, *)
+    func trackAppVisit() {
+        fetchValidAuthJWT { _jwt in
+            guard
+                let jwt = _jwt,
+                let request = try? PivotAPI.trackAppVisit(authToken: jwt.jwt).request()
+            else { return }
+            
+            URLSession.shared.dataTask(with: request).resume()
+        }
+    }
+    @objc func applicationDidBecomeActive(noti: NSNotification) {
+        if #available(iOS 11.0, *) {
+            trackAppVisit()
+        }
+    }
+}
+
+extension HTTPCookie {
+    /**
+    	Returnes the Expired State of the cookie
+     - True is expired
+     - False is not expired
+     - nil if no expiration date is found.
+     */
+    var isExpired: Bool? {
+        guard let expiresDate = self.expiresDate else { return nil }
+        let now = Date()
+        return now.compare(expiresDate) == .orderedDescending
+    }
 }
