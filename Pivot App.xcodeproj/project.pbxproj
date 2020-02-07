@@ -493,7 +493,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_BUILD_NUMBER = 36;
-				BUNDLE_VERSION = 1.1.3;
+				BUNDLE_VERSION = 1.1.4;
 				CODE_SIGN_ENTITLEMENTS = Pivot.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T85Z44958S;
@@ -505,6 +505,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1.4;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = NO_ANCHOR;
 				SWIFT_VERSION = 5.0;
@@ -637,7 +638,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_BUILD_NUMBER = 36;
-				BUNDLE_VERSION = 1.1.3;
+				BUNDLE_VERSION = 1.1.4;
 				CODE_SIGN_ENTITLEMENTS = Pivot.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T85Z44958S;
@@ -649,6 +650,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1.4;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG NO_ANCHOR";
 				SWIFT_VERSION = 5.0;
@@ -660,7 +662,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_BUILD_NUMBER = 36;
-				BUNDLE_VERSION = 1.1.3;
+				BUNDLE_VERSION = 1.1.4;
 				CODE_SIGN_ENTITLEMENTS = Pivot.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T85Z44958S;
@@ -672,6 +674,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1.4;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

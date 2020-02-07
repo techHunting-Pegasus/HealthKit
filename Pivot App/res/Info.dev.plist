@@ -15,7 +15,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>${BUNDLE_VERSION}</string>
+	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -38,14 +38,14 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>Please Allow $(EXECUTABLE_NAME) to access your Camera to take photos for your Profile Picture and health tracking.</string>
 	<key>NSHealthShareUsageDescription</key>
 	<string>Please Allow $(EXECUTABLE_NAME) to access your Health Kit data.</string>
 	<key>NSHealthUpdateUsageDescription</key>
 	<string>Please allow $(EXECUTABLE_NAME) to get Updates from Apple HealthKit for health reporting.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Please allow $(EXECUTABLE_NAME) access to photos for crash reporting.</string>
-	<key>NSCameraUsageDescription</key>
-	<string>Please Allow $(EXECUTABLE_NAME) to access your Camera to take photos for your Profile Picture and health tracking.</string>
 	<key>PivotAPIURL</key>
 	<string>https://dm.gopivotsolutions.com/pvDataMation/</string>
 	<key>PivotLoginURL</key>
