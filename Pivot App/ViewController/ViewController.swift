@@ -119,11 +119,11 @@ class ViewController: UIViewController {
         }
     }
 
-    private func fulfillPromise(promiseId: Int, with token: String? = nil) {
-        Logger.log(.viewController, info: "Fulfilling Promise with ID: \(promiseId) and Token: \(token ?? "No Token")")
+    private func fulfillPromise(promiseId: Int, with value: String? = nil) {
+        Logger.log(.viewController, info: "Fulfilling Promise with ID: \(promiseId) and value: \(value ?? "No Value")")
         var javaScript = "window.resolvePromise(" + String(promiseId)
-        if let token = token {
-            javaScript += ", \"\(token)\")"
+        if let value = value {
+            javaScript += ", \"\(value)\")"
         } else {
             javaScript += ")"
         }
@@ -182,6 +182,22 @@ extension ViewController: ScriptMessageDelegate {
         HealthKitService.instance.storeTokens(tokens)
         HealthKitService.instance.fetchAllStatisticsData()
         self.fulfillPromise(promiseId: promiseId)
+    }
+
+    func onRequestDeviceInfo(promiseId: Int) {
+
+        var result: String? = nil
+        let deviceInfo = DeviceInfo()
+
+        let endoder = JSONEncoder()
+
+        do {
+            let data = try endoder.encode(deviceInfo)
+            result = String(data: data, encoding: .utf8)
+        } catch { }
+
+        fulfillPromise(promiseId: promiseId, with: result)
+
     }
 
     func onLoadSecureUrl(url: URL) {

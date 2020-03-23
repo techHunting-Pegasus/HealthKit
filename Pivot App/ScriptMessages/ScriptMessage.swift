@@ -14,6 +14,7 @@ protocol ScriptMessageDelegate: class {
     func onUserAuthenticationReceived(value: String)
     func onEnableAppleHealthKit(promiseId: Int)
     func onReceiveAppleHealthKitTokens(promiseId: Int, tokens: HealthKitTokens)
+    func onRequestDeviceInfo(promiseId: Int)
 
     func onLoadSecureUrl(url: URL)
     func onLoadGoogleFitUrl(url: URL)
@@ -49,6 +50,9 @@ class ScriptMessageHandler: NSObject, WKScriptMessageHandler {
                     let tokens = HealthKitTokens(with: promiseValue) {
                     delegate?.onReceiveAppleHealthKitTokens(promiseId: promiseId, tokens: tokens)
                 }
+            case "deviceInfo":
+                delegate?.onRequestDeviceInfo(promiseId: promiseId)
+
             default:
                 Logger.log(.scriptMessageHandler, warning: "Unhandled Body Value \(bodyValue)")
             }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		441CF4D124296D460032179F /* DeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441CF4D024296D460032179F /* DeviceInfo.swift */; };
 		44848B4523D4BFE600A6A522 /* PivotJWT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44848B4423D4BFE600A6A522 /* PivotJWT.swift */; };
 		9408C9CB220623F7005901C8 /* HealthKitData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9408C9CA220623F7005901C8 /* HealthKitData.swift */; };
 		9408C9CD22062423005901C8 /* CategoryData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9408C9CC22062423005901C8 /* CategoryData.swift */; };
@@ -50,6 +51,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		441CF4D024296D460032179F /* DeviceInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfo.swift; sourceTree = "<group>"; };
 		44848B4423D4BFE600A6A522 /* PivotJWT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PivotJWT.swift; sourceTree = "<group>"; };
 		9408C9CA220623F7005901C8 /* HealthKitData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitData.swift; sourceTree = "<group>"; };
 		9408C9CC22062423005901C8 /* CategoryData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryData.swift; sourceTree = "<group>"; };
@@ -114,12 +116,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		44848B4323D4BFCD00A6A522 /* JWT */ = {
+		44848B4323D4BFCD00A6A522 /* Util */ = {
 			isa = PBXGroup;
 			children = (
 				44848B4423D4BFE600A6A522 /* PivotJWT.swift */,
+				441CF4D024296D460032179F /* DeviceInfo.swift */,
 			);
-			path = JWT;
+			path = Util;
 			sourceTree = "<group>";
 		};
 		9408C9C9220623E1005901C8 /* Health Kit Data */ = {
@@ -209,7 +212,7 @@
 		94D563711F85B99900C2C72D /* Pivot App */ = {
 			isa = PBXGroup;
 			children = (
-				44848B4323D4BFCD00A6A522 /* JWT */,
+				44848B4323D4BFCD00A6A522 /* Util */,
 				94303D6521E6CEA800041ABF /* ScriptMessages */,
 				941CB0E921947820002CD157 /* HealthKit */,
 				94F68C65217D34CD005781B5 /* ViewController */,
@@ -382,6 +385,7 @@
 				9432D14E1FD1E3FE00A2B98A /* ScriptMessage.swift in Sources */,
 				943677551F96D58F00840058 /* SettingsService.swift in Sources */,
 				94303D6721E6CEC700041ABF /* HealthKitTokens.swift in Sources */,
+				441CF4D124296D460032179F /* DeviceInfo.swift in Sources */,
 				9408C9CF22062443005901C8 /* SampleData.swift in Sources */,
 				94A06EC2225C55CC00F691B0 /* Analytics.swift in Sources */,
 				94F9FF7A1FD8D3820032B193 /* NotificationService.swift in Sources */,
