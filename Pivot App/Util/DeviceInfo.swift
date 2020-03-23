@@ -16,7 +16,7 @@ struct DeviceInfo: Encodable {
 
     init() {
         self.appVersion = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String
-        self.deviceModel = UIDevice.current.model
+        self.deviceModel = UIDevice.current.modelName
         self.deviceOSVersion = UIDevice.current.systemVersion
     }
 }

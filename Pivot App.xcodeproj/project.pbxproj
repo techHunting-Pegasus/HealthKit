@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		441CF4D124296D460032179F /* DeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441CF4D024296D460032179F /* DeviceInfo.swift */; };
+		441CF4D3242975CC0032179F /* UIDevice+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441CF4D2242975CC0032179F /* UIDevice+Extensions.swift */; };
 		44848B4523D4BFE600A6A522 /* PivotJWT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44848B4423D4BFE600A6A522 /* PivotJWT.swift */; };
 		9408C9CB220623F7005901C8 /* HealthKitData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9408C9CA220623F7005901C8 /* HealthKitData.swift */; };
 		9408C9CD22062423005901C8 /* CategoryData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9408C9CC22062423005901C8 /* CategoryData.swift */; };
@@ -52,6 +53,7 @@
 
 /* Begin PBXFileReference section */
 		441CF4D024296D460032179F /* DeviceInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfo.swift; sourceTree = "<group>"; };
+		441CF4D2242975CC0032179F /* UIDevice+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extensions.swift"; sourceTree = "<group>"; };
 		44848B4423D4BFE600A6A522 /* PivotJWT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PivotJWT.swift; sourceTree = "<group>"; };
 		9408C9CA220623F7005901C8 /* HealthKitData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitData.swift; sourceTree = "<group>"; };
 		9408C9CC22062423005901C8 /* CategoryData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryData.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 			children = (
 				44848B4423D4BFE600A6A522 /* PivotJWT.swift */,
 				441CF4D024296D460032179F /* DeviceInfo.swift */,
+				441CF4D2242975CC0032179F /* UIDevice+Extensions.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -395,6 +398,7 @@
 				941CB0EB2194815F002CD157 /* Logger.swift in Sources */,
 				94303D7221F0201200041ABF /* HealthKitItem.swift in Sources */,
 				9408C9CB220623F7005901C8 /* HealthKitData.swift in Sources */,
+				441CF4D3242975CC0032179F /* UIDevice+Extensions.swift in Sources */,
 				941CB0EF219A6F62002CD157 /* HealthKitFetchAllContainer.swift in Sources */,
 				94303D6F21EC0D2300041ABF /* HealthKitRefreshTokenResponse.swift in Sources */,
 				94D563751F85B99A00C2C72D /* ViewController.swift in Sources */,
@@ -500,6 +504,7 @@
 				BUNDLE_VERSION = 1.1.4;
 				CODE_SIGN_ENTITLEMENTS = Pivot.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 37;
 				DEVELOPMENT_TEAM = T85Z44958S;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -509,7 +514,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.4;
+				MARKETING_VERSION = 1.1.5;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = NO_ANCHOR;
 				SWIFT_VERSION = 5.0;
@@ -645,6 +650,7 @@
 				BUNDLE_VERSION = 1.1.4;
 				CODE_SIGN_ENTITLEMENTS = Pivot.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 37;
 				DEVELOPMENT_TEAM = T85Z44958S;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -654,7 +660,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.4;
+				MARKETING_VERSION = 1.1.5;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG NO_ANCHOR";
 				SWIFT_VERSION = 5.0;
@@ -669,6 +675,7 @@
 				BUNDLE_VERSION = 1.1.4;
 				CODE_SIGN_ENTITLEMENTS = Pivot.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 37;
 				DEVELOPMENT_TEAM = T85Z44958S;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -678,7 +685,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.4;
+				MARKETING_VERSION = 1.1.5;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
