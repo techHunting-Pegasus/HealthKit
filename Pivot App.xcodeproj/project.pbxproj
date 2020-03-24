@@ -54,6 +54,7 @@
 /* Begin PBXFileReference section */
 		441CF4D024296D460032179F /* DeviceInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfo.swift; sourceTree = "<group>"; };
 		441CF4D2242975CC0032179F /* UIDevice+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extensions.swift"; sourceTree = "<group>"; };
+		441CF4D4242A458F0032179F /* Pivot-QA.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = "Pivot-QA.entitlements"; sourceTree = "<group>"; };
 		44848B4423D4BFE600A6A522 /* PivotJWT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PivotJWT.swift; sourceTree = "<group>"; };
 		9408C9CA220623F7005901C8 /* HealthKitData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitData.swift; sourceTree = "<group>"; };
 		9408C9CC22062423005901C8 /* CategoryData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryData.swift; sourceTree = "<group>"; };
@@ -196,6 +197,7 @@
 		94D563661F85B99900C2C72D = {
 			isa = PBXGroup;
 			children = (
+				441CF4D4242A458F0032179F /* Pivot-QA.entitlements */,
 				94F9FF6F1FD8B29A0032B193 /* Pivot.entitlements */,
 				94DCE13D1F942B10007B76CD /* lib */,
 				94D563711F85B99900C2C72D /* Pivot App */,
@@ -502,7 +504,7 @@
 			buildSettings = {
 				BUNDLE_BUILD_NUMBER = 36;
 				BUNDLE_VERSION = 1.1.4;
-				CODE_SIGN_ENTITLEMENTS = Pivot.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "Pivot-QA.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 37;
 				DEVELOPMENT_TEAM = T85Z44958S;
