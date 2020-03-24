@@ -90,6 +90,8 @@ class HealthKitWorkouts {
         case .mixedCardio:          return "mixedCardio"
         case .handCycling:          return "handCycling"
         case .other:                return "other"
+        case .discSports:           return "discSports"
+        case .fitnessGaming:        return "fitnessGaming"
         @unknown default:
             assertionFailure("Cannot find new workout activity type")
             return "other"
