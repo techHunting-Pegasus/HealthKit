@@ -502,11 +502,9 @@
 		943677371F96CA8400840058 /* QA */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_BUILD_NUMBER = 36;
-				BUNDLE_VERSION = 1.1.4;
 				CODE_SIGN_ENTITLEMENTS = "Pivot-QA.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 37;
+				CURRENT_PROJECT_VERSION = 38;
 				DEVELOPMENT_TEAM = T85Z44958S;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -648,11 +646,9 @@
 		94D563821F85B99A00C2C72D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_BUILD_NUMBER = 36;
-				BUNDLE_VERSION = 1.1.4;
 				CODE_SIGN_ENTITLEMENTS = Pivot.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 37;
+				CURRENT_PROJECT_VERSION = 38;
 				DEVELOPMENT_TEAM = T85Z44958S;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -673,11 +669,9 @@
 		94D563831F85B99A00C2C72D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_BUILD_NUMBER = 36;
-				BUNDLE_VERSION = 1.1.4;
 				CODE_SIGN_ENTITLEMENTS = Pivot.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 37;
+				CURRENT_PROJECT_VERSION = 38;
 				DEVELOPMENT_TEAM = T85Z44958S;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
