@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		440E63AF2434085500F78AA4 /* IntermediaryAppDelegate in Frameworks */ = {isa = PBXBuildFile; productRef = 440E63AE2434085500F78AA4 /* IntermediaryAppDelegate */; };
 		441CF4D124296D460032179F /* DeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441CF4D024296D460032179F /* DeviceInfo.swift */; };
 		441CF4D3242975CC0032179F /* UIDevice+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441CF4D2242975CC0032179F /* UIDevice+Extensions.swift */; };
 		44848B4523D4BFE600A6A522 /* PivotJWT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44848B4423D4BFE600A6A522 /* PivotJWT.swift */; };
@@ -108,6 +109,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				440E63AF2434085500F78AA4 /* IntermediaryAppDelegate in Frameworks */,
 				94A06EBE225C513D00F691B0 /* AppCenterDistribute.framework in Frameworks */,
 				94A06EBF225C513D00F691B0 /* AppCenter.framework in Frameworks */,
 				94A06EBD225C513D00F691B0 /* AppCenterAnalytics.framework in Frameworks */,
@@ -295,6 +297,9 @@
 			dependencies = (
 			);
 			name = GoPivot;
+			packageProductDependencies = (
+				440E63AE2434085500F78AA4 /* IntermediaryAppDelegate */,
+			);
 			productName = "Piviot App";
 			productReference = 94D5636F1F85B99900C2C72D /* GoPivot.app */;
 			productType = "com.apple.product-type.application";
@@ -339,6 +344,9 @@
 				Base,
 			);
 			mainGroup = 94D563661F85B99900C2C72D;
+			packageReferences = (
+				440E63AD2434085500F78AA4 /* XCRemoteSwiftPackageReference "IntermediaryAppDelegate" */,
+			);
 			productRefGroup = 94D563701F85B99900C2C72D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -504,7 +512,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Pivot-QA.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 38;
+				CURRENT_PROJECT_VERSION = 39;
 				DEVELOPMENT_TEAM = T85Z44958S;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -648,7 +656,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Pivot.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 38;
+				CURRENT_PROJECT_VERSION = 39;
 				DEVELOPMENT_TEAM = T85Z44958S;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -671,7 +679,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Pivot.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 38;
+				CURRENT_PROJECT_VERSION = 39;
 				DEVELOPMENT_TEAM = T85Z44958S;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -712,6 +720,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		440E63AD2434085500F78AA4 /* XCRemoteSwiftPackageReference "IntermediaryAppDelegate" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:steg132/IntermediaryAppDelegate.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		440E63AE2434085500F78AA4 /* IntermediaryAppDelegate */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 440E63AD2434085500F78AA4 /* XCRemoteSwiftPackageReference "IntermediaryAppDelegate" */;
+			productName = IntermediaryAppDelegate;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 94D563671F85B99900C2C72D /* Project object */;
 }

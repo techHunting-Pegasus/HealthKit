@@ -231,6 +231,16 @@ extension ViewController: ScriptMessageDelegate {
             components.scheme = "https"
         }
 
+        if let websiteUrl = UserDefaults.standard.string(forKey: Constants.loginUrl),
+            let websiteComponents = URLComponents(string: websiteUrl) {
+
+            components.host = websiteComponents.host
+            components.port = websiteComponents.port
+            components.user = websiteComponents.user
+            components.password = websiteComponents.password
+        }
+
+
         guard let url = components.url else {
             print("Failed to construct URL from Components")
             return

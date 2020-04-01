@@ -28,4 +28,19 @@ class NotificationService: NSObject, ApplicationService {
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
     }
 
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        defer {
+            completionHandler(.noData)
+        }
+
+        guard application.applicationState != .active else { return }
+
+        guard let data = userInfo["data"] as? [AnyHashable: Any] else { return }
+        guard let link = data["link"] as? String else { return }
+        guard let url = URL(string: link) else { return }
+
+        NotificationCenter.default.post(name: CallbackNotification,
+                                        object: nil,
+                                        userInfo: [CallbackNotificationURLKey: url])
+    }
 }
