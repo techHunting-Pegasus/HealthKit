@@ -11,6 +11,7 @@
 		441CF4D124296D460032179F /* DeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441CF4D024296D460032179F /* DeviceInfo.swift */; };
 		441CF4D3242975CC0032179F /* UIDevice+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441CF4D2242975CC0032179F /* UIDevice+Extensions.swift */; };
 		44848B4523D4BFE600A6A522 /* PivotJWT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44848B4423D4BFE600A6A522 /* PivotJWT.swift */; };
+		44CFE098243E8E5A00424D62 /* PromiseResponses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CFE097243E8E5A00424D62 /* PromiseResponses.swift */; };
 		9408C9CB220623F7005901C8 /* HealthKitData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9408C9CA220623F7005901C8 /* HealthKitData.swift */; };
 		9408C9CD22062423005901C8 /* CategoryData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9408C9CC22062423005901C8 /* CategoryData.swift */; };
 		9408C9CF22062443005901C8 /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9408C9CE22062443005901C8 /* SampleData.swift */; };
@@ -57,6 +58,7 @@
 		441CF4D2242975CC0032179F /* UIDevice+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extensions.swift"; sourceTree = "<group>"; };
 		441CF4D4242A458F0032179F /* Pivot-QA.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = "Pivot-QA.entitlements"; sourceTree = "<group>"; };
 		44848B4423D4BFE600A6A522 /* PivotJWT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PivotJWT.swift; sourceTree = "<group>"; };
+		44CFE097243E8E5A00424D62 /* PromiseResponses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromiseResponses.swift; sourceTree = "<group>"; };
 		9408C9CA220623F7005901C8 /* HealthKitData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitData.swift; sourceTree = "<group>"; };
 		9408C9CC22062423005901C8 /* CategoryData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryData.swift; sourceTree = "<group>"; };
 		9408C9CE22062443005901C8 /* SampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 			children = (
 				9432D14D1FD1E3FE00A2B98A /* ScriptMessage.swift */,
 				94303D6621E6CEC700041ABF /* HealthKitTokens.swift */,
+				44CFE097243E8E5A00424D62 /* PromiseResponses.swift */,
 			);
 			path = ScriptMessages;
 			sourceTree = "<group>";
@@ -420,6 +423,7 @@
 				941CB0ED219778E8002CD157 /* HealthKitAnchor.swift in Sources */,
 				94D563731F85B99900C2C72D /* AppDelegate.swift in Sources */,
 				946B9B8C1FE2424800296DC7 /* PivotAPIError.swift in Sources */,
+				44CFE098243E8E5A00424D62 /* PromiseResponses.swift in Sources */,
 				9408C9D12206248B005901C8 /* WorkoutData.swift in Sources */,
 				94FDC6992011AA460050CA6B /* Constants.swift in Sources */,
 				44848B4523D4BFE600A6A522 /* PivotJWT.swift in Sources */,

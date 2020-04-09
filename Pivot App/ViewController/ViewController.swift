@@ -11,6 +11,7 @@ import WebKit
 import UserNotifications
 import SafariServices
 import HealthKit
+import LocalAuthentication
 
 let CallbackNotification = Notification.Name(rawValue: "CallbackNotification")
 let CallbackNotificationURLKey = "URL"
@@ -23,6 +24,8 @@ class ViewController: UIViewController {
 
     private var currentPromiseId: Int?
     var hasCompletedFirstNavigation = false
+
+    let laContext = LAContext()
 
     override func loadView() {
         self.view = UIView()
@@ -111,13 +114,30 @@ class ViewController: UIViewController {
         case Constants.tokenKey:
             DispatchQueue.main.async { [weak self] in
                 if let token = change?[.newKey] as? String,
-                    let promiseId = self?.currentPromiseId {
-                    self?.fulfillPromise(promiseId: promiseId, with: token)
+                    let promiseId = self?.currentPromiseId,
+                    let laContext = self?.laContext{
+                    let response = EnablePushResponse(deviceId: token, context: laContext)
+                    self?.fulfillPromise(promiseId: promiseId, with: response)
                 }
             }
         default: break
         }
     }
+
+    private func fulfillPromise(promiseId: Int, with value: EnablePushResponse) {
+        var javaScript = "window.resolvePromise(" + String(promiseId)
+
+        if let data = try? JSONEncoder().encode(value),
+            let stringValue = String(data: data, encoding: .utf8) {
+            Logger.log(.viewController, info: "Fulfilling Promise with ID: \(promiseId) and response: \(stringValue)")
+            javaScript += ", \(stringValue))"
+        } else {
+            Logger.log(.viewController, info: "Fulfilling Promise with ID: \(promiseId) Failed to encode Push Response")
+            javaScript += ")"
+        }
+        webView?.evaluateJavaScript(javaScript, completionHandler: nil)
+    }
+
 
     private func fulfillPromise(promiseId: Int, with value: String? = nil) {
         Logger.log(.viewController, info: "Fulfilling Promise with ID: \(promiseId) and value: \(value ?? "No Value")")
@@ -138,9 +158,11 @@ extension ViewController: ScriptMessageDelegate {
     }
 
     func onNotificationRegistration(promiseId: Int, value: Bool) {
+        var response = EnablePushResponse(deviceId: nil, context: laContext)
         if let deviceToken = UserDefaults.standard.string(forKey: Constants.tokenKey) {
             // we are registered for notifications.
-            fulfillPromise(promiseId: promiseId, with: deviceToken)
+            response.deviceId = deviceToken
+            fulfillPromise(promiseId: promiseId, with: response)
         }
         guard value == true else {
             fulfillPromise(promiseId: promiseId)
@@ -153,11 +175,11 @@ extension ViewController: ScriptMessageDelegate {
                 // Enable or disable features based on authorization.
                 DispatchQueue.main.async {
                     guard granted == true else {
-                        self?.fulfillPromise(promiseId: promiseId)
+                        self?.fulfillPromise(promiseId: promiseId, with: response)
                         return
                     }
                     #if targetEnvironment(simulator)
-                    self?.fulfillPromise(promiseId: promiseId)
+                    self?.fulfillPromise(promiseId: promiseId, with: response)
                     #else
                     UIApplication.shared.registerForRemoteNotifications()
                     #endif
