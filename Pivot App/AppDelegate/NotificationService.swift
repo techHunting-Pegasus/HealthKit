@@ -10,6 +10,13 @@ import UIKit
 
 class NotificationService: NSObject, ApplicationService {
 
+    func application(_ application: UIApplication,
+                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+
+        UNUserNotificationCenter.current().delegate = self
+        return true
+    }
+
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         let tokenParts = deviceToken.map { data -> String in
             return String(format: "%02.2hhx", data)
@@ -33,8 +40,6 @@ class NotificationService: NSObject, ApplicationService {
             completionHandler(.noData)
         }
 
-        guard application.applicationState != .active else { return }
-
         guard let data = userInfo["data"] as? [AnyHashable: Any] else { return }
         guard let link = data["link"] as? String else { return }
         guard let url = URL(string: link) else { return }
@@ -43,4 +48,13 @@ class NotificationService: NSObject, ApplicationService {
                                         object: nil,
                                         userInfo: [CallbackNotificationURLKey: url])
     }
+}
+
+extension NotificationService: UNUserNotificationCenterDelegate {
+
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert, .sound])
+    }
+
 }
