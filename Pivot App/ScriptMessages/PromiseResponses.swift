@@ -6,20 +6,36 @@
 //  Copyright © 2020 Schu Studios, LLC. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import LocalAuthentication
 
-struct EnablePushResponse: Encodable {
+struct PushResponse: Encodable {
     enum BiometricType: String, Encodable {
         case faceId
         case fingerprint
     }
+    let deviceType: String = "ios"
+    var deviceUniqueId: String?
+
+    var deviceModel: String
+    var deviceOS: String
+    var deviceAppVersion: String
+
     var deviceId: String?
-    var shouldPromptBiometrics: Bool
+    var devicePushEnabled: Bool
+
+    var deviceBiometricAvailable: Bool
     var biometricType: BiometricType?
 
     init(deviceId: String?, context: LAContext) {
         self.deviceId = deviceId
+        self.devicePushEnabled = deviceId != nil
+
+        self.deviceUniqueId = UniqueDeviceIdService.shared.id
+
+        self.deviceModel = PushResponse.getDeviceModel()
+        self.deviceOS = PushResponse.getDeviceOS()
+        self.deviceAppVersion = PushResponse.getDeviceAppVersion()
 
         var error: NSError?
         if #available(iOS 11.0, *), context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
@@ -27,18 +43,34 @@ struct EnablePushResponse: Encodable {
             switch context.biometryType {
             case .faceID:
                 biometricType = .faceId
-                shouldPromptBiometrics = true
+                deviceBiometricAvailable = true
             case .touchID:
                 biometricType = .fingerprint
-                shouldPromptBiometrics = true
+                deviceBiometricAvailable = true
             default:
                 biometricType = nil
-                shouldPromptBiometrics = false
+                deviceBiometricAvailable = false
             }
         } else {
             // Fallback on earlier versions
             biometricType = nil
-            shouldPromptBiometrics = false
+            deviceBiometricAvailable = false
         }
     }
+}
+
+extension PushResponse {
+
+    private static func getDeviceOS() -> String {
+        return UIDevice.current.systemVersion
+    }
+
+    private static func getDeviceModel() -> String {
+        return UIDevice.current.modelName
+    }
+
+    private static func getDeviceAppVersion() -> String {
+        return Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String
+    }
+
 }

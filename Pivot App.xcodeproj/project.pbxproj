@@ -10,6 +10,7 @@
 		440E63AF2434085500F78AA4 /* IntermediaryAppDelegate in Frameworks */ = {isa = PBXBuildFile; productRef = 440E63AE2434085500F78AA4 /* IntermediaryAppDelegate */; };
 		441CF4D124296D460032179F /* DeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441CF4D024296D460032179F /* DeviceInfo.swift */; };
 		441CF4D3242975CC0032179F /* UIDevice+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441CF4D2242975CC0032179F /* UIDevice+Extensions.swift */; };
+		44294C8B244675E6006D77FB /* UniqueDeviceIdService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44294C8A244675E6006D77FB /* UniqueDeviceIdService.swift */; };
 		44848B4523D4BFE600A6A522 /* PivotJWT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44848B4423D4BFE600A6A522 /* PivotJWT.swift */; };
 		44CFE098243E8E5A00424D62 /* PromiseResponses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CFE097243E8E5A00424D62 /* PromiseResponses.swift */; };
 		9408C9CB220623F7005901C8 /* HealthKitData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9408C9CA220623F7005901C8 /* HealthKitData.swift */; };
@@ -57,6 +58,7 @@
 		441CF4D024296D460032179F /* DeviceInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfo.swift; sourceTree = "<group>"; };
 		441CF4D2242975CC0032179F /* UIDevice+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extensions.swift"; sourceTree = "<group>"; };
 		441CF4D4242A458F0032179F /* Pivot-QA.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = "Pivot-QA.entitlements"; sourceTree = "<group>"; };
+		44294C8A244675E6006D77FB /* UniqueDeviceIdService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniqueDeviceIdService.swift; sourceTree = "<group>"; };
 		44848B4423D4BFE600A6A522 /* PivotJWT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PivotJWT.swift; sourceTree = "<group>"; };
 		44CFE097243E8E5A00424D62 /* PromiseResponses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromiseResponses.swift; sourceTree = "<group>"; };
 		9408C9CA220623F7005901C8 /* HealthKitData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitData.swift; sourceTree = "<group>"; };
@@ -261,6 +263,7 @@
 				94F9FF791FD8D3820032B193 /* NotificationService.swift */,
 				943B94FB201785EC00C3722A /* DeepLinkService.swift */,
 				9495DBB520260EFD00951BF9 /* HealthKitService.swift */,
+				44294C8A244675E6006D77FB /* UniqueDeviceIdService.swift */,
 			);
 			path = AppDelegate;
 			sourceTree = "<group>";
@@ -409,6 +412,7 @@
 				94F68C67217D34F2005781B5 /* ViewController+FileDownload.swift in Sources */,
 				949015A0219A79F500B80E99 /* HealthKitRequest.swift in Sources */,
 				941CB0EB2194815F002CD157 /* Logger.swift in Sources */,
+				44294C8B244675E6006D77FB /* UniqueDeviceIdService.swift in Sources */,
 				94303D7221F0201200041ABF /* HealthKitItem.swift in Sources */,
 				9408C9CB220623F7005901C8 /* HealthKitData.swift in Sources */,
 				441CF4D3242975CC0032179F /* UIDevice+Extensions.swift in Sources */,

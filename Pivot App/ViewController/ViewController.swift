@@ -116,7 +116,7 @@ class ViewController: UIViewController {
                 if let token = change?[.newKey] as? String,
                     let promiseId = self?.currentPromiseId,
                     let laContext = self?.laContext{
-                    let response = EnablePushResponse(deviceId: token, context: laContext)
+                    let response = PushResponse(deviceId: token, context: laContext)
                     self?.fulfillPromise(promiseId: promiseId, with: response)
                 }
             }
@@ -124,7 +124,7 @@ class ViewController: UIViewController {
         }
     }
 
-    private func fulfillPromise(promiseId: Int, with value: EnablePushResponse) {
+    private func fulfillPromise(promiseId: Int, with value: PushResponse) {
         var javaScript = "window.resolvePromise(" + String(promiseId)
 
         if let data = try? JSONEncoder().encode(value),
@@ -158,15 +158,15 @@ extension ViewController: ScriptMessageDelegate {
     }
 
     func onNotificationRegistration(promiseId: Int, value: Bool) {
-        var response = EnablePushResponse(deviceId: nil, context: laContext)
+        var response = PushResponse(deviceId: nil, context: laContext)
+        guard value == true else {
+            fulfillPromise(promiseId: promiseId, with: response)
+            return
+        }
         if let deviceToken = UserDefaults.standard.string(forKey: Constants.tokenKey) {
             // we are registered for notifications.
             response.deviceId = deviceToken
             fulfillPromise(promiseId: promiseId, with: response)
-        }
-        guard value == true else {
-            fulfillPromise(promiseId: promiseId)
-            return
         }
         currentPromiseId = promiseId
         if #available(iOS 10, *) {
