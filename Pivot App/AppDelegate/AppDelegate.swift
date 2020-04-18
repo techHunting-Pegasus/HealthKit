@@ -16,7 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AppCenterService(),
         NotificationService(),
         HealthKitService.instance,
-        DeepLinkService()
+        DeepLinkService(),
+        BiometricsService.shared
     ]
     var window: UIWindow?
 

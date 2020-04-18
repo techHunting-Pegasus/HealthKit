@@ -124,7 +124,7 @@ class ViewController: UIViewController {
         }
     }
 
-    private func fulfillPromise(promiseId: Int, with value: PushResponse) {
+    private func fulfillPromise<T: Encodable>(promiseId: Int, with value: T) {
         var javaScript = "window.resolvePromise(" + String(promiseId)
 
         if let data = try? JSONEncoder().encode(value),
@@ -275,6 +275,25 @@ extension ViewController: ScriptMessageDelegate {
         self.webView.load(request)
 
         Analytics.track(event: .openDeepLink(url))
+    }
+
+    func onEnableBiometrics(promiseId: Int) {
+
+        BiometricsService.shared.onEnableBiometrics {
+            [weak self] (result) in
+            DispatchQueue.main.async {
+                self?.fulfillPromise(promiseId: promiseId, with: BiometricsResponse(success: result))
+            }
+        }
+    }
+
+    func onDisableBiometrics(promiseId: Int) {
+        BiometricsService.shared.onDisableBiometrics {
+            [weak self] (result) in
+            DispatchQueue.main.async {
+                self?.fulfillPromise(promiseId: promiseId, with: BiometricsResponse(success: result))
+            }
+        }
     }
 }
 

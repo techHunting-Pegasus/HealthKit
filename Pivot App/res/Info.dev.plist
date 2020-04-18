@@ -46,6 +46,8 @@
 	<string>Please allow $(EXECUTABLE_NAME) to get Updates from Apple HealthKit for health reporting.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Please allow $(EXECUTABLE_NAME) access to photos for crash reporting.</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>Please allow $(EXECUTABLE_NAME)to use your FaceId for login.</string>
 	<key>PivotAPIURL</key>
 	<string>https://dm.gopivotsolutions.com/pvDataMation/</string>
 	<key>PivotLoginURL</key>

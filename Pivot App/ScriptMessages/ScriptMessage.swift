@@ -16,6 +16,9 @@ protocol ScriptMessageDelegate: class {
     func onReceiveAppleHealthKitTokens(promiseId: Int, tokens: HealthKitTokens)
     func onRequestDeviceInfo(promiseId: Int)
 
+    func onEnableBiometrics(promiseId: Int)
+    func onDisableBiometrics(promiseId: Int)
+
     func onLoadSecureUrl(url: URL)
     func onLoadGoogleFitUrl(url: URL)
 }
@@ -43,6 +46,10 @@ class ScriptMessageHandler: NSObject, WKScriptMessageHandler {
                 delegate?.onNotificationRegistration(promiseId: promiseId, value: true)
             case "disablePush":
                 delegate?.onNotificationRegistration(promiseId: promiseId, value: false)
+            case "enableBiometric":
+                delegate?.onEnableBiometrics(promiseId: promiseId)
+            case "disableBiometric":
+                delegate?.onDisableBiometrics(promiseId: promiseId)
             case "enableAHK":
                 delegate?.onEnableAppleHealthKit(promiseId: promiseId)
             case "receiveAHKtokens":

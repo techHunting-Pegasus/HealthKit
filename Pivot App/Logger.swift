@@ -13,6 +13,7 @@ class Logger {
         case healthStoreService
         case scriptMessageHandler
         case viewController
+        case biometricsService
     }
 
     enum Level: Int, Comparable {

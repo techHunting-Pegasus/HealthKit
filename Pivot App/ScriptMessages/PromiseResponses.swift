@@ -74,3 +74,8 @@ extension PushResponse {
     }
 
 }
+
+
+struct BiometricsResponse: Encodable {
+    let success: Bool
+}
