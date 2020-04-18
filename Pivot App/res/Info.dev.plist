@@ -47,7 +47,7 @@
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Please allow $(EXECUTABLE_NAME) access to photos for crash reporting.</string>
 	<key>NSFaceIDUsageDescription</key>
-	<string>Please allow $(EXECUTABLE_NAME)to use your FaceId for login.</string>
+	<string>Please allow $(EXECUTABLE_NAME) to use your FaceId for login.</string>
 	<key>PivotAPIURL</key>
 	<string>https://dm.gopivotsolutions.com/pvDataMation/</string>
 	<key>PivotLoginURL</key>
@@ -75,5 +75,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>BiometricLoginTimeout</key>
+	<integer>60</integer>
 </dict>
 </plist>

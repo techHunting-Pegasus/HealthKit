@@ -52,6 +52,8 @@
 	<string>Please allow $(EXECUTABLE_NAME) to get Updates from Apple HealthKit for health reporting.</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Please Allow $(EXECUTABLE_NAME) to access your Camera to take photos for your Profile Picture and health tracking.</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>Please allow $(EXECUTABLE_NAME) to use your FaceId for login.</string>
 	<key>PivotLoginURL</key>
 	<string>https://www1.gopivotsolutions.com</string>
 	<key>PivotAPIURL</key>
@@ -81,5 +83,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>BiometricLoginTimeout</key>
+	<integer>3600</integer>
 </dict>
 </plist>

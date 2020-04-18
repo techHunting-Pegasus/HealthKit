@@ -12,6 +12,8 @@ import LocalAuthentication
 class BiometricsService: NSObject, ApplicationService {
     private enum Constants {
         static let isBiometricsEnabledKey = "isBiometricsEnabled_v1"
+        static let lastAppDismissedKey = "lastAppDismissed_v1"
+        static let biometricLoginTimeoutKey = "BiometricLoginTimeout"
     }
 
     static let shared = BiometricsService()
@@ -28,12 +30,40 @@ class BiometricsService: NSObject, ApplicationService {
         }
     }
 
+    private var lastAppDismiss: Date? {
+        get {
+            return UserDefaults.standard.object(forKey: Constants.lastAppDismissedKey) as? Date
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: Constants.lastAppDismissedKey)
+        }
+    }
+
     private override init() {
         super.init()
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         return true
+    }
+
+    func applicationDidBecomeActive(_ application: UIApplication) {
+
+        if
+            let lastAppDismiss = lastAppDismiss,
+            let timeout = Bundle.main.object(forInfoDictionaryKey: Constants.biometricLoginTimeoutKey) as? NSNumber {
+            Logger.log(.biometricsService, info: "Last App Dismissed: \(lastAppDismiss) and timeout: \(timeout)")
+
+            if lastAppDismiss.addingTimeInterval(timeout.doubleValue).compare(Date()) == .orderedAscending {
+                // We need to show biometrics
+                Logger.log(.biometricsService, info: "NEED TO SHOW BIOMETRICS!!!")
+            }
+
+        }
+    }
+
+    func applicationWillResignActive(_ application: UIApplication) {
+        lastAppDismiss = Date()
     }
 
     func onEnableBiometrics(onComplete: @escaping (Bool) -> Void) {
