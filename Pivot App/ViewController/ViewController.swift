@@ -16,6 +16,8 @@ import LocalAuthentication
 let CallbackNotification = Notification.Name(rawValue: "CallbackNotification")
 let CallbackNotificationURLKey = "URL"
 
+let LogoutNotification = Notification.Name(rawValue: "LogoutNotification")
+
 class ViewController: UIViewController {
 
     @IBOutlet weak var webView: WKWebView!
@@ -55,13 +57,22 @@ class ViewController: UIViewController {
         webView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20.0).isActive = true
     }
 
+    fileprivate func loadLoginUrl() {
+        if let websiteUrl = UserDefaults.standard.string(forKey: Constants.loginUrl) {
+            guard let requestUrl = URL(string: websiteUrl) else {
+                assertionFailure("Failed to parse Login URL!")
+                return
+            }
+            loadURL(url: requestUrl)
+        }
+
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if let websiteUrl = UserDefaults.standard.string(forKey: Constants.loginUrl) {
-            guard let requestUrl = URL(string: websiteUrl) else { return }
-            loadURL(url: requestUrl)
-        }
+        loadLoginUrl()
+
         UserDefaults.standard.addObserver(self, forKeyPath: Constants.loginUrl,
                                           options: .new,
                                           context: nil)
@@ -79,6 +90,13 @@ class ViewController: UIViewController {
                                                selector: #selector(applicationWillEnterForeground),
                                                name: UIApplication.willEnterForegroundNotification,
                                                object: nil)
+
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(onLogout),
+                                               name: LogoutNotification,
+                                               object: nil)
+
+        BiometricsService.shared.challengeLogin()
     }
 
     func loadURL(url: URL) {
@@ -275,6 +293,18 @@ extension ViewController: ScriptMessageDelegate {
         self.webView.load(request)
 
         Analytics.track(event: .openDeepLink(url))
+    }
+
+    @objc func onLogout(notification: Notification){
+
+        // TODO: Dismiss Safari VC!
+        DispatchQueue.main.async {
+
+            self.loadLoginUrl()
+
+            self.dismissSafariVC()
+
+        }
     }
 
     func onEnableBiometrics(promiseId: Int) {

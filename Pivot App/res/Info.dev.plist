@@ -76,6 +76,6 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>BiometricLoginTimeout</key>
-	<integer>60</integer>
+	<integer>30</integer>
 </dict>
 </plist>
