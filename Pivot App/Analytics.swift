@@ -27,7 +27,9 @@ class Analytics {
         case .healthKitEnabled:
             MSAnalytics.trackEvent("HealthKitEnabled")
         case .openDeepLink(let url):
-            MSAnalytics.trackEvent("OpenDeepLink", withProperties: ["url": url.absoluteString])
+            if let cleanUrl = Analytics.clean(url: url) {
+                MSAnalytics.trackEvent("OpenDeepLink", withProperties: ["url": cleanUrl])
+            }
         case .healthKitDataUploadSucceeded(let count):
             MSAnalytics.trackEvent("HealthKitDataUploadSucceeded",
                                    withProperties: ["dataCount":"\(count)"])
@@ -39,4 +41,13 @@ class Analytics {
     }
 
     private init() {}
+
+    private static func clean(url: URL) -> String? {
+        guard var components = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
+            return nil
+        }
+
+        components.query = nil
+        return components.url?.absoluteString
+    }
 }
