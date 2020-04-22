@@ -26,7 +26,7 @@ class BiometricsService: NSObject, ApplicationService {
 
     // This value dictates wether or not Biometrics is enabled in the Pivot App.
     // This does not indicate that Biometrics work in the app
-    private var isBiometricsEnabled: Bool {
+    private(set) var isBiometricsEnabled: Bool {
         get {
             return UserDefaults.standard.bool(forKey: Constants.isBiometricsEnabledKey)
         }

@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>BiometricLoginTimeout</key>
+	<integer>30</integer>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -40,14 +42,14 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>Please Allow $(EXECUTABLE_NAME) to access your Camera to take photos for your Profile Picture and health tracking.</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>Please allow $(EXECUTABLE_NAME) to use your FaceId for login.</string>
 	<key>NSHealthShareUsageDescription</key>
 	<string>Please Allow $(EXECUTABLE_NAME) to access your Health Kit data.</string>
 	<key>NSHealthUpdateUsageDescription</key>
 	<string>Please allow $(EXECUTABLE_NAME) to get Updates from Apple HealthKit for health reporting.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Please allow $(EXECUTABLE_NAME) access to photos for crash reporting.</string>
-	<key>NSFaceIDUsageDescription</key>
-	<string>Please allow $(EXECUTABLE_NAME) to use your FaceId for login.</string>
 	<key>PivotAPIURL</key>
 	<string>https://dm.gopivotsolutions.com/pvDataMation/</string>
 	<key>PivotLoginURL</key>
@@ -75,7 +77,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>BiometricLoginTimeout</key>
-	<integer>30</integer>
 </dict>
 </plist>

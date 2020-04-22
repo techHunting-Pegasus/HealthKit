@@ -25,6 +25,7 @@ struct PushResponse: Encodable {
     var devicePushEnabled: Bool
 
     var deviceBiometricAvailable: Bool
+    var deviceBiometricEnabled: Bool
     var biometricType: BiometricType?
 
     init(deviceId: String?, context: LAContext) {
@@ -39,6 +40,8 @@ struct PushResponse: Encodable {
 
         var error: NSError?
         if #available(iOS 11.0, *), context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+
+            deviceBiometricEnabled = BiometricsService.shared.isBiometricsEnabled
 
             switch context.biometryType {
             case .faceID:
@@ -55,6 +58,7 @@ struct PushResponse: Encodable {
             // Fallback on earlier versions
             biometricType = nil
             deviceBiometricAvailable = false
+            deviceBiometricEnabled = false
         }
     }
 }
