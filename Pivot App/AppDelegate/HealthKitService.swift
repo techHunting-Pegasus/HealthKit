@@ -13,6 +13,7 @@ typealias AuthorizationComplete = (Bool) -> Void
 typealias InitialResultsHandlerType = ((HKStatisticsCollectionQuery, HKStatisticsCollection?, Error?, Date) -> Void)?
 typealias CategoryResultsHandlerType = (HKSampleQuery, [HKSample]?, Error?) -> Void
 typealias WorkoutResultsHandlerType = (HKSampleQuery, [HKWorkout], Date) -> Void
+typealias ActivityResultsHandlerType = (HKActivitySummaryQuery, [HKActivitySummary]?, Error?) -> Void
 
 class HealthKitService: NSObject, ApplicationService {
 
@@ -134,7 +135,18 @@ class HealthKitService: NSObject, ApplicationService {
 
             }
         }
+
         store.execute(workoutQuery)
+
+
+        self.fetchActivityData(start: .oneMonth) {
+            [weak self] (query, activities, error) in
+            if let error = error {
+                print("Failed to query activity with error: \(error)")
+            }
+
+            self?.fetchAllContainer.add(activities: activities ?? [])
+        }
     }
 
     private func enableBackgroundDeliveries() {
@@ -202,6 +214,14 @@ class HealthKitService: NSObject, ApplicationService {
 
             self?.fetchAllContainer.add(workouts: workouts)
         }
+
+        fetchActivityData(start: .oneMonth) {
+            [weak self] (query, activities, error) in
+            if let error = error {
+                print("Failed to query activity with error: \(error)")
+            }
+        }
+
     }
 
     private func fetchStatisticsData(for type: HKQuantityType, start: StartDate,
@@ -245,6 +265,33 @@ class HealthKitService: NSObject, ApplicationService {
 
         store.execute(statQuery)
     }
+
+    private func fetchActivityData(start: StartDate, complete: @escaping ActivityResultsHandlerType) {
+        let calendar = NSCalendar.current
+        let endDate = Date()
+
+        guard let startDate = calendar.date(byAdding: .month, value: -1, to: endDate) else {
+            fatalError("*** Unable to create the start date ***")
+        }
+
+        let units: Set<Calendar.Component> = [.day, .month, .year, .era]
+
+
+        var startDateComponents = calendar.dateComponents(units, from: startDate)
+        startDateComponents.calendar = calendar
+
+
+        var endDateComponents = calendar.dateComponents(units, from: endDate)
+        endDateComponents.calendar = calendar
+
+        let summariesWithinRange = HKQuery.predicate(forActivitySummariesBetweenStart: startDateComponents,
+                                                     end: endDateComponents)
+
+        let activitySummaryQuery = HKActivitySummaryQuery(predicate: summariesWithinRange, resultsHandler: complete)
+
+        store.execute(activitySummaryQuery)
+    }
+
 
     private func fetchWorkoutData(start: StartDate, complete: @escaping WorkoutResultsHandlerType) {
         let date = Date()
@@ -345,6 +392,7 @@ class HealthKitService: NSObject, ApplicationService {
         }
 
         result.insert(HKWorkoutType.workoutType())
+        result.insert(HKObjectType.activitySummaryType())
 
         return result
     }

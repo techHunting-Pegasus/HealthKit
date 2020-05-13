@@ -25,14 +25,16 @@ class HealthKitUploadOperation: Operation {
     private(set) var accessToken: String
     private(set) var refreshToken: String
     let data: [Any]
+    let dailySummary: [Any]
     var error: Error?
 
     private var hasRefreshedToken: Bool = false
 
-    init(accessToken: String, refreshToken: String, data: [Any]) {
+    init(accessToken: String, refreshToken: String, data: [Any], dailySummary: [Any]) {
         self.accessToken = accessToken
         self.refreshToken = refreshToken
         self.data = data
+        self.dailySummary = dailySummary
         super.init()
     }
 
@@ -77,7 +79,7 @@ class HealthKitUploadOperation: Operation {
         startUploadRequest()
     }
     private func startUploadRequest() {
-        guard let uploadRequest = try? PivotAPI.uploadHealthData(token: accessToken, data: data).request() else {
+        guard let uploadRequest = try? PivotAPI.uploadHealthData(token: accessToken, data: data, dailySummary: dailySummary).request() else {
             finish(with: UploadError.createUploadRequestFailed)
             return
         }

@@ -15,12 +15,14 @@ class HealthKitRequest: Encodable {
     }
 
     var data: [HealthKitData] = []
+    var dailySummary: [ActivitySummary] = []
 
     enum CodingKeys: String, CodingKey {
         case data
+        case dailySummary
     }
 
-    init(from data: [Any]) {
+    init(from data: [Any], and dailySummary: [Any]) {
         self.data = data.compactMap { (object) -> HealthKitData? in
             switch object {
             case let object as HKStatistics:
@@ -29,6 +31,15 @@ class HealthKitRequest: Encodable {
                 return try? CategoryData(from: object)
             case let object as HKWorkout:
                 return try? WorkoutData(from: object)
+            default:
+                Logger.log(.healthStoreService, info: "Failed to proccess a data!")
+                return nil
+            }
+        }
+        self.dailySummary = dailySummary.compactMap { (object) -> ActivitySummary? in
+            switch object {
+            case let object as HKActivitySummary:
+                return ActivitySummary(from: object)
             default:
                 Logger.log(.healthStoreService, info: "Failed to proccess a data!")
                 return nil
@@ -57,6 +68,12 @@ class HealthKitRequest: Encodable {
             } else if let workout = sample as? WorkoutData {
                 try dataContainer.encode(workout)
             }
+        }
+
+        var dailyContainer = container.nestedUnkeyedContainer(forKey: .dailySummary)
+
+        try dailySummary.forEach { (summary) in
+            try dailyContainer.encode(summary)
         }
     }
 }
