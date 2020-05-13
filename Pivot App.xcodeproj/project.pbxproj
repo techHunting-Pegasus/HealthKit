@@ -544,7 +544,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Pivot-QA.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 39;
+				CURRENT_PROJECT_VERSION = 42;
 				DEVELOPMENT_TEAM = T85Z44958S;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -688,7 +688,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Pivot.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 39;
+				CURRENT_PROJECT_VERSION = 42;
 				DEVELOPMENT_TEAM = T85Z44958S;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -711,7 +711,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Pivot.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 39;
+				CURRENT_PROJECT_VERSION = 42;
 				DEVELOPMENT_TEAM = T85Z44958S;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
