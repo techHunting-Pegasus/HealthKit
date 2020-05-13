@@ -12,6 +12,8 @@
 		441CF4D3242975CC0032179F /* UIDevice+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441CF4D2242975CC0032179F /* UIDevice+Extensions.swift */; };
 		44294C8B244675E6006D77FB /* UniqueDeviceIdService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44294C8A244675E6006D77FB /* UniqueDeviceIdService.swift */; };
 		44848B4523D4BFE600A6A522 /* PivotJWT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44848B4423D4BFE600A6A522 /* PivotJWT.swift */; };
+		44927A31246B7EF700A65CB8 /* default.wav in Resources */ = {isa = PBXBuildFile; fileRef = 44927A2F246B7EF700A65CB8 /* default.wav */; };
+		44927A32246B7EF700A65CB8 /* urgent.wav in Resources */ = {isa = PBXBuildFile; fileRef = 44927A30246B7EF700A65CB8 /* urgent.wav */; };
 		44C416EB244A68740051F94C /* BiometricsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C416EA244A68740051F94C /* BiometricsService.swift */; };
 		44C416ED244CA54F0051F94C /* BlurViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C416EC244CA54F0051F94C /* BlurViewController.swift */; };
 		44CFE098243E8E5A00424D62 /* PromiseResponses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CFE097243E8E5A00424D62 /* PromiseResponses.swift */; };
@@ -62,6 +64,8 @@
 		441CF4D4242A458F0032179F /* Pivot-QA.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = "Pivot-QA.entitlements"; sourceTree = "<group>"; };
 		44294C8A244675E6006D77FB /* UniqueDeviceIdService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniqueDeviceIdService.swift; sourceTree = "<group>"; };
 		44848B4423D4BFE600A6A522 /* PivotJWT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PivotJWT.swift; sourceTree = "<group>"; };
+		44927A2F246B7EF700A65CB8 /* default.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = default.wav; sourceTree = "<group>"; };
+		44927A30246B7EF700A65CB8 /* urgent.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = urgent.wav; sourceTree = "<group>"; };
 		44C416EA244A68740051F94C /* BiometricsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricsService.swift; sourceTree = "<group>"; };
 		44C416EC244CA54F0051F94C /* BlurViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurViewController.swift; sourceTree = "<group>"; };
 		44CFE097243E8E5A00424D62 /* PromiseResponses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromiseResponses.swift; sourceTree = "<group>"; };
@@ -137,6 +141,15 @@
 				441CF4D2242975CC0032179F /* UIDevice+Extensions.swift */,
 			);
 			path = Util;
+			sourceTree = "<group>";
+		};
+		44927A2E246B7EE400A65CB8 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				44927A30246B7EF700A65CB8 /* urgent.wav */,
+				44927A2F246B7EF700A65CB8 /* default.wav */,
+			);
+			path = Sounds;
 			sourceTree = "<group>";
 		};
 		9408C9C9220623E1005901C8 /* Health Kit Data */ = {
@@ -228,6 +241,7 @@
 		94D563711F85B99900C2C72D /* Pivot App */ = {
 			isa = PBXGroup;
 			children = (
+				44927A2E246B7EE400A65CB8 /* Sounds */,
 				44848B4323D4BFCD00A6A522 /* Util */,
 				94303D6521E6CEA800041ABF /* ScriptMessages */,
 				941CB0E921947820002CD157 /* HealthKit */,
@@ -376,7 +390,9 @@
 				94D5637D1F85B99A00C2C72D /* LaunchScreen.storyboard in Resources */,
 				94D5637A1F85B99A00C2C72D /* Assets.xcassets in Resources */,
 				94D563781F85B99A00C2C72D /* Main.storyboard in Resources */,
+				44927A32246B7EF700A65CB8 /* urgent.wav in Resources */,
 				94A06EBC225C513D00F691B0 /* AppCenterDistributeResources.bundle in Resources */,
+				44927A31246B7EF700A65CB8 /* default.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
