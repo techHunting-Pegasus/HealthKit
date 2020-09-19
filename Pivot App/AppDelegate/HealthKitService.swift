@@ -232,6 +232,12 @@ class HealthKitService: NSObject, ApplicationService {
             options = .cumulativeSum
         case .discrete:
             options = .discreteAverage
+        case .discreteTemporallyWeighted:
+            options = .discreteAverage
+        case .discreteEquivalentContinuousLevel:
+            options = .discreteAverage
+        case .discreteArithmetic:
+            options = .discreteAverage
         @unknown default:
             assertionFailure("Cannot find additional aggregation style")
             options = .cumulativeSum

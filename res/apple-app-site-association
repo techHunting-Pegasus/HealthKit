@@ -1,0 +1,31 @@
+{
+    "applinks": {
+        "apps": [],
+        "details": [
+            {
+                "appID": "T85Z44958S.com.gbehavior.pivot-app",
+                "paths": [
+                    "*"
+                ]
+            },
+            {
+                "appID": "T85Z44958S.com.gbehavior.pivot-app.dev",
+                "paths": [
+                    "*"
+                ]
+            },
+            {
+                "appID": "T85Z44958S.com.gbehavior.pivot-app.uat",
+                "paths": [
+                    "*"
+                ]
+            },
+            {
+                "appID": "T85Z44958S.com.gbehavior.pivot-app.qa",
+                "paths": [
+                    "*"
+                ]
+            }
+        ]
+    }
+}
