@@ -28,12 +28,13 @@ class SampleData: HealthKitData {
             }
             quantity = sumQuantity
 
-        case .discrete:
+        case .discrete, .discreteEquivalentContinuousLevel, .discreteArithmetic, .discreteTemporallyWeighted:
             guard let averageQuantity = sample.averageQuantity() else {
                 Logger.log(.healthStoreService, warning: "Unable to get Average for Statistics")
                 throw HealthKitRequest.HKRError.noQuantityTypeFound
             }
             quantity = averageQuantity
+
         @unknown default:
             assertionFailure("Unknown aggregation style")
             quantity = HKQuantity(unit: .count(), doubleValue: 0.0)
