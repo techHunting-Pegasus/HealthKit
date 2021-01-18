@@ -145,26 +145,26 @@ class ViewController: UIViewController {
     private func fulfillPromise<T: Encodable>(promiseId: Int, with value: T) {
         var javaScript = "window.resolvePromise(" + String(promiseId)
 
-        if let data = try? JSONEncoder().encode(value),
-            let stringValue = String(data: data, encoding: .utf8) {
-            Logger.log(.viewController, info: "Fulfilling Promise with ID: \(promiseId) and response: \(stringValue)")
-            javaScript += ", \(stringValue))"
-        } else {
-            Logger.log(.viewController, info: "Fulfilling Promise with ID: \(promiseId) Failed to encode Push Response")
-            javaScript += ")"
+        // This switch is needed for iOS 12
+        // on 12, JSONEncoder fails to encode a string, which succeeds on 13+
+        switch value {
+        case let value as String:
+            javaScript += ", \"\(value)\")"
+        default:
+            if let data = try? JSONEncoder().encode(value),
+                let stringValue = String(data: data, encoding: .utf8) {
+                Logger.log(.viewController, info: "Fulfilling Promise with ID: \(promiseId) and response: \(stringValue)")
+                javaScript += ", \(stringValue))"
+            } else {
+                Logger.log(.viewController, info: "Fulfilling Promise with ID: \(promiseId) Failed to encode Push Response")
+                javaScript += ")"
+            }
         }
         webView?.evaluateJavaScript(javaScript, completionHandler: nil)
     }
 
-
-    private func fulfillPromise(promiseId: Int, with value: String? = nil) {
-        Logger.log(.viewController, info: "Fulfilling Promise with ID: \(promiseId) and value: \(value ?? "No Value")")
-        var javaScript = "window.resolvePromise(" + String(promiseId)
-        if let value = value {
-            javaScript += ", \"\(value)\")"
-        } else {
-            javaScript += ")"
-        }
+    private func fulfillPromise(promiseId: Int) {
+        let javaScript = "window.resolvePromise(" + String(promiseId) + ")"
         webView?.evaluateJavaScript(javaScript, completionHandler: nil)
     }
 }
