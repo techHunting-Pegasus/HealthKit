@@ -55,8 +55,11 @@ class ActivitySummary: Encodable {
         try container.encode(dateFormatter.string(from: date),
                              forKey: .date)
 
-        try container.encode(moveTime, forKey: .moveTime)
         try container.encode(exerciseTime, forKey: .exerciseTime)
+
+        if let moveTime = self.moveTime {
+            try container.encode(moveTime, forKey: .moveTime)
+        }
 
         if let activeEnergyBurned = self.activeEnergyBurned,
            let activeEnergyUnit = self.activeEnergyUnit {
