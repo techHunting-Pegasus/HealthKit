@@ -53,7 +53,7 @@
 	<key>PivotAPIURL</key>
 	<string>https://dm.gopivotsolutions.com/pvDataMation/</string>
 	<key>PivotLoginURL</key>
-	<string>https://pivotdev.gbehavior.com</string>
+	<string>https://www1.gopivotsolutions.com</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>

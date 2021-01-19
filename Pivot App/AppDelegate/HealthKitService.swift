@@ -220,6 +220,7 @@ class HealthKitService: NSObject, ApplicationService {
             if let error = error {
                 print("Failed to query activity with error: \(error)")
             }
+            self?.fetchAllContainer.add(activities: activities ?? [])
         }
 
     }
