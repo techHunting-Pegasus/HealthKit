@@ -37,6 +37,16 @@
          </BuildableReference>
       </MacroExpansion>
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "44744FF725BDFB29005A0207"
+               BuildableName = "GoPivotTests.xctest"
+               BlueprintName = "GoPivotTests"
+               ReferencedContainer = "container:Pivot App.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

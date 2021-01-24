@@ -11,6 +11,8 @@
 		441CF4D124296D460032179F /* DeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441CF4D024296D460032179F /* DeviceInfo.swift */; };
 		441CF4D3242975CC0032179F /* UIDevice+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441CF4D2242975CC0032179F /* UIDevice+Extensions.swift */; };
 		44294C8B244675E6006D77FB /* UniqueDeviceIdService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44294C8A244675E6006D77FB /* UniqueDeviceIdService.swift */; };
+		44744FFB25BDFB29005A0207 /* GoPivotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44744FFA25BDFB29005A0207 /* GoPivotTests.swift */; };
+		4474500625BDFB84005A0207 /* VersionCompare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4474500525BDFB83005A0207 /* VersionCompare.swift */; };
 		44848B4523D4BFE600A6A522 /* PivotJWT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44848B4423D4BFE600A6A522 /* PivotJWT.swift */; };
 		44927A31246B7EF700A65CB8 /* default.wav in Resources */ = {isa = PBXBuildFile; fileRef = 44927A2F246B7EF700A65CB8 /* default.wav */; };
 		44927A32246B7EF700A65CB8 /* urgent.wav in Resources */ = {isa = PBXBuildFile; fileRef = 44927A30246B7EF700A65CB8 /* urgent.wav */; };
@@ -59,11 +61,25 @@
 		94FDC6992011AA460050CA6B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FDC6982011AA460050CA6B /* Constants.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		44744FFD25BDFB29005A0207 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 94D563671F85B99900C2C72D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 94D5636E1F85B99900C2C72D;
+			remoteInfo = GoPivot;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		441CF4D024296D460032179F /* DeviceInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfo.swift; sourceTree = "<group>"; };
 		441CF4D2242975CC0032179F /* UIDevice+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extensions.swift"; sourceTree = "<group>"; };
 		441CF4D4242A458F0032179F /* Pivot-QA.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = "Pivot-QA.entitlements"; sourceTree = "<group>"; };
 		44294C8A244675E6006D77FB /* UniqueDeviceIdService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniqueDeviceIdService.swift; sourceTree = "<group>"; };
+		44744FF825BDFB29005A0207 /* GoPivotTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GoPivotTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		44744FFA25BDFB29005A0207 /* GoPivotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoPivotTests.swift; sourceTree = "<group>"; };
+		44744FFC25BDFB29005A0207 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4474500525BDFB83005A0207 /* VersionCompare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionCompare.swift; sourceTree = "<group>"; };
 		44848B4423D4BFE600A6A522 /* PivotJWT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PivotJWT.swift; sourceTree = "<group>"; };
 		44927A2F246B7EF700A65CB8 /* default.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = default.wav; sourceTree = "<group>"; };
 		44927A30246B7EF700A65CB8 /* urgent.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = urgent.wav; sourceTree = "<group>"; };
@@ -119,6 +135,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		44744FF525BDFB29005A0207 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		94D5636C1F85B99900C2C72D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -135,12 +158,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		44744FF925BDFB29005A0207 /* GoPivotTests */ = {
+			isa = PBXGroup;
+			children = (
+				44744FFA25BDFB29005A0207 /* GoPivotTests.swift */,
+				44744FFC25BDFB29005A0207 /* Info.plist */,
+			);
+			path = GoPivotTests;
+			sourceTree = "<group>";
+		};
 		44848B4323D4BFCD00A6A522 /* Util */ = {
 			isa = PBXGroup;
 			children = (
 				44848B4423D4BFE600A6A522 /* PivotJWT.swift */,
 				441CF4D024296D460032179F /* DeviceInfo.swift */,
 				441CF4D2242975CC0032179F /* UIDevice+Extensions.swift */,
+				4474500525BDFB83005A0207 /* VersionCompare.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -228,6 +261,7 @@
 				94F9FF6F1FD8B29A0032B193 /* Pivot.entitlements */,
 				94DCE13D1F942B10007B76CD /* lib */,
 				94D563711F85B99900C2C72D /* Pivot App */,
+				44744FF925BDFB29005A0207 /* GoPivotTests */,
 				94D563701F85B99900C2C72D /* Products */,
 				94F9FF701FD8B2B10032B193 /* Frameworks */,
 			);
@@ -237,6 +271,7 @@
 			isa = PBXGroup;
 			children = (
 				94D5636F1F85B99900C2C72D /* GoPivot.app */,
+				44744FF825BDFB29005A0207 /* GoPivotTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -312,6 +347,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		44744FF725BDFB29005A0207 /* GoPivotTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4474500225BDFB29005A0207 /* Build configuration list for PBXNativeTarget "GoPivotTests" */;
+			buildPhases = (
+				44744FF425BDFB29005A0207 /* Sources */,
+				44744FF525BDFB29005A0207 /* Frameworks */,
+				44744FF625BDFB29005A0207 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				44744FFE25BDFB29005A0207 /* PBXTargetDependency */,
+			);
+			name = GoPivotTests;
+			productName = GoPivotTests;
+			productReference = 44744FF825BDFB29005A0207 /* GoPivotTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		94D5636E1F85B99900C2C72D /* GoPivot */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 94D563811F85B99A00C2C72D /* Build configuration list for PBXNativeTarget "GoPivot" */;
@@ -339,10 +392,14 @@
 		94D563671F85B99900C2C72D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0900;
+				LastSwiftUpdateCheck = 1230;
 				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "Schu Studios, LLC.";
 				TargetAttributes = {
+					44744FF725BDFB29005A0207 = {
+						CreatedOnToolsVersion = 12.3;
+						TestTargetID = 94D5636E1F85B99900C2C72D;
+					};
 					94D5636E1F85B99900C2C72D = {
 						CreatedOnToolsVersion = 9.0;
 						LastSwiftMigration = 1000;
@@ -381,11 +438,19 @@
 			projectRoot = "";
 			targets = (
 				94D5636E1F85B99900C2C72D /* GoPivot */,
+				44744FF725BDFB29005A0207 /* GoPivotTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		44744FF625BDFB29005A0207 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		94D5636D1F85B99900C2C72D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -418,6 +483,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		44744FF425BDFB29005A0207 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				44744FFB25BDFB29005A0207 /* GoPivotTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		94D5636B1F85B99900C2C72D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -460,10 +533,19 @@
 				44C9036325A7A03E0099673E /* ActivitySummary.swift in Sources */,
 				44848B4523D4BFE600A6A522 /* PivotJWT.swift in Sources */,
 				9495DBB620260EFD00951BF9 /* HealthKitService.swift in Sources */,
+				4474500625BDFB84005A0207 /* VersionCompare.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		44744FFE25BDFB29005A0207 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 94D5636E1F85B99900C2C72D /* GoPivot */;
+			targetProxy = 44744FFD25BDFB29005A0207 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		94D563761F85B99A00C2C72D /* Main.storyboard */ = {
@@ -485,6 +567,79 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		44744FFF25BDFB29005A0207 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9BTWQYMRUP;
+				INFOPLIST_FILE = GoPivotTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.gbehavior.pivot-app.GoPivotTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GoPivot.app/GoPivot";
+			};
+			name = Debug;
+		};
+		4474500025BDFB29005A0207 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9BTWQYMRUP;
+				INFOPLIST_FILE = GoPivotTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.gbehavior.pivot-app.GoPivotTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GoPivot.app/GoPivot";
+			};
+			name = Release;
+		};
+		4474500125BDFB29005A0207 /* QA */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9BTWQYMRUP;
+				INFOPLIST_FILE = GoPivotTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.gbehavior.pivot-app.GoPivotTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GoPivot.app/GoPivot";
+			};
+			name = QA;
+		};
 		943677361F96CA8400840058 /* QA */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -735,6 +890,16 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		4474500225BDFB29005A0207 /* Build configuration list for PBXNativeTarget "GoPivotTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				44744FFF25BDFB29005A0207 /* Debug */,
+				4474500025BDFB29005A0207 /* Release */,
+				4474500125BDFB29005A0207 /* QA */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		94D5636A1F85B99900C2C72D /* Build configuration list for PBXProject "Pivot App" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
