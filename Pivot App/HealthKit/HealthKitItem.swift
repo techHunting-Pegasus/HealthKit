@@ -101,6 +101,7 @@ class HealthKitItems {
         .dietaryCalcium: HealthKitItem("dietaryCalcium", unit: HKUnit.gram()),
 
         .dietaryWater: HealthKitItem("dietaryWater", unit: HKUnit.liter()),
+        .activeEnergyBurned: HealthKitItem("activeEnergyBurned", unit: HKUnit.kilocalorie())
     ]
 
     static let categoryItems: [HKCategoryTypeIdentifier: HealthKitItem] = [

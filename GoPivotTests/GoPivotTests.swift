@@ -15,6 +15,9 @@ class GoPivotTests: XCTestCase {
     let v102 = "1.0.2"
     let v200 = "2.0.0"
 
+    let v1010 = "1.0.10"
+    let v109 = "1.0.9"
+
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
@@ -40,6 +43,8 @@ class GoPivotTests: XCTestCase {
         XCTAssertEqual(v102.versionCompare(v10), .orderedDescending)
         XCTAssertEqual(v102.versionCompare(v100), .orderedDescending)
         XCTAssertEqual(v200.versionCompare(v100), .orderedDescending)
+
+        XCTAssertEqual(v1010.versionCompare(v109), .orderedDescending)
     }
 
     func testPerformanceExample() throws {

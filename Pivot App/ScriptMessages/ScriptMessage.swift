@@ -11,6 +11,8 @@ import WebKit
 
 protocol ScriptMessageDelegate: class {
     func onNotificationRegistration(promiseId: Int, value: Bool)
+    func onLogin()
+
     func onUserAuthenticationReceived(value: String)
     func onEnableAppleHealthKit(promiseId: Int)
     func onReceiveAppleHealthKitTokens(promiseId: Int, tokens: HealthKitTokens)
@@ -44,6 +46,7 @@ class ScriptMessageHandler: NSObject, WKScriptMessageHandler {
             switch bodyValue {
             case "enablePush":
                 delegate?.onNotificationRegistration(promiseId: promiseId, value: true)
+                delegate?.onLogin()
             case "disablePush":
                 delegate?.onNotificationRegistration(promiseId: promiseId, value: false)
             case "enableBiometric":

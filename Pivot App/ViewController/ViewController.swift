@@ -167,9 +167,67 @@ class ViewController: UIViewController {
         let javaScript = "window.resolvePromise(" + String(promiseId) + ")"
         webView?.evaluateJavaScript(javaScript, completionHandler: nil)
     }
+
+    func showSimpleAlert(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alertController, animated: true, completion: nil)
+    }
+
+    enum CheckHKState {
+        case inProgress
+        case idle
+    }
+
+    var checkHKState = CheckHKState.idle
+
+    func checkHKUpgrade() {
+        guard self.checkHKState == .idle else {
+            return
+        }
+        self.checkHKState = .inProgress
+        // check for access token
+        guard UserDefaults.standard.object(forKey: Constants.accessToken) != nil else {
+            // User is not logged into Health Kit
+            return
+        }
+
+        // Check if we need to present HK Auth
+        guard let lastHKAuthVersion = UserDefaults.standard.object(forKey: Constants.lastHKAuthVersion) as? String,
+           lastHKAuthVersion.versionCompare(Constants.lastPermissionChangedVersion) == .orderedAscending else {
+            return
+        }
+
+        // Post notification to request user to upgrade Health Kit
+        let hkReauthAlert = UIAlertController.init(title: "HealthKit Upgrade Available", message: "Our Healthkit permissions have changed. Please allow GoPivot to upgrade your HealthKit permissions.", preferredStyle: .alert)
+        hkReauthAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: {[weak self] (action) in
+            // Request HealthKit permissions
+            DispatchQueue.main.async {
+                HealthKitService.instance.requestAuthorization { (success) in
+                    DispatchQueue.main.async {
+                        self?.showSimpleAlert(title: "Thank You", message: "Your permission have been updated!")
+                    }
+                }
+            }
+        }))
+
+        hkReauthAlert.addAction(UIAlertAction(title: "Not Now", style: .cancel, handler: { [weak self] (action) in
+            // Request cancelled
+        }))
+
+        self.present(hkReauthAlert, animated: true) { [weak self] in
+            self?.checkHKState = .idle
+        }
+    }
 }
 
 extension ViewController: ScriptMessageDelegate {
+
+    func onLogin() {
+        DispatchQueue.main.async {
+            self.checkHKUpgrade()
+        }
+    }
 
     func onUserAuthenticationReceived(value: String) {
         UserDefaults.standard.set(value, forKey: Constants.userAuthorization)

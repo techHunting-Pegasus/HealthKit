@@ -63,6 +63,10 @@ class HealthKitService: NSObject, ApplicationService {
             }
             Logger.log(.healthStoreService, info: "RequestAuthorization succeeded!")
             Analytics.track(event: .healthKitEnabled)
+
+            if let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
+                UserDefaults.standard.setValue(appVersion, forKey:Constants.lastHKAuthVersion)
+            }
         }
     }
 
