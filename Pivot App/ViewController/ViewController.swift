@@ -193,8 +193,8 @@ class ViewController: UIViewController {
         }
 
         // Check if we need to present HK Auth
-        guard let lastHKAuthVersion = UserDefaults.standard.object(forKey: Constants.lastHKAuthVersion) as? String,
-           lastHKAuthVersion.versionCompare(Constants.lastPermissionChangedVersion) == .orderedAscending else {
+        if let lastHKAuthVersion = UserDefaults.standard.object(forKey: Constants.lastHKAuthVersion) as? String,
+           lastHKAuthVersion.versionCompare(Constants.lastPermissionChangedVersion) != .orderedAscending {
             return
         }
 
