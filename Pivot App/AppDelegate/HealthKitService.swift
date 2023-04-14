@@ -18,8 +18,9 @@ typealias ActivityResultsHandlerType = (HKActivitySummaryQuery, [HKActivitySumma
 class HealthKitService: NSObject, ApplicationService {
 
     enum StartDate {
-        case oneMonth
-        case threeMonths
+        
+        case oneMinute
+        case oneHour
     }
 
     static let instance = HealthKitService()
@@ -93,7 +94,7 @@ class HealthKitService: NSObject, ApplicationService {
 
                 Logger.log(.healthStoreService, info: "Observer Query Succeeded for Quantity Type: \(type)")
 
-                self?.fetchStatisticsData(for: type, start: .oneMonth) { (query, results, error, newDate) in
+                self?.fetchStatisticsData(for: type, start: .oneMinute) { (query, results, error, newDate) in
                     var didSucceed = false
                     defer {
                         if didSucceed == false {
@@ -131,7 +132,7 @@ class HealthKitService: NSObject, ApplicationService {
         let workoutQuery = HKObserverQuery(sampleType: HKWorkoutType.workoutType(), predicate: nil) {
             [weak self] (query, completionHandler, error) in
 
-            self?.fetchWorkoutData(start: .oneMonth) { [weak self] (query, workouts, newDate) in
+            self?.fetchWorkoutData(start: .oneMinute) { [weak self] (query, workouts, newDate) in
 
                 self?.fetchAllContainer.add(workouts: workouts) {
                     completionHandler()
@@ -143,7 +144,7 @@ class HealthKitService: NSObject, ApplicationService {
         store.execute(workoutQuery)
 
 
-        self.fetchActivityData(start: .oneMonth) {
+        self.fetchActivityData(start: .oneMinute) {
             [weak self] (query, activities, error) in
             if let error = error {
                 print("Failed to query activity with error: \(error)")
@@ -157,7 +158,7 @@ class HealthKitService: NSObject, ApplicationService {
 
         for id in quantityTypeIdentifiers {
             guard let type = HKQuantityType.quantityType(forIdentifier: id) else { continue }
-            store.enableBackgroundDelivery(for:type, frequency: .hourly) { (success, error) in
+            store.enableBackgroundDelivery(for:type, frequency: .immediate) { (success, error) in
                 guard success else {
                     let debugError = error.debugDescription
 
@@ -176,7 +177,7 @@ class HealthKitService: NSObject, ApplicationService {
         for id in quantityTypeIdentifiers {
             guard let type = HKObjectType.quantityType(forIdentifier: id) else { continue }
 
-            fetchStatisticsData(for: type, start: .threeMonths) { [weak self] (query, results, error, newDate) in
+            fetchStatisticsData(for: type, start: .oneHour) { [weak self] (query, results, error, newDate) in
 
                 if let error = error {
                     Logger.log(.healthStoreService, error: "HKStatisticsCollectionQuery failed for SampleType: \(type)\nError: \(error)")
@@ -196,7 +197,7 @@ class HealthKitService: NSObject, ApplicationService {
         for id in categoryTypeIdentifiers {
             guard let type = HKObjectType.categoryType(forIdentifier: id) else { continue }
 
-            fetchCategoryData(for: type, start: .threeMonths) { [weak self] (query, samples: [HKSample]?, error) in
+            fetchCategoryData(for: type, start: .oneHour) { [weak self] (query, samples: [HKSample]?, error) in
                 if let error = error {
                     Logger.log(.healthStoreService, error: "HKCategorySample failed for SampleType: \(type)\nError: \(error)")
                     return
@@ -214,12 +215,12 @@ class HealthKitService: NSObject, ApplicationService {
             }
         }
 
-        fetchWorkoutData(start: .threeMonths) { [weak self] (query, workouts, newDate) in
+        fetchWorkoutData(start: .oneHour) { [weak self] (query, workouts, newDate) in
 
             self?.fetchAllContainer.add(workouts: workouts)
         }
 
-        fetchActivityData(start: .oneMonth) {
+        fetchActivityData(start: .oneMinute) {
             [weak self] (query, activities, error) in
             if let error = error {
                 print("Failed to query activity with error: \(error)")
@@ -239,10 +240,10 @@ class HealthKitService: NSObject, ApplicationService {
         let startDate: Date?
 
         switch start {
-        case .oneMonth:
-            startDate = cal.date(byAdding: .month, value: -1, to: newDate)
-        case .threeMonths:
-            startDate = cal.date(byAdding: .month, value: -3, to: newDate)
+        case .oneMinute:
+            startDate = cal.date(byAdding: .minute, value: -1, to: newDate)
+        case .oneHour:
+            startDate = cal.date(byAdding: .hour, value: -3, to: newDate)
         }
 
         let predicate = HKQuery.predicateForSamples(withStart: startDate, end: nil,
@@ -312,10 +313,10 @@ class HealthKitService: NSObject, ApplicationService {
         let startDate: Date?
 
         switch start {
-        case .oneMonth:
-            startDate = cal.date(byAdding: .month, value: -1, to: newDate)
-        case .threeMonths:
-            startDate = cal.date(byAdding: .month, value: -3, to: newDate)
+        case .oneMinute:
+            startDate = cal.date(byAdding: .minute, value: -1, to: newDate)
+        case .oneHour:
+            startDate = cal.date(byAdding: .hour, value: -3, to: newDate)
         }
 
 //        guard let distanceType = HKObjectType.quantityType(forIdentifier: .distanceWalkingRunning) else {
@@ -358,10 +359,10 @@ class HealthKitService: NSObject, ApplicationService {
         let startDate: Date?
 
         switch start {
-        case .oneMonth:
-            startDate = cal.date(byAdding: .month, value: -1, to: newDate)
-        case .threeMonths:
-            startDate = cal.date(byAdding: .month, value: -3, to: newDate)
+        case .oneMinute:
+            startDate = cal.date(byAdding: .minute, value: -1, to: newDate)
+        case .oneHour:
+            startDate = cal.date(byAdding: .hour, value: -3, to: newDate)
         }
 
         let predicate = HKQuery.predicateForSamples(withStart: startDate, end: nil,

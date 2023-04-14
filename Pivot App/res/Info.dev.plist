@@ -50,6 +50,8 @@
 	<string>Please allow $(EXECUTABLE_NAME) to get Updates from Apple HealthKit for health reporting.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Please allow $(EXECUTABLE_NAME) access to photos for crash reporting.</string>
+    <key>NSUserTrackingUsageDescription</key>
+    <string>This app needs permission to track you across apps and websites owned by 3rd parties.</string>
 	<key>PivotAPIURL</key>
 	<string>https://dm.gopivotsolutions.com/pvDataMation/</string>
 	<key>PivotLoginURL</key>

@@ -71,6 +71,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+//        HealthKitService.instance.startObserverQueries()
+        
         loadLoginUrl()
 
         UserDefaults.standard.addObserver(self, forKeyPath: Constants.loginUrl,

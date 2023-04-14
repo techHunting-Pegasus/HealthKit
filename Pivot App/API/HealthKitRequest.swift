@@ -22,7 +22,7 @@ class HealthKitRequest: Encodable {
         case dailySummary
     }
 
-    init(from data: [Any], and dailySummary: [Any]) {
+    init(from data: [Any], and b: [Any]) {
         self.data = data.compactMap { (object) -> HealthKitData? in
             switch object {
             case let object as HKStatistics:
